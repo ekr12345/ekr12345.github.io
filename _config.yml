@@ -22,7 +22,7 @@ navigation:
   - name: thoughts
     url: /
   - name: creative projects
-  - name: Tags
+  - name: tags
     url: /tags
 
 # Pagination
