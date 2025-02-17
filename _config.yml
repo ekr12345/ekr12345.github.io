@@ -22,8 +22,9 @@ navigation:
   - name: thoughts
     url: /
   - name: creative projects
+    url: /cp
   - name: tags
-    url: /tags
+    url: /t
 
 # Pagination
 paginate: 5
