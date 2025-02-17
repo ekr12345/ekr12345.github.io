@@ -30,6 +30,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: 'Titillium Web', sans-serif !important;
   font-weight: 600;
   margin: 1em 0;
 }
@@ -65,11 +66,21 @@ p {
 }
 
 a {
+  font-family: 'Titillium Web', sans-serif !important;
   color: $link-color;
   text-decoration: none;
   &:hover {
     text-decoration: underline;
   }
+}
+
+.site-name {
+  font-family: 'Titillium Web', sans-serif !important;
+  font-weight: 700;
+}
+
+nav a {
+  font-family: 'Titillium Web', sans-serif !important;
 }
 
 ul, ol {
