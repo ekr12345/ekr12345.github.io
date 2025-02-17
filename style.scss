@@ -20,13 +20,13 @@ html {
 }
 
 body {
-  font-family: 'Titillium Web', sans-serif;
+  font-family: 'Titillium Web', sans-serif !important;
   color: $base-color;
   line-height: 1.6;
 }
 
 h1, h2, h3, h4, h5, h6, p, a, button {
-  font-family: 'Titillium Web', sans-serif;
+  font-family: 'Titillium Web', sans-serif !important;
 }
 
 .container {
@@ -87,10 +87,6 @@ a {
     color: $link-color;
   }
 }
-
-...
-// (Rest of the file remains unchanged)
-...
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 @import "highlights";
