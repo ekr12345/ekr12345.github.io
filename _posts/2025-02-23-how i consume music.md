@@ -22,4 +22,4 @@ Tech companies have been trying to tell me that I can have all the music I could
 recommended reading:
 
 [Don't Let Machines Or The Crowd Decide Your World](https://www.hottakes.space/p/dont-let-machines-or-the-crowd-decide)
-[The Ugly Truth About Spotify Is Finally Revealed]https://www.honest-broker.com/p/the-ugly-truth-about-spotify-is-finally
+[The Ugly Truth About Spotify Is Finally Revealed](https://www.honest-broker.com/p/the-ugly-truth-about-spotify-is-finally)
