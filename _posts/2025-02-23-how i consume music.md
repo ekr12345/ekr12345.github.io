@@ -12,7 +12,7 @@ Listening to a record puts me in a state of flow because I can't scroll, fast-fo
 
 The way I consume music has strengthened my ability to focus. 
 
-Going out and buying vinyl forces me to interact with my local community. The process of finding records in shops (aka digging) is sometimes more enjoyable than listening to the record itself. My local record shop has introduced me to fascinating people. Out of these interactions, new friendships have been made. From those friendships, events have been created, drawing in more like-minded individuals and fostering a real sense of community in my neighborhood.
+Going out and buying vinyl forces me to interact with my local community. The process of finding records in shops (aka digging) is sometimes more enjoyable than listening to the records themselves. My local record shop has introduced me to fascinating people. Out of these interactions, new friendships have been made. From those friendships, events have been created, drawing in more like-minded individuals and fostering a real sense of community in my neighborhood.
 
 The way I consume music has strengthened my social connections.
 
