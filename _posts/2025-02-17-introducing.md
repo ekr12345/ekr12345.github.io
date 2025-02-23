@@ -17,7 +17,7 @@ Going out and buying vinyl forces me to interact with my local community. The pr
 
 The way I consume music has strengthened my social connections.
 
-Tech companies have been trying to tell me that I can have all the music I could ever want, for a fraction of the cost and in an instant. But the isolation, the distractions, the data collection, and the dopamine manipulation that come with it—those are the costs I’m not willing to pay.
+Tech companies have been trying to tell me that I can have all the music I could ever want, for a fraction of the cost and in an instant. But the distractions, the isolation, the data collection, and the dopamine manipulation that come with it—those are the costs I’m not willing to pay.
 
 recommended reading:
 
