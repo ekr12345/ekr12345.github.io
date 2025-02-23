@@ -19,7 +19,7 @@ The way I consume music has strengthened my social connections.
 
 Tech companies have been trying to tell me that I can have all the music I could ever want, for a fraction of the cost and in an instant. But the distractions, the isolation, the data collection, and the dopamine manipulation that come with it—those are the costs I’m not willing to pay.
 
-recommended reading:
+Recommended Reading:
 
 [Don't Let Machines Or The Crowd Decide Your World](https://www.hottakes.space/p/dont-let-machines-or-the-crowd-decide)
 [The Ugly Truth About Spotify Is Finally Revealed](https://www.honest-broker.com/p/the-ugly-truth-about-spotify-is-finally)
