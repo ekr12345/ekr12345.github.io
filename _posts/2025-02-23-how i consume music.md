@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "How I Consume Music"
-tags: [personal]
 comments: true
 ---
 
