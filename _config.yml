@@ -21,10 +21,6 @@ avatar:
 navigation:
   - name: Home
     url: /
-  - name: Creative Projects
-    url: /cp
-  - name: Tags
-    url: /t
 
 # Pagination
 paginate: 5
