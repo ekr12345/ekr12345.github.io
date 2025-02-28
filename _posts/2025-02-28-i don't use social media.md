@@ -10,14 +10,14 @@ That's why I decided to delete my social media accounts and start this site.
 
 Having my own site encourages me to spend more time creating.
 
-Social media pushes us to spend more time mindlessly consuming.
+Social media pushed me to spend more time mindlessly consuming.
 
 Having my own site allows me focus.
 
-Social media wants to wreck my attention span.
+Social media wanted to wreck my attention span.
 
 Having my own site encourages me to share my work with *real* friends.
 
-Social media wants me to think every follower (and bot) is a *real* friend. 
+Social media wanted me to think that every follower (and bot) was a *real* friend. 
 
 I could go on but you probably already get the point. 
