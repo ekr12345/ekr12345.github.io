@@ -24,7 +24,7 @@ I help family when they need me.
 
 I go for long walks in nature when I need a break.
 
-I'm thankful for this, and my loyalty to my employer has strengthened. I've been with the same tech company for over five years. Most of my colleagues have been here even longer.
+I'm thankful for this, and my loyalty to my employer has strengthened. I've been with the same employer for over five years. Most of my colleagues have been here even longer.
 
 Being able to start the day on my schedule is such a game changer. Because I've saved around 10 hours of commute a week, I have no problem spending the extra time on weekends to do a litle extra.
 
