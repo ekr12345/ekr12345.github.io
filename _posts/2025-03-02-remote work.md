@@ -4,6 +4,8 @@ title: "I Love Being Remote"
 comments: true
 ---
 
+The morning dread is long gone.
+
 The dread of knowing it would take me hours to get to and from the office.
 
 The dread of knowing my eight-hour day would, most likely, become ten hours.
