@@ -28,4 +28,4 @@ Being able to start the day on my schedule is such a game changer. Because I've 
 
 I've been going to the gym more, and I feel healthier. A strong body fuels a strong mind, and a strong mind makes me more productive.
 
-To put this into perspective, the company I work for has grown year over year ever since remote work became a thing. And you know what, others have too.
+To put this into perspective, the company I work for has grown year over year ever since remote work became a thing. And you know what? Others have too.
