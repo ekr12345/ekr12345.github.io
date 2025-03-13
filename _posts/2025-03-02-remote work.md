@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "I Love Being Remote"
+title: "Being Remote"
 comments: true
 ---
 
