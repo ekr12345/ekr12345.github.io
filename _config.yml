@@ -21,7 +21,7 @@ avatar:
 navigation:
   - name: Home
     url: /
-  - title: 日本語
+  - name: 日本語
     url: /jp/
 
 # Pagination
