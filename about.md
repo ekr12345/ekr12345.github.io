@@ -1,7 +1,7 @@
 ---
 layout: page
 title: About
-permalink: /jp/
+permalink: /about/
 ---
 
 Some information about you!
