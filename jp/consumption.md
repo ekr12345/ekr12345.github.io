@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "私の音楽の楽しみ方"
+date: 2025-03-16
 comments: true
 ---
 
