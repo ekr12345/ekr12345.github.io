@@ -24,6 +24,12 @@ navigation:
   - name: 日本語
     url: /jp/
 
+# Japanese
+collections:
+  jp:
+    output: true
+    permalink: /jp/:name/
+
 # Pagination
 paginate: 5
 
