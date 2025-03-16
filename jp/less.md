@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "知識疲れ"
+date: 2025-03-08
 comments: true
 ---
 
