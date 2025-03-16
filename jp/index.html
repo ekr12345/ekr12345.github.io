@@ -3,8 +3,6 @@ layout: default
 permalink: /jp/
 ---
 
-<h6>以下の投稿は、私が英語で書いた内容をChatGPTで翻訳したものです。</h6>
-
 <div class="posts">
   {% assign jp_posts = site.pages | where_exp: "post", "post.path contains 'jp/'" | sort: "date" | reverse %}
   {% for post in jp_posts %}
