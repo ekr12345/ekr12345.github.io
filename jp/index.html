@@ -1,13 +1,14 @@
 ---
 layout: default
 title: "日本語の投稿一覧"
+permalink: /jp/
 ---
 
 <h1>日本語の投稿一覧</h1>
 
 <div class="post-list">
   {% for post in site.pages %}
-    {% if post.path contains '_jp/' %}
+    {% if post.path contains 'jp/' and post.url != '/jp/' %}
       <article class="post">
         <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
         <p>{{ post.date | date: "%Y-%m-%d" }}</p>
