@@ -100,3 +100,7 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+
+# Japanese
+include:
+  - _jp
