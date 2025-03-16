@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "反ソーシャルメディア"
+date: 2025-02-28
 comments: true
 ---
 
