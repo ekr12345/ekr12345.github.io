@@ -20,7 +20,7 @@ avatar:
 # it from the list(Delete '- name: ' and 'url: ', too!)
 navigation:
   - name: About
-    url: /me
+    url: /me/
   - name: 日本語
     url: /jp/
 
