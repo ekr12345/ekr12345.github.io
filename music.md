@@ -4,5 +4,4 @@ title: Music
 permalink: /music/
 ---
 
-Coming soon.
-
+<a href="https://ekr.blog/music/suddenly.mp3" target="_blank">Suddenly</a>
