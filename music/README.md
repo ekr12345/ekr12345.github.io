@@ -1,3 +1,3 @@
 Add music here. 
 
-Create hyperlink on music.md 
+Create hyperlink in music.md 
