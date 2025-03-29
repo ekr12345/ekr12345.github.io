@@ -22,3 +22,5 @@ I’ve deleted all my social media accounts, but I’m still active on LinkedIn 
 I spent much of my 20s immersed in electronic music, both as a DJ and producer. These days, I do less of it but still feel the urge to create. Other hobbies include ice hockey, language learning, investing, video games, working out, and reading.
 
 Long walks tend to solve most of my problems.
+
+P.S. This page is a work in progress and is subject to change.
