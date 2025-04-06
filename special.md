@@ -5,6 +5,6 @@ permalink: /special/
 
 This page is where you can find some of the special work I've done in the past. 
 
-- Soundscapes
+- [Soundscapes](https://www.ekr.blog/sounds)
 
 - [Music](https://www.ekr.blog/music)
