@@ -1,3 +1,3 @@
-Add 128 bit music here. 
+Add music here. 
 
 Create hyperlink in music.md 
