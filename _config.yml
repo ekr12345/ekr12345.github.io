@@ -23,8 +23,8 @@ navigation:
     url: /me/
   - name: 日本語
     url: /jp/
-  - name: Music
-    url: /music/
+  - name: Special
+    url: /special/
 
 # Pagination
 paginate: 5
