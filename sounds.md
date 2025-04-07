@@ -2,7 +2,6 @@
 layout: page
 permalink: /sounds/
 ---
-<h2 style="text-align:center; font-size:2em; font-weight:bold; margin-bottom:1em;">🌏 Soundscapes from Japan & Canada</h2>
 
 <div style="
   display: grid;
