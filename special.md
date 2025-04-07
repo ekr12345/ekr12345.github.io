@@ -3,6 +3,7 @@ layout: page
 permalink: /special/
 ---
 
-- [Soundscapes](https://www.ekr.blog/sounds)
+[![Sounds](https://www.ekr.blog/image/recorder.png)](https://www.ekr.blog/sounds/) 
 
-- [Music](https://www.ekr.blog/music)
+
+[![Music](https://www.ekr.blog/image/music.png)](https://www.ekr.blog/music/) 
