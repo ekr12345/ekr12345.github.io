@@ -34,6 +34,9 @@ permalink: /sounds/
 
   <a href="https://www.ekr.blog/soundscapes/Waves%20(Japan).mp3" style="background:#f9f9f9; padding:1rem; border-radius:12px; text-align:center; text-decoration:none; color:#111; font-weight:500;">Waves<br><small>(Japan)</small></a>
   
-  <a href="https://www.ekr.blog/soundscapes/Restaurant%20(Japan).mp3" style="background:#f9f9f9; padding:1rem; border-radius:12px; text-align:center; text-decoration:none; color:#111; font-weight:500;">Waves<br><small>(Japan)</small></a>
+<a href="https://www.ekr.blog/soundscapes/Restaurant%20(Japan).mp3" style="background:#f9f9f9; padding:1rem; border-radius:12px; text-align:center; text-decoration:none; color:#111; font-weight:500;">Restaurant<br><small>(Japan)</small>
+
+</a>
+
 
 </div>
