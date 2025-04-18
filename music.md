@@ -3,8 +3,5 @@ layout: page
 permalink: /music/
 ---
 
-[![YUMI](https://www.ekr.blog/images/yumi.png)](https://www.ekr.blog/music/yumi.mp3)
+[![DUB01](https://www.ekr.blog/images/dub01.jpg)](https://www.ekr.blog/music/dub01.mp3)
 
-[![JAYKIN](https://www.ekr.blog/images/jaykin.png)](https://www.ekr.blog/music/jaykin.mp3)
-
-[![SZA](https://www.ekr.blog/images/sza.png)](https://www.ekr.blog/music/sza.mp3)
