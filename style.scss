@@ -9,6 +9,26 @@
 @import "open-color";
 @import "variables";
 
+/* — Dark Mode Styles — */
+html, body {
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+html.dark,
+html.dark body {
+  background: #121212 !important;
+  color:      #e0e0e0 !important;
+}
+
+html.dark a {
+  color: #80ccff !important;
+}
+
+html.dark hr {
+  border-top: 1px solid #333 !important;
+}
+/* ———————————————— */
+
 // Syntax highlighting @import is at the bottom of this file
 
 /**************/
