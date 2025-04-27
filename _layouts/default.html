@@ -17,5 +17,23 @@
     </div>
 
     {% include analytics.html %}
+
+    <script>
+    // on load: re-apply dark if set
+    (function(){
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+
+    // called by your 🌓 button
+    function toggleTheme() {
+      const html = document.documentElement;
+      const dark = html.classList.toggle('dark');
+      if (dark) localStorage.setItem('theme','dark');
+      else      localStorage.removeItem('theme');
+    }
+  </script>
+    
   </body>
 </html>
