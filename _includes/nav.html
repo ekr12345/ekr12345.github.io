@@ -20,13 +20,18 @@
         {% endfor %}
       </nav>        
          <!-- ← ADD THE BUTTON HERE: -->
-  <button
-    onclick="toggleTheme()"
-    aria-label="Toggle dark mode"
-    style="background:none;border:none;font-size:1.2em;cursor:pointer;margin-left:1em;"
-  >
-    🌓
-  </button>
+<button
+  id="theme-toggle"
+  class="theme-toggle"
+  onclick="toggleTheme()"
+  aria-label="Toggle dark mode"
+>
+  <!-- example inline SVG; swap for your own asset if you like -->
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 3a1 1 0 0 0 0 2a7 7 0 0 1 0 14a1 1 0 1 0 0 2a9 9 0 0 0 0-18z"/>
+  </svg>
+</button>
+
     </header>
   </div>
 </div>
