@@ -11,6 +11,17 @@
       </div>
 
       <nav>
+        
+         <!-- ← ADD THE BUTTON HERE: -->
+  <button
+    onclick="toggleTheme()"
+    aria-label="Toggle dark mode"
+    style="background:none;border:none;font-size:1.2em;cursor:pointer;margin-left:1em;"
+  >
+    🌓
+  </button>
+</header>
+    
         {% for nav in site.navigation %}
         {% if nav.url contains 'http://' or nav.url contains 'https://' %}
         <a href="{{ nav.url }}">{{ nav.name }}</a>
