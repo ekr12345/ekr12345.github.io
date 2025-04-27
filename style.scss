@@ -9,37 +9,6 @@
 @import "open-color";
 @import "variables";
 
-/* Dark Mode Support — add this after @import "variables"; */
-
-html {
-  /* smooth color transition when toggling */
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-html.dark {
-  /* base page background & text */
-  background: #121212;
-  color:      #e0e0e0;
-}
-
-html.dark body {
-  /* body element too, in case you set body colors elsewhere */
-  background: #121212;
-  color:      #e0e0e0;
-}
-
-/* link color override */
-html.dark a {
-  color: #80ccff;
-}
-
-/* horizontal rule override */
-html.dark hr {
-  border-top: 1px solid #333;
-}
-
-/* …you can add more html.dark overrides here (tables, blockquotes, code, etc.) */
-
 // Syntax highlighting @import is at the bottom of this file
 
 /**************/
