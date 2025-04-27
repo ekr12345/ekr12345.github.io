@@ -640,6 +640,30 @@ html.dark .entry hr {
 }
 /* ———————————————————————————— */
 
+/* — Dark-mode footer overrides — */
+html.dark .wrapper-footer {
+  background-color: #121212 !important;
+  border-top:    1px solid #333 !important;
+  border-bottom: 1px solid #333 !important;
+}
+
+html.dark footer {
+  background: transparent !important;
+  color:      #e0e0e0  !important;
+  text-align: center;  /* preserve centering if you want */
+}
+
+/* force all text/links/icons inside footer to be light */
+html.dark footer,
+html.dark footer p,
+html.dark footer a,
+html.dark footer .svg-icon,
+html.dark footer li {
+  color: #e0e0e0 !important;
+  fill:  #e0e0e0 !important;  /* for any inline SVGs */
+}
+/* ———————————————————————— */
+
 // — Toggle Button Styles —
 
 // Make sure your nav container is position: relative
