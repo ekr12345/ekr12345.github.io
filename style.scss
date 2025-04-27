@@ -615,3 +615,28 @@ footer {
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";
+
+/* — Dark Mode Final Overrides — */
+html.dark,
+html.dark body {
+  background: #121212 !important;
+  color:      #e0e0e0 !important;
+}
+
+/* every element inside a post */
+html.dark .entry,
+html.dark .entry * {
+  color: #e0e0e0 !important;
+}
+
+/* links in posts */
+html.dark .entry a {
+  color: #80ccff !important;
+}
+
+/* hr inside posts */
+html.dark .entry hr {
+  border-top: 1px solid #333 !important;
+}
+/* ———————————————————————————— */
+
