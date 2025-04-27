@@ -29,6 +29,11 @@ html.dark hr {
 }
 /* ———————————————— */
 
+/* make sure post content text also flips to light-on-dark */
+html.dark .entry {
+  color: #e0e0e0 !important;
+}
+
 // Syntax highlighting @import is at the bottom of this file
 
 /**************/
