@@ -660,17 +660,3 @@ html.dark footer li {
   fill:  #e0e0e0 !important;  /* for any inline SVGs */
 }
 /* ———————————————————————— */
-
-/* === Toggle Theme Button === */
-  
-.theme-toggle {
-  background: none;
-  border: none;
-  outline: none; /* <-- ADD this */
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  font-size: 1.2em;
-  cursor: pointer;
-  margin-left: 1em;
-}
