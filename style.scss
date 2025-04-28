@@ -413,16 +413,19 @@ nav {
 
     @include mobile {
       margin: 0 10px;
-      color: $blue;
+      color: $blue;   }
 
-    button#theme-toggle {
+button#theme-toggle {
     margin-left: 20px;
     cursor: pointer;
-    /* ← paste the new lines here: */
     background: none !important;
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
+  }
+
+  button#theme-toggle:focus {
+    outline: none !important;
   }
 }
 
