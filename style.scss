@@ -660,20 +660,3 @@ html.dark footer li {
   fill:  #e0e0e0 !important;  /* for any inline SVGs */
 }
 /* ———————————————————————— */
-
-  /* other styles above... */
-
-/* === Theme Toggle Button Reset === */
-#theme-toggle,
-.theme-toggle {
-  all: unset;
-  font-size: 1.2em;
-  cursor: pointer;
-  margin-left: 1em;
-}
-
-.theme-toggle:focus {
-  outline: 2px solid #555;
-  outline-offset: 4px;
-}
-
