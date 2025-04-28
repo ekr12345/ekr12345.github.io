@@ -660,3 +660,34 @@ html.dark footer li {
   fill:  #e0e0e0 !important;  /* for any inline SVGs */
 }
 /* ———————————————————————— */
+
+  /* === Theme Toggle Button === */
+#theme-toggle {
+  font-size: 2rem;
+  cursor: pointer;
+  margin-left: 1em;
+}
+
+#theme-toggle:focus {
+  outline: 2px solid #555;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+#theme-toggle:hover {
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+/* === Dark Mode Styles === */
+body {
+  background: white;
+  color: black;
+  transition: background 0.3s, color 0.3s;
+}
+
+body.dark {
+  background: black;
+  color: white;
+}
+
