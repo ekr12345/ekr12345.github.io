@@ -18,20 +18,26 @@
 
     {% include analytics.html %}
 
-    <script>
-    // on load: re-apply dark if set
+   {% include analytics.html %}
+
+  <script>
+    // on load: re-apply dark mode if the user set it before
     (function(){
       if (localStorage.getItem('theme') === 'dark') {
         document.documentElement.classList.add('dark');
+        document.getElementById('theme-toggle')
+                .classList.add('dark');
       }
     })();
 
-    // called by your 🌓 button
+    // Called when the theme-toggle button is clicked
     function toggleTheme() {
       const html = document.documentElement;
-      const dark = html.classList.toggle('dark');
-      if (dark) localStorage.setItem('theme','dark');
-      else      localStorage.removeItem('theme');
+      const btn  = document.getElementById('theme-toggle');
+      const isDark = html.classList.toggle('dark');
+      btn.classList.toggle('dark', isDark);
+      if (isDark) localStorage.setItem('theme','dark');
+      else        localStorage.removeItem('theme');
     }
   </script>
     
