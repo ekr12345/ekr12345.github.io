@@ -663,3 +663,73 @@ html.dark footer li {
   fill:  #e0e0e0 !important;  /* for any inline SVGs */
 }
 /* ———————————————————————— */
+
+// — Toggle Button Styles —
+
+.masthead {
+  position: relative;  // ensure .theme-toggle can absolutely position inside it
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  background: var(--bg-color);
+  border: 1px solid var(--divider-color);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.theme-toggle .icon {
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: var(--text-color);
+  stroke: var(--text-color);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.theme-toggle .sun {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.theme-toggle .moon {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+/* when in dark mode, flip which icon is visible */
+html.dark .theme-toggle .sun {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+html.dark .theme-toggle .moon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+// Mobile tweak (using your existing mobile mixin)
+@include mobile {
+  .theme-toggle {
+    right: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
