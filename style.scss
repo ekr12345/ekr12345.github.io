@@ -414,19 +414,6 @@ nav {
     @include mobile {
       margin: 0 10px;
       color: $blue;   }
-
-button#theme-toggle {
-    margin-left: 20px;
-    cursor: pointer;
-    background: none !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-  }
-
-  button#theme-toggle:focus {
-    outline: none !important;
-  }
 }
 
 // Posts
