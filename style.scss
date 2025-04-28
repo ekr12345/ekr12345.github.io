@@ -666,12 +666,10 @@ html.dark footer li {
 .theme-toggle {
   background: none;
   border: none;
+  appearance: none;
+  -webkit-appearance: none; /* For Safari */
+  -moz-appearance: none;    /* For Firefox */
   font-size: 1.2em;
   cursor: pointer;
   margin-left: 1em;
 }
-
-.theme-toggle:focus {
-  outline: none; /* optional, only if you want to remove focus outline */
-}
-
