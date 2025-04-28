@@ -414,6 +414,14 @@ nav {
     @include mobile {
       margin: 0 10px;
       color: $blue;
+
+      button#theme-toggle {
+  margin-left: 20px;  // match your link spacing
+  cursor: pointer;    // show the hand on hover
+  background: none;
+  border: none;
+  font-size: inherit;
+
     }
   }
 }
