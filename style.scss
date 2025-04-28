@@ -662,13 +662,14 @@ html.dark footer li {
 /* ———————————————————————— */
 
 /* === Toggle Theme Button === */
-
+  
 .theme-toggle {
   background: none;
   border: none;
+  outline: none; /* <-- ADD this */
   appearance: none;
-  -webkit-appearance: none; /* For Safari */
-  -moz-appearance: none;    /* For Firefox */
+  -webkit-appearance: none;
+  -moz-appearance: none;
   font-size: 1.2em;
   cursor: pointer;
   margin-left: 1em;
