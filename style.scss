@@ -660,21 +660,3 @@ html.dark footer li {
   fill:  #e0e0e0 !important;  /* for any inline SVGs */
 }
 /* ———————————————————————— */
-
-  /* — Ultimate button-reset for #theme-toggle — */
-#theme-toggle {
-  /* Nuke all inherited/UA properties */
-  all: unset !important;               /* clears border, background, padding, etc. :contentReference[oaicite:2]{index=2} */
-  -webkit-appearance: none !important; /* removes platform-specific styling :contentReference[oaicite:3]{index=3} */
-  -moz-appearance: none !important;
-  appearance: none !important;
-
-  /* Restore minimal layout */
-  display: inline-block !important;   
-  cursor: pointer !important;         /* clickable hand */
-
-  /* If you still see a stray outline, this kills it: */
-  outline: none !important;           
-  box-shadow: none !important;        /* in case of shadow-based borders */
-}
-
