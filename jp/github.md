@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "バックグラウンドミュージック"
+title: "GitHubを理解する"
 date: 2025-05-01
 comments: true
 ---
