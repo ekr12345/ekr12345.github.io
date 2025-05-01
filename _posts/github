@@ -5,20 +5,38 @@ comments: true
 ---
 
 I never used GitHub prior to creating this website—or should I say, blog?
+
 I never touched code in the past, which made the platform intimidating to look at.
+
 But, times-a-change and guess what? I've now ended up hosting my website through GitHub.
+
 Let me explain why.
+
 I don’t have any personal social media accounts for a variety of reasons.
+
 However, the itch to create and share online was too strong, and so I decided it was time to create my own website. I wanted to have full control and ownership of what I created. Plus, it feels good to say to someone, ‘I don’t use social media, but here’s my site’. Boom.
+
 It bugs me to see how so many people are giving up ownership and control of their work in the digital world. I didn’t want to play those games anymore.
+
 I sifted through sites online to see which platforms would give me full control and ownership of my site. I’ve used WordPress in the past but opted out this time because it feels too jumbo for what I currently need (I don’t care about plugins, SEO, and so on). Other website builders like Carrd don’t provide the full control that I’m after these days.
-As my search evolved, I came across this post. The quote from Derek Sivers struck a chord.
+
+As my search evolved, I came across this [post](https://parsam.io/website). The quote from Derek Sivers struck a chord.
+
 Don't let anyone sell you on some complex solution. They're saying you need a jumbo jet when really you need a bicycle. Do your HTML by hand like this, and then you'll know when your site has become so big that you need a little more automation to help manage changes or links to the hundreds of pages inside. But until then, no no no. Just do HTML by hand.
+
 The author suggested GitHub as a web building solution. It’s free and it’ll allow me to learn new skills along the way.
+
 As a side note, I work in SaaS on the marketing, sales, and creative side of things. So a lot of the “dev talk” is fuzz to me. However, now that I get GitHub, the fuzz is slowly evaporating and I feel that I can contribute to the team in more meaningful ways.
+
 Anyways, going back to my website’s setup. I needed help. Lots of help. Again, I had no idea what I was doing so I did what everyone else would do, I turned to good ‘ole ChatGPT.
+
 I fed it the most basic prompts and explained I had no idea what the hell I was doing. Like any competent assistant, ChatGPT held my hand through the entire process, providing me with detailed explanations, code, and so on. I felt like a junior coder throughout the entire process, and it felt great.
+
 Within an hour, I had my own website hosted on GitHub.
+
 It felt good. It still feels good.
+
 I’m able to dig into my site like a dirty mechanic digs into their car’s engine.
+
 I get an extra dose of satisfaction knowing that I’ve built something on my own.
+
