@@ -12,7 +12,7 @@ But, times-a-change and guess what? I've now ended up hosting my website through
 
 Let me explain why.
 
-I don’t have any personal social media accounts for a variety of reasons.
+I don’t have any personal [social media](https://ekr.blog/unsocial) accounts for a variety of reasons.
 
 However, the itch to create and share online was too strong, and so I decided it was time to create my own website. I wanted to have full control and ownership of what I created. Plus, it feels good to say to someone, ‘I don’t use social media, but here’s my site’. Boom.
 
@@ -22,7 +22,12 @@ I sifted through sites online to see which platforms would give me full control 
 
 As my search evolved, I came across this [post](https://parsam.io/website). The quote from Derek Sivers struck a chord.
 
-Don't let anyone sell you on some complex solution. They're saying you need a jumbo jet when really you need a bicycle. Do your HTML by hand like this, and then you'll know when your site has become so big that you need a little more automation to help manage changes or links to the hundreds of pages inside. But until then, no no no. Just do HTML by hand.
+<figure>
+  <blockquote>
+    <p>Don't let anyone sell you on some complex solution. They're saying you need a jumbo jet when really you need a bicycle. Do your HTML by hand like this, and then you'll know when your site has become so big that you need a little more automation to help manage changes or links to the hundreds of pages inside. But until then, no no no. Just do HTML by hand.</p>
+  </blockquote>
+  <figcaption>— Derek Sivers</figcaption>
+</figure>
 
 The author suggested GitHub as a web building solution. It’s free and it’ll allow me to learn new skills along the way.
 
