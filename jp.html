@@ -7,7 +7,7 @@ permalink: /jp/
 <h1>日本語ブログ</h1>
 
 <ul class="post-list">
-  {% assign jp_posts = site.pages | where_exp: "p", "p.path contains 'jp/' and p.path != 'jp/index.md'" | sort: 'date' | reverse %}
+  {% assign jp_posts = site.jp | sort: "date" | reverse %}
   {% for post in jp_posts %}
     <li>
       <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
