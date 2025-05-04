@@ -24,6 +24,11 @@ navigation:
   - name: Special
     url: /special/
 
+collections:
+  jp:
+    output: true
+    permalink: /jp/:name/
+
 # Pagination
 paginate: 5
 
