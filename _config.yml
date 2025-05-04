@@ -21,8 +21,6 @@ avatar:
 navigation:
   - name: About
     url: /me/
-  - name: 日本語
-    url: /jp/
   - name: Special
     url: /special/
 
