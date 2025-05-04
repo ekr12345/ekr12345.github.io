@@ -14,6 +14,16 @@
 /* BASE RULES */
 /**************/
 
+/* Reduce top margin of the header */
+header {
+  margin-top: 20px;
+}
+
+/* Reduce top margin of the main content */
+main {
+  margin-top: 20px;
+}
+
 html {
   font-size: $base-font-size;
 }
