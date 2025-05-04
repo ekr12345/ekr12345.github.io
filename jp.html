@@ -1,0 +1,15 @@
+---
+layout: default
+title: 日本語ブログ
+permalink: /jp/
+---
+
+<ul class="post-list">
+  {% assign jp_posts = site.jp | sort: "date" | reverse %}
+  {% for post in jp_posts %}
+    <li>
+      <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+    </li>
+  {% endfor %}
+</ul>

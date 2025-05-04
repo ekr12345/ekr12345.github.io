@@ -2,49 +2,61 @@
 layout: default
 ---
 
-{% if site.posts.size == 0 %}
-  <h2>No post found</h2>
-{% endif %}
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Eric – About</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <section>
+      <p>I'm a 30-something year old Canadian who currently works in EdTech. I'm based in Vancouver but spend anywhere between 25% to 40% of the year across a number of cities in Japan.</p>
 
-<div class="posts">
-  {% for post in paginator.posts %}
-    <article class="post">
-      <h1>
-        <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-      </h1>
+      <p>You can read my posts <a href="https://ekr.blog/posts">here</a> 「<a href="https://ekr.blog/jp">日本語版</a>」.</p>
+    </section>
 
-      <div>
-        <span class="date">
-          {{ post.date | date: "%Y-%m-%d" }}
-        </span>
+    <h1>Links</h1>
+    <section class="link-section">
+      <a class="link-button" href="https://github.com/ekr12345" target="_blank">GitHub</a>
+      <a class="link-button" href="https://www.linkedin.com/in/e-k-r" target="_blank">LinkedIn</a>
+      <a class="link-button" href="/faves">Favorites</a>
+      <a class="link-button" href="/music">Music</a>
+      <a class="link-button" href="/sounds">Sounds</a>
+    </section>
 
-        <ul class="tag">
-          {% for tag in post.tags %}
-          <li>
-            <a href="{{ site.url }}{{ site.baseurl }}/tags#{{ tag }}">
-              {{ tag }}
-            </a>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-    </article>
-  {% endfor %}
-</div>
+    <h1>Now</h1>
+    <section>
+      <p>I'm head of Sales and Biz development at LingQ and working remotely around Vancouver.</p>
+      <p>Besides that, I'm also planning a few special pop-up events and my next visit to 日本 in the Fall.</p>
+    </section>
+  </div>
 
-<div class="pagination">
-  {% if paginator.previous_page %}
-    <span class="prev">
-      <a href="{{ site.baseurl }}{{ paginator.previous_page_path }}" class="prev">
-        &#xE000; Previous
-      </a>
-    </span>
-  {% endif %}
-  {% if paginator.next_page %}
-    <span class="next">
-      <a href="{{ site.baseurl}}{{ paginator.next_page_path }}" class="next">
-        Next &#xE001;
-      </a>
-    </span>
-  {% endif %}
-</div>
+  <style>
+    .link-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .link-button {
+      border: 1px solid #ccc;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #000;
+      font-weight: 500;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .link-button:hover {
+      background-color: #f4f4f4;
+      border-color: #888;
+    }
+  </style>
+</body>
+</html>
