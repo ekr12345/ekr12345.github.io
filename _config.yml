@@ -18,9 +18,6 @@ avatar:
 # Tabs in header. There are 'Blog', 'About', 'Archive', 'Tags'
 # and URL Link(e.g. 'Theme' tab below) tabs. If you don't need one, just delete
 # it from the list(Delete '- name: ' and 'url: ', too!)
-navigation:
-  - name: 
-    url:
 
 collections:
   jp:
