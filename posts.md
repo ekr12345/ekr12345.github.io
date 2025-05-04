@@ -1,50 +1,18 @@
 ---
 layout: default
+title: Thoughts
+permalink: /thoughts/
 ---
 
-{% if site.posts.size == 0 %}
-  <h2>No post found</h2>
-{% endif %}
+## Thoughts
 
-<div class="posts">
-  {% for post in paginator.posts %}
-    <article class="post">
-      <h1>
-        <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-      </h1>
+Here are some of my recent posts:
 
-      <div>
-        <span class="date">
-          {{ post.date | date: "%Y-%m-%d" }}
-        </span>
-
-        <ul class="tag">
-          {% for tag in post.tags %}
-          <li>
-            <a href="{{ site.url }}{{ site.baseurl }}/tags#{{ tag }}">
-              {{ tag }}
-            </a>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-    </article>
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+      <span> – {{ post.date | date: "%Y-%m-%d" }}</span>
+    </li>
   {% endfor %}
-</div>
-
-<div class="pagination">
-  {% if paginator.previous_page %}
-    <span class="prev">
-      <a href="{{ site.baseurl }}{{ paginator.previous_page_path }}" class="prev">
-        &#xE000; Previous
-      </a>
-    </span>
-  {% endif %}
-  {% if paginator.next_page %}
-    <span class="next">
-      <a href="{{ site.baseurl}}{{ paginator.next_page_path }}" class="next">
-        Next &#xE001;
-      </a>
-    </span>
-  {% endif %}
-</div>
+</ul>
