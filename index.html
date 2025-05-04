@@ -36,5 +36,38 @@ layout: default
     
     <p><a href="/posts/">→ Read my blog</a></p>
   </div>
+
+  <style>
+  .link-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .link-button {
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .link-button:hover {
+    background-color: #f4f4f4;
+    border-color: #888;
+  }
+</style>
+
+<section class="link-section">
+  <a class="link-button" href="https://github.com/ekr12345" target="_blank">GitHub</a>
+  <a class="link-button" href="https://www.linkedin.com/in/ekr12345" target="_blank">LinkedIn</a>
+  <a class="link-button" href="/blog">Blog</a>
+  <a class="link-button" href="mailto:you@example.com">Email</a>
+</section>
+
 </body>
 </html>
