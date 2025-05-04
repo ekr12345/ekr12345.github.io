@@ -72,19 +72,6 @@ baseurl:
 #
 
 permalink: /:title/
-paginate_path: "/posts/page:num/"
-
-pagination:
-  enabled: true
-  per_page: 5
-  title: ':title'
-  limit: 0
-  sort_field: 'date'
-  sort_reverse: true
-  trail:
-    before: 2
-    after: 2
-  path: "/posts/"
 
 
 # The release of Jekyll Now that you're using
