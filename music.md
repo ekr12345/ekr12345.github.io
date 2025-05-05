@@ -3,20 +3,19 @@ layout: page
 permalink: /music/
 ---
 
-<section class="px-4 py-8 max-w-5xl mx-auto">
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+<div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
 
-    <!-- Linked Image Card -->
-    <a href="/music/sza.mp3" class="block group">
-      <img 
-        src="/image/sza.jpg" 
-        alt="SZA Track" 
-        class="w-full h-auto object-cover rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105"
-        loading="lazy"
-      />
-    </a>
+  <a href="/music/sza.mp3" style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem);">
+    <img 
+      src="/image/sza.jpg" 
+      alt="SZA Track" 
+      style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s;"
+      onmouseover="this.style.transform='scale(1.03)'"
+      onmouseout="this.style.transform='scale(1)'"
+    />
+  </a>
 
-    <!-- Add more linked images here as needed -->
+  <!-- Future images go here -->
+  <!-- Example: <a href="/music/another.mp3">...</a> -->
 
-  </div>
-</section>
+</div>
