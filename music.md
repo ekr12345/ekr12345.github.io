@@ -7,7 +7,7 @@ permalink: /music/
 
   <a href="/music/sza.mp3" style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem);">
     <img 
-      src="/image/sza.jpg" 
+      src="/images/sza.jpg" 
       alt="SZA Track" 
       style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s;"
       onmouseover="this.style.transform='scale(1.03)'"
