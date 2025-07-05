@@ -7,7 +7,7 @@ permalink: /sounds/
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Soundscapes</title>
+  <title>Sounds</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
@@ -20,12 +20,6 @@ permalink: /sounds/
       max-width: 900px;
       margin: 2.5rem auto;
       padding: 0 1rem;
-    }
-    h1 {
-      text-align: center;
-      font-size: 2.2rem;
-      margin-bottom: 2rem;
-      letter-spacing: 0.01em;
     }
     .sounds-tiles {
       display: flex;
@@ -66,7 +60,6 @@ permalink: /sounds/
 </head>
 <body>
   <div class="container">
-    <h1>Soundscapes</h1>
     <div class="sounds-tiles">
       <a href="https://www.ekr.blog/soundscapes/An%20Alley%20(Japan).mp3"><div class="sound-tile-inner"></div></a>
       <a href="https://www.ekr.blog/soundscapes/Birds%20(Japan).mp3"><div class="sound-tile-inner"></div></a>
@@ -79,8 +72,4 @@ permalink: /sounds/
       <a href="https://www.ekr.blog/soundscapes/Stations%20(Japan).mp3"><div class="sound-tile-inner"></div></a>
       <a href="https://www.ekr.blog/soundscapes/Streams%20(Canada).mp3"><div class="sound-tile-inner"></div></a>
       <a href="https://www.ekr.blog/soundscapes/Waves%20(Japan).mp3"><div class="sound-tile-inner"></div></a>
-      <a href="https://www.ekr.blog/soundscapes/Restaurant%20(Japan).mp3"><div class="sound-tile-inner"></div></a>
-    </div>
-  </div>
-</body>
-</html>
+      <a href="https://www.ekr.blog/soundscapes/Restaurant%20(Japan).mp3"><
