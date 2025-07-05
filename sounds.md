@@ -11,7 +11,9 @@ permalink: /sounds/
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-decoration: none; color: #111; font-weight: 500; font-size: 1.18rem; 
-            transition: transform 0.24s, box-shadow 0.24s;">
+            transition: transform 0.24s, box-shadow 0.24s;"
+     onmouseover="this.style.transform='scale(1.03)'"
+     onmouseout="this.style.transform='scale(1)'">
     <span style="font-size:1.14em;">An Alley</span>
     <small style="color:#888; font-size:1em; margin-top:.3em;">Japan</small>
   </a>
@@ -22,119 +24,142 @@ permalink: /sounds/
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-decoration: none; color: #111; font-weight: 500; font-size: 1.18rem; 
-            transition: transform 0.24s, box-shadow 0.24s;">
+            transition: transform 0.24s, box-shadow 0.24s;"
+     onmouseover="this.style.transform='scale(1.03)'"
+     onmouseout="this.style.transform='scale(1)'">
     <span style="font-size:1.14em;">Birds</span>
     <small style="color:#888; font-size:1em; margin-top:.3em;">Japan</small>
   </a>
-  
+
   <a href="https://www.ekr.blog/soundscapes/Buses%20(Japan).mp3"
      style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); aspect-ratio: 1/1;
             background: #f9f9f9; border-radius: 18px; border: 1.5px solid #111;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-decoration: none; color: #111; font-weight: 500; font-size: 1.18rem; 
-            transition: transform 0.24s, box-shadow 0.24s;">
+            transition: transform 0.24s, box-shadow 0.24s;"
+     onmouseover="this.style.transform='scale(1.03)'"
+     onmouseout="this.style.transform='scale(1)'">
     <span style="font-size:1.14em;">Buses</span>
     <small style="color:#888; font-size:1em; margin-top:.3em;">Japan</small>
   </a>
-  
+
   <a href="https://www.ekr.blog/soundscapes/Cafes%20(Japan).mp3"
      style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); aspect-ratio: 1/1;
             background: #f9f9f9; border-radius: 18px; border: 1.5px solid #111;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-decoration: none; color: #111; font-weight: 500; font-size: 1.18rem; 
-            transition: transform 0.24s, box-shadow 0.24s;">
+            transition: transform 0.24s, box-shadow 0.24s;"
+     onmouseover="this.style.transform='scale(1.03)'"
+     onmouseout="this.style.transform='scale(1)'">
     <span style="font-size:1.14em;">Cafes</span>
     <small style="color:#888; font-size:1em; margin-top:.3em;">Japan</small>
   </a>
-  
+
   <a href="https://www.ekr.blog/soundscapes/Drain%20(Canada).mp3"
      style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); aspect-ratio: 1/1;
             background: #f9f9f9; border-radius: 18px; border: 1.5px solid #111;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-decoration: none; color: #111; font-weight: 500; font-size: 1.18rem; 
-            transition: transform 0.24s, box-shadow 0.24s;">
+            transition: transform 0.24s, box-shadow 0.24s;"
+     onmouseover="this.style.transform='scale(1.03)'"
+     onmouseout="this.style.transform='scale(1)'">
     <span style="font-size:1.14em;">Drain</span>
     <small style="color:#888; font-size:1em; margin-top:.3em;">Canada</small>
   </a>
-  
+
   <a href="https://www.ekr.blog/soundscapes/Izakaya%20(Japan).mp3"
      style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); aspect-ratio: 1/1;
             background: #f9f9f9; border-radius: 18px; border: 1.5px solid #111;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-decoration: none; color: #111; font-weight: 500; font-size: 1.18rem; 
-            transition: transform 0.24s, box-shadow 0.24s;">
+            transition: transform 0.24s, box-shadow 0.24s;"
+     onmouseover="this.style.transform='scale(1.03)'"
+     onmouseout="this.style.transform='scale(1)'">
     <span style="font-size:1.14em;">Izakaya</span>
     <small style="color:#888; font-size:1em; margin-top:.3em;">Japan</small>
   </a>
-  
+
   <a href="https://www.ekr.blog/soundscapes/Konbini%20(Japan).mp3"
      style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); aspect-ratio: 1/1;
             background: #f9f9f9; border-radius: 18px; border: 1.5px solid #111;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-decoration: none; color: #111; font-weight: 500; font-size: 1.18rem; 
-            transition: transform 0.24s, box-shadow 0.24s;">
+            transition: transform 0.24s, box-shadow 0.24s;"
+     onmouseover="this.style.transform='scale(1.03)'"
+     onmouseout="this.style.transform='scale(1)'">
     <span style="font-size:1.14em;">Konbini</span>
     <small style="color:#888; font-size:1em; margin-top:.3em;">Japan</small>
   </a>
-  
+
   <a href="https://www.ekr.blog/soundscapes/River%20(Canada).mp3"
      style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); aspect-ratio: 1/1;
             background: #f9f9f9; border-radius: 18px; border: 1.5px solid #111;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-decoration: none; color: #111; font-weight: 500; font-size: 1.18rem; 
-            transition: transform 0.24s, box-shadow 0.24s;">
+            transition: transform 0.24s, box-shadow 0.24s;"
+     onmouseover="this.style.transform='scale(1.03)'"
+     onmouseout="this.style.transform='scale(1)'">
     <span style="font-size:1.14em;">River</span>
     <small style="color:#888; font-size:1em; margin-top:.3em;">Canada</small>
   </a>
-  
+
   <a href="https://www.ekr.blog/soundscapes/Stations%20(Japan).mp3"
      style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); aspect-ratio: 1/1;
             background: #f9f9f9; border-radius: 18px; border: 1.5px solid #111;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-decoration: none; color: #111; font-weight: 500; font-size: 1.18rem; 
-            transition: transform 0.24s, box-shadow 0.24s;">
+            transition: transform 0.24s, box-shadow 0.24s;"
+     onmouseover="this.style.transform='scale(1.03)'"
+     onmouseout="this.style.transform='scale(1)'">
     <span style="font-size:1.14em;">Stations</span>
     <small style="color:#888; font-size:1em; margin-top:.3em;">Japan</small>
   </a>
-  
+
   <a href="https://www.ekr.blog/soundscapes/Streams%20(Canada).mp3"
      style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); aspect-ratio: 1/1;
             background: #f9f9f9; border-radius: 18px; border: 1.5px solid #111;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-decoration: none; color: #111; font-weight: 500; font-size: 1.18rem; 
-            transition: transform 0.24s, box-shadow 0.24s;">
+            transition: transform 0.24s, box-shadow 0.24s;"
+     onmouseover="this.style.transform='scale(1.03)'"
+     onmouseout="this.style.transform='scale(1)'">
     <span style="font-size:1.14em;">Streams</span>
     <small style="color:#888; font-size:1em; margin-top:.3em;">Canada</small>
   </a>
-  
+
   <a href="https://www.ekr.blog/soundscapes/Waves%20(Japan).mp3"
      style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); aspect-ratio: 1/1;
             background: #f9f9f9; border-radius: 18px; border: 1.5px solid #111;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-decoration: none; color: #111; font-weight: 500; font-size: 1.18rem; 
-            transition: transform 0.24s, box-shadow 0.24s;">
+            transition: transform 0.24s, box-shadow 0.24s;"
+     onmouseover="this.style.transform='scale(1.03)'"
+     onmouseout="this.style.transform='scale(1)'">
     <span style="font-size:1.14em;">Waves</span>
     <small style="color:#888; font-size:1em; margin-top:.3em;">Japan</small>
   </a>
-  
+
   <a href="https://www.ekr.blog/soundscapes/Restaurant%20(Japan).mp3"
      style="flex: 1 1 calc(33.333% - 1rem); max-width: calc(33.333% - 1rem); aspect-ratio: 1/1;
             background: #f9f9f9; border-radius: 18px; border: 1.5px solid #111;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-decoration: none; color: #111; font-weight: 500; font-size: 1.18rem; 
-            transition: transform 0.24s, box-shadow 0.24s;">
+            transition: transform 0.24s, box-shadow 0.24s;"
+     onmouseover="this.style.transform='scale(1.03)'"
+     onmouseout="this.style.transform='scale(1)'">
     <span style="font-size:1.14em;">Restaurant</span>
     <small style="color:#888; font-size:1em; margin-top:.3em;">Japan</small>
   </a>
+
 </div>
 
