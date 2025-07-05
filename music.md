@@ -76,7 +76,7 @@ permalink: /music/
   <a href="/music/dalipapi.mp3">
     <img 
       src="/images/lariss.jpg" 
-      alt="Dalipapi"
+      alt="Dali Papi"
     />
   </a>
 
@@ -98,6 +98,13 @@ permalink: /music/
     <img 
       src="/images/adina.jpg" 
       alt="Body Heat"
+    />
+  </a>
+
+  <a href="/music/401west.mp3">
+    <img 
+      src="/images/jaydink2.jpg" 
+      alt="401 West"
     />
   </a>
 
