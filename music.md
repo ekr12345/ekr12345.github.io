@@ -108,13 +108,6 @@ permalink: /music/
     />
   </a>
 
-  <a href="/music/weeknd.mp3">
-    <img 
-      src="/images/weeknd.jpg" 
-      alt="After Hours"
-    />
-  </a>
-
   <!-- Add more image links below as needed -->
 
 </div>
