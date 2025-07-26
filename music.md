@@ -110,18 +110,16 @@ permalink: /music/
   <a href="/music/fara.mp3">
     <img 
       src="/images/fara.jpg" 
-      alt="401 West"
+      alt="fara"
     />
   </a>
 
   <a href="/music/tinashe.mp3">
     <img 
       src="/images/tinashe.jpg" 
-      alt="401 West"
+      alt="tinashe"
     />
   </a>
-
-  
 
   <!-- Add more image links below as needed -->
 
