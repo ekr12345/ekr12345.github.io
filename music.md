@@ -2,6 +2,38 @@
 layout: page
 permalink: /music/
 ---
+<style>
+.music-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+.music-tiles a {
+  flex: 1 1 calc(33.333% - 1rem);
+  max-width: calc(33.333% - 1rem);
+  min-width: 0;
+}
+.music-tiles img {
+  width: 100%;
+  height: auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 16px;
+  border: 1.5px solid #111;
+  background: #f9f9f9;
+  transition: transform 0.3s;
+}
+.music-tiles img:hover,
+.music-tiles img:focus {
+  transform: scale(1.03);
+}
+@media (max-width: 600px) {
+  .music-tiles a {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+</style>
 
 <div class="music-tiles">
 
