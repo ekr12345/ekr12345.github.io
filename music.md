@@ -107,6 +107,15 @@ permalink: /music/
       alt="401 West"
     />
   </a>
+  
+  <a href="/music/fara.mp3">
+    <img 
+      src="/images/fara.jpg" 
+      alt="401 West"
+    />
+  </a>
+
+  
 
   <!-- Add more image links below as needed -->
 
