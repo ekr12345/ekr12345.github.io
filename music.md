@@ -114,6 +114,13 @@ permalink: /music/
     />
   </a>
 
+  <a href="/music/tinashe.mp3">
+    <img 
+      src="/images/tinashe.jpg" 
+      alt="401 West"
+    />
+  </a>
+
   
 
   <!-- Add more image links below as needed -->
