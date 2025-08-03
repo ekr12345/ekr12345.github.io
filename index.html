@@ -1,119 +1,66 @@
----
-layout: default
----
-
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Eric – About</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom, #0054c4, #002c6e);
+      color: white;
+    }
+    .link-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 1rem;
+    }
+    .card {
+      flex: 1 1 160px;
+      max-width: 230px;
+      aspect-ratio: 1 / 1;
+      border-radius: 16px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.12rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: white;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(6px);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.045);
+      filter: brightness(1.15);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+    }
+  </style>
 </head>
 <body>
-    <section class="link-section" style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; max-width: 800px; margin: 2.5rem auto;">
-      <a href="https://ekr.blog/posts" 
-     style="flex: 1 1 160px; max-width: 230px; aspect-ratio: 1/1;
-            background: #f9f9f9; border-radius: 16px; border: 1.5px solid #111;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.12rem; font-weight: 500; color: #111; text-decoration: none;
-            transition: transform 0.22s, box-shadow 0.22s;"
-     onmouseover="this.style.transform='scale(1.035)'" onmouseout="this.style.transform='scale(1)'"
-     ontouchstart="this.style.transform='scale(1.035)'" ontouchend="this.style.transform='scale(1)'">
-        Posts
-  </a>
-  <!-- 日本語版 second -->
-  <a href="https://ekr.blog/jp" 
-     style="flex: 1 1 160px; max-width: 230px; aspect-ratio: 1/1;
-            background: #f9f9f9; border-radius: 16px; border: 1.5px solid #111;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.12rem; font-weight: 500; color: #111; text-decoration: none;
-            transition: transform 0.22s, box-shadow 0.22s;"
-     onmouseover="this.style.transform='scale(1.035)'" onmouseout="this.style.transform='scale(1)'"
-     ontouchstart="this.style.transform='scale(1.035)'" ontouchend="this.style.transform='scale(1)'">
-        日本語版
-  </a>
-      <a href="/me"
-         style="flex: 1 1 160px; max-width: 230px; aspect-ratio: 1/1;
-                background: #f9f9f9; border-radius: 16px; border: 1.5px solid #111;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                display: flex; align-items: center; justify-content: center;
-                font-size: 1.12rem; font-weight: 500; color: #111; text-decoration: none;
-                transition: transform 0.22s, box-shadow 0.22s;"
-         onmouseover="this.style.transform='scale(1.035)'" onmouseout="this.style.transform='scale(1)'"
-         ontouchstart="this.style.transform='scale(1.035)'" ontouchend="this.style.transform='scale(1)'">
-        Bio
-      </a>
-      <a href="https://github.com/ekr12345" target="_blank"
-         style="flex: 1 1 160px; max-width: 230px; aspect-ratio: 1/1;
-                background: #f9f9f9; border-radius: 16px; border: 1.5px solid #111;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                display: flex; align-items: center; justify-content: center;
-                font-size: 1.12rem; font-weight: 500; color: #111; text-decoration: none;
-                transition: transform 0.22s, box-shadow 0.22s;"
-         onmouseover="this.style.transform='scale(1.035)'" onmouseout="this.style.transform='scale(1)'"
-         ontouchstart="this.style.transform='scale(1.035)'" ontouchend="this.style.transform='scale(1)'">
-        GitHub
-      </a>
-      <a href="https://www.linkedin.com/in/e-k-r" target="_blank"
-         style="flex: 1 1 160px; max-width: 230px; aspect-ratio: 1/1;
-                background: #f9f9f9; border-radius: 16px; border: 1.5px solid #111;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                display: flex; align-items: center; justify-content: center;
-                font-size: 1.12rem; font-weight: 500; color: #111; text-decoration: none;
-                transition: transform 0.22s, box-shadow 0.22s;"
-         onmouseover="this.style.transform='scale(1.035)'" onmouseout="this.style.transform='scale(1)'"
-         ontouchstart="this.style.transform='scale(1.035)'" ontouchend="this.style.transform='scale(1)'">
-        LinkedIn
-      </a>
-      <a href="/faves"
-         style="flex: 1 1 160px; max-width: 230px; aspect-ratio: 1/1;
-                background: #f9f9f9; border-radius: 16px; border: 1.5px solid #111;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                display: flex; align-items: center; justify-content: center;
-                font-size: 1.12rem; font-weight: 500; color: #111; text-decoration: none;
-                transition: transform 0.22s, box-shadow 0.22s;"
-         onmouseover="this.style.transform='scale(1.035)'" onmouseout="this.style.transform='scale(1)'"
-         ontouchstart="this.style.transform='scale(1.035)'" ontouchend="this.style.transform='scale(1)'">
-        Favorites
-      </a>
-      <a href="/music"
-         style="flex: 1 1 160px; max-width: 230px; aspect-ratio: 1/1;
-                background: #f9f9f9; border-radius: 16px; border: 1.5px solid #111;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                display: flex; align-items: center; justify-content: center;
-                font-size: 1.12rem; font-weight: 500; color: #111; text-decoration: none;
-                transition: transform 0.22s, box-shadow 0.22s;"
-         onmouseover="this.style.transform='scale(1.035)'" onmouseout="this.style.transform='scale(1)'"
-         ontouchstart="this.style.transform='scale(1.035)'" ontouchend="this.style.transform='scale(1)'">
-        Music
-      </a>
-      <a href="/sounds"
-         style="flex: 1 1 160px; max-width: 230px; aspect-ratio: 1/1;
-                background: #f9f9f9; border-radius: 16px; border: 1.5px solid #111;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                display: flex; align-items: center; justify-content: center;
-                font-size: 1.12rem; font-weight: 500; color: #111; text-decoration: none;
-                transition: transform 0.22s, box-shadow 0.22s;"
-         onmouseover="this.style.transform='scale(1.035)'" onmouseout="this.style.transform='scale(1)'"
-         ontouchstart="this.style.transform='scale(1.035)'" ontouchend="this.style.transform='scale(1)'">
-        Sounds
-      </a>
-      <a href="/now"
-         style="flex: 1 1 160px; max-width: 230px; aspect-ratio: 1/1;
-                background: #f9f9f9; border-radius: 16px; border: 1.5px solid #111;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                display: flex; align-items: center; justify-content: center;
-                font-size: 1.12rem; font-weight: 500; color: #111; text-decoration: none;
-                transition: transform 0.22s, box-shadow 0.22s;"
-         onmouseover="this.style.transform='scale(1.035)'" onmouseout="this.style.transform='scale(1)'"
-         ontouchstart="this.style.transform='scale(1.035)'" ontouchend="this.style.transform='scale(1)'">
-        Now
-      </a>
-    </section>
-  </div>
+
+  <section class="link-section">
+    <a class="card" href="https://ekr.blog/posts">Posts</a>
+    <a class="card" href="https://ekr.blog/jp">日本語版</a>
+    <a class="card" href="/me">Bio</a>
+    <a class="card" href="https://github.com/ekr12345" target="_blank">GitHub</a>
+    <a class="card" href="https://www.linkedin.com/in/e-k-r" target="_blank">LinkedIn</a>
+    <a class="card" href="/faves">Favorites</a>
+    <a class="card" href="/music">Music</a>
+    <a class="card" href="/sounds">Sounds</a>
+    <a class="card" href="/now">Now</a>
+  </section>
+
 </body>
 </html>
-
