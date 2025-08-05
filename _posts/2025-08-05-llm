@@ -1,0 +1,17 @@
+---
+layout: post
+title: "Private LLMs"
+comments: true
+---
+
+I'm becoming more wary of big tech these days.
+
+Slowly, I'm trying to migrate away from certain software in favor of open source. I was tempted to switch to Linux, but for now, I'll keep using Windows.
+
+I came across a video explaining how to host your own private, secure LLM models. Woah—neat. I gave it a go and, within minutes, I had my own private DeepSeek-powered model running on my laptop.
+
+My main reason for doing this is to test how AI might help me with my finances. The more details I share, the better the answers—at least in theory. Since those details are personal, I'd rather not use a closed, big-tech-owned model like ChatGPT.
+
+I've barely tested my private LLM (which I use with LM Studio). It's definitely not as quick, and it guzzles GPU power—my fans go into hyper-mode whenever I prompt it. But no worries; for my particular use case, I think it’ll be good enough.
+
+P.S. I recently re-designed this site using ChatGPT. Still can't believe that I can generate working code with so much ease.
