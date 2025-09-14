@@ -605,31 +605,29 @@ footer {
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";
 
-/* === Sticky-to-bottom footer (Flexbox) ===============================
-   Ensures the footer sits at the bottom on tall screens and flows
-   naturally below content on long pages.
-   ------------------------------------------------------------------ */
+/* === Sticky footer using .container as flex wrapper ================== */
 html, body {
   height: 100%;
 }
 
 body {
-  /* Keep existing styles, but add the following for layout */
   margin: 0;
+}
+
+.container {
+  min-height: 100vh;   /* fill viewport height */
   display: flex;
   flex-direction: column;
-  min-height: 100%;
 }
 
 main {
-  /* Expand to fill remaining vertical space between header and footer */
-  flex: 1 0 auto;
+  flex: 1 0 auto;      /* grow to push footer down when page is short */
 }
 
 footer {
-  /* Optional: guarantees the footer hugs the bottom when content is short */
-  margin-top: auto;
+  margin-top: auto;    /* sit footer at bottom when content is short */
   text-align: center;
   padding: 1rem 0;
 }
-/* === End sticky footer ============================================= */
+/* === End container flex sticky footer =============================== */
+
