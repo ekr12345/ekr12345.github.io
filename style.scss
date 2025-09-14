@@ -605,29 +605,22 @@ footer {
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";
 
-/* === Sticky footer using .container as flex wrapper ================== */
-html, body {
-  height: 100%;
-}
-
+/* === Universal sticky footer (body flex + common wrappers) ========== */
 body {
   margin: 0;
-}
-
-.container {
-  min-height: 100vh;   /* fill viewport height */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-main {
-  flex: 1 0 auto;      /* grow to push footer down when page is short */
+:where(main, .container, .wrapper, .page, .home, #main, .content) {
+  flex: 1 0 auto;
 }
 
 footer {
-  margin-top: auto;    /* sit footer at bottom when content is short */
+  margin-top: auto;
   text-align: center;
   padding: 1rem 0;
 }
-/* === End container flex sticky footer =============================== */
+/* === End universal sticky footer =================================== */
 
