@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "レディット"
+title: "セカンドアクト"
 date: 2025-05-11
 comments: true
 ---
