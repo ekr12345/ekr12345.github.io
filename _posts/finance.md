@@ -1,0 +1,32 @@
+---
+layout: post
+title: "Financial Education for Kids"
+comments: true
+---
+
+Parents used to say: “Buy a house in your 20s.”
+
+<p>
+  In Vancouver, 
+  <a href="https://vancouversun.com/business/real-estate/housing-affordability-vancouver-rbc-report">
+    that’s almost impossible now
+  </a>. 
+  Housing here isn’t just expensive, it’s unreachable for most of the younger generation.
+</p>
+
+That’s sad because home ownership serves a purpose: shelter and financial upside, a safe investment for most.
+
+But today, housing prices have gone berserk. Another way to look at it is that money itself has lost value due to mass printing.
+
+So what do you do with money that keeps losing value? Beyond saving for emergencies, you invest in assets. And if housing is out of reach, the market is the next best thing.
+
+I get the sense this approach is becoming more common. Thanks to the flood of financial news, knowledge, and influencer noise pouring through social media and smartphones.
+
+But there needs to be a more straightforward, common-sense approach to investing designed for young people. That’s where the education system should step in.
+
+Kids in Canada should grow up learning about compound interest. Finance should be taught in elementary schools.
+
+And habits should be built at home too, so that by 18, investing feels as normal as paying a phone bill.
+
+Let's not leave financial education up to algorithms and greedy corporations, otherwise the next generation risks becoming a class of degenerates.
+
