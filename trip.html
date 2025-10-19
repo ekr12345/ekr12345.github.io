@@ -1,0 +1,135 @@
+---
+layout: page
+permalink: /trip/
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dates in Japan</title>
+<style>
+  :root{
+    --bg:#0b0f14; --ink:#e7eef7; --muted:#9fb0c6; --card:#0f141c; --border:rgba(255,255,255,.12);
+  }
+  body{margin:0;padding:2rem;background:var(--bg);color:var(--ink);
+       font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;}
+  .wrap{max-width:900px;margin:0 auto}
+  h1{margin:.2rem 0 .8rem;font-weight:800;letter-spacing:.2px}
+  .subtitle{color:var(--muted);margin:0 0 1.2rem}
+  .table-card{background:linear-gradient(180deg,#121821,#0f141c);border:1px solid var(--border);
+              border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  table{width:100%;border-collapse:collapse}
+  caption{text-align:left;padding:14px 16px;font-weight:700;color:var(--muted)}
+  thead th{text-align:left;font-size:.9rem;color:#cdd9ea;background:#101722;border-bottom:1px solid var(--border);
+           padding:12px 16px;letter-spacing:.02em}
+  tbody td{padding:12px 16px;border-bottom:1px solid var(--border)}
+  tbody tr:hover{background:#101722}
+  time{white-space:nowrap}
+  /* Mobile: stack rows with labels */
+  @media (max-width:720px){
+    table, thead, tbody, th, td, tr{display:block}
+    thead{display:none}
+    tbody tr{border-bottom:1px solid var(--border)}
+    tbody td{display:flex;justify-content:space-between;align-items:baseline;padding:10px 14px}
+    tbody td::before{content:attr(data-label);color:var(--muted);font-size:.9rem;margin-right:1rem}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Dates in Japan</h1>
+    <p class="subtitle">Columns: <strong>Date</strong> and <strong>Location</strong>.</p>
+
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Date"><time datetime="2025-11-02">Nov 2, 2025</time></td>
+            <td data-label="Location">Tokyo</td>
+          </tr>
+          <tr>
+            <td data-label="Date"><time datetime="2025-11-03">Nov 3, 2025</time></td>
+            <td data-label="Location">Tokyo</td>
+          </tr>
+          <tr>
+            <td data-label="Date"><time datetime="2025-11-04">Nov 4, 2025</time></td>
+            <td data-label="Location">Tokyo</td>
+          </tr>
+          <tr>
+            <td data-label="Date"><time datetime="2025-11-05">Nov 5, 2025</time></td>
+            <td data-label="Location">Tokyo</td>
+          </tr>
+          <tr>
+            <td data-label="Date"><time datetime="2025-11-06">Nov 6, 2025</time></td>
+            <td data-label="Location">Tokyo</td>
+          </tr>
+          <tr>
+            <td data-label="Date"><time datetime="2025-11-07">Nov 7, 2025</time></td>
+            <td data-label="Location">Tokyo</td>
+          </tr>
+          <tr>
+            <td data-label="Date"><time datetime="2025-11-08">Nov 8, 2025</time></td>
+            <td data-label="Location">Osaka</td>
+          </tr>
+          <tr>
+            <td data-label="Date"><time datetime="2025-11-09">Nov 9, 2025</time></td>
+            <td data-label="Location">Osaka</td>
+          </tr>
+          <tr>
+            <td data-label="Date"><time datetime="2025-11-10">Nov 10, 2025</time></td>
+            <td data-label="Location">Osaka</td>
+          </tr>
+          <tr>
+            <td data-label="Date"><time datetime="2025-11-11">Nov 11, 2025</time></td>
+            <td data-label="Location">Osaka</td>
+          </tr>
+          <tr>
+            <td data-label="Date"><time datetime="2025-11-12">Nov 12, 2025</time></td>
+            <td data-label="Location">Osaka</td>
+          </tr>
+          <tr>
+            <td data-label="Date"><time datetime="2025-11-13">Nov 13, 2025</time></td>
+            <td data-label="Location">Okayama*</td>
+          </tr>
+          <tr>
+            <td data-label="Date"><time datetime="2025-11-14">Nov 14, 2025</time></td>
+            <td data-label="Location">Osaka</td>
+          </tr>
+          <tr>
+            <td data-label="Date"><time datetime="2025-11-15">Nov 15, 2025</time></td>
+            <td data-label="Location">Osaka</td>
+          </tr>
+          <tr>
+            <td data-label="Date"><time datetime="2025-11-16">Nov 16, 2025</time></td>
+            <td data-label="Location">Kanazawa</td>
+          </tr>
+          <tr>
+            <td data-label="Date"><time datetime="2025-11-17">Nov 17, 2025</time></td>
+            <td data-label="Location">Kanazawa</td>
+          </tr>
+          <tr>
+            <td data-label="Date"><time datetime="2025-11-18">Nov 18, 2025</time></td>
+            <td data-label="Location">Tokyo</td>
+          </tr>
+          <tr>
+            <td data-label="Date"><time datetime="2025-11-19">Nov 19, 2025</time></td>
+            <td data-label="Location">Tokyo</td>
+          </tr>
+          <tr>
+            <td data-label="Date"><time datetime="2025-11-20">Nov 20, 2025</time></td>
+            <td data-label="Location">Tokyo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
