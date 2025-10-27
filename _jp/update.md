@@ -13,9 +13,7 @@ Windowsとは完全にお別れして、Linuxへ。Ubuntuを入れてみたけ�
 
 次にやったのは、AndroidとiPadにBraveを入れること。なんでもっと早くやらなかったんだろう。広告がバッサリ消えて、しかも無料。最高。
 
-それからもうひとつ。  
-LinkedInのアクティビティを全部消した。  
-<a href="https://github.com/onceiwasadev/delete-linkedin-activity" target="_blank" rel="noopener noreferrer">このコード</a>のおかげ。
+それからもうひとつ。LinkedInのアクティビティを全部消した。<a href="https://github.com/onceiwasadev/delete-linkedin-activity" target="_blank" rel="noopener noreferrer">このコード</a>のおかげ。
 
 そして最後に。バンクーバーで住宅ローンを完済。37歳。  
 
