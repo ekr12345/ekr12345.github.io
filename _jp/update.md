@@ -16,7 +16,7 @@ Ubuntuを選んだんですが、YouTubeのチュートリアルとChatGPTのお
 なんでもっと早くやらなかったんだろう？
 広告をしっかりブロックしてくれるのに無料。かなりおすすめです。
 
-LinkedInのアクティビティを全部消しました（<a href="https://github.com/onceiwasadev/delete-linkedin-activity" target="_blank" rel="noopener noreferrer">この素晴らしいコード</a>のおかげで）。
+LinkedInのアクティビティを全部消した（<a href="https://github.com/onceiwasadev/delete-linkedin-activity" target="_blank" rel="noopener noreferrer">この素晴らしいコード</a>のおかげで）。
 
 そして最後に——
 ついに住宅ローンを完済しました（ここバンクーバーで！）。
