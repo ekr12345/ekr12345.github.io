@@ -13,10 +13,11 @@ Windows、さようなら。Linux、こんにちは。Ubuntuを選びました�
 
 次にやったのは、AndroidとiPadにBraveを入れること。なんでもっと早くやらなかったんだろう？広告をしっかりブロックしてくれるのに無料。かなりおすすめです。
 
-<p>LinkedInのアクティビティを全部消しました。この素晴らしいコードのおかげです： 
+<p>
+  LinkedInのアクティビティを全部消しました。
   <a href="https://github.com/onceiwasadev/delete-linkedin-activity" target="_blank" rel="noopener noreferrer">
-    https://github.com/onceiwasadev/delete-linkedin-activity
-  </a>
+    この素晴らしいコード
+  </a>のおかげです。
 </p>
 
 そして最後に——ついに住宅ローンを完済しました（ここバンクーバーで！）。37歳です。
