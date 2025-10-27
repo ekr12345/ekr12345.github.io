@@ -13,13 +13,15 @@ Windows、さようなら。Linux、こんにちは。
 Ubuntuを選びました。YouTubeのチュートリアルとChatGPTのおかげで、今のところすべて順調。
 
 次にやったのは、AndroidとiPadにBraveを入れること。  
-なんでもっと早くやらなかったんだろう？  
+なんでもっと早くやらなかったんだろう。  
 広告をしっかりブロックしてくれるのに無料。かなりおすすめです。
 
-LinkedInのアクティビティを全部消しました（<a href="https://github.com/onceiwasadev/delete-linkedin-activity" target="_blank" rel="noopener noreferrer">この素晴らしいコード</a>のおかげで）。
+LinkedInのアクティビティを全部消しました。  
+この素晴らしいコードのおかげです：  
+[https://github.com/onceiwasadev/delete-linkedin-activity](https://github.com/onceiwasadev/delete-linkedin-activity)
 
 そして最後に——  
-ついに住宅ローンを完済しました（ここバンクーバーで！）。  
+ついに住宅ローンを完済しました（ここバンクーバーで）。  
 37歳です。
 
 ここまで来れたのは、長い間実家に住んでいたおかげ。  
@@ -30,10 +32,8 @@ LinkedInのアクティビティを全部消しました（<a href="https://gith
 
 なぜ早めにローンを完済したか、ざっくりまとめると：
 
-<ul> 
-  <li>心の安定</li> 
-  <li>貯蓄率アップ</li> 
-</ul>
+- 心の安定  
+- 貯蓄率アップ
 
 これで一段落。  
 そろそろ、大きな変化が訪れそうな予感。  
