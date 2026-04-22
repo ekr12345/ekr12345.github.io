@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-04-22T10:32:13-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Eric Roberts</title><subtitle>Trying to be Useful</subtitle><entry><title type="html">Dependance on AI</title><link href="http://localhost:4000/ai/" rel="alternate" type="text/html" title="Dependance on AI" /><published>2026-03-31T00:00:00-07:00</published><updated>2026-03-31T00:00:00-07:00</updated><id>http://localhost:4000/ai</id><content type="html" xml:base="http://localhost:4000/ai/"><![CDATA[<p>I’m not going to lie—if someone told me I couldn’t use AI for any part of my job, I’d be in trouble.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2026-04-22T10:42:55-07:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Eric Roberts</title><subtitle>Trying to be Useful</subtitle><entry><title type="html">Dependance on AI</title><link href="http://0.0.0.0:4000/ai/" rel="alternate" type="text/html" title="Dependance on AI" /><published>2026-03-31T00:00:00-07:00</published><updated>2026-03-31T00:00:00-07:00</updated><id>http://0.0.0.0:4000/ai</id><content type="html" xml:base="http://0.0.0.0:4000/ai/"><![CDATA[<p>I’m not going to lie—if someone told me I couldn’t use AI for any part of my job, I’d be in trouble.</p>
 
 <p>Hooking up MCPs, APIs, and building my own home-brewed apps, it feels like I’ve got real power.</p>
 
@@ -59,7 +59,7 @@
 
 <p>I’ve explored this briefly in the past but didn’t get much value from it. Prompts that didn’t require many tokens caused my laptop to heat up and its fans to go berserk.</p>
 
-<p>However, it seems like things are becoming a lot more efficient, and I’m ready to jump back in.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[I’m not going to lie—if someone told me I couldn’t use AI for any part of my job, I’d be in trouble.]]></summary></entry><entry><title type="html">Adwords and Claude</title><link href="http://localhost:4000/claude/" rel="alternate" type="text/html" title="Adwords and Claude" /><published>2026-02-16T00:00:00-08:00</published><updated>2026-02-16T00:00:00-08:00</updated><id>http://localhost:4000/claude</id><content type="html" xml:base="http://localhost:4000/claude/"><![CDATA[<p>New task.
+<p>However, it seems like things are becoming a lot more efficient, and I’m ready to jump back in.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[I’m not going to lie—if someone told me I couldn’t use AI for any part of my job, I’d be in trouble.]]></summary></entry><entry><title type="html">Adwords and Claude</title><link href="http://0.0.0.0:4000/claude/" rel="alternate" type="text/html" title="Adwords and Claude" /><published>2026-02-16T00:00:00-08:00</published><updated>2026-02-16T00:00:00-08:00</updated><id>http://0.0.0.0:4000/claude</id><content type="html" xml:base="http://0.0.0.0:4000/claude/"><![CDATA[<p>New task.
 Figure out how to implement, run, and analyze Google AdWords campaigns.</p>
 
 <p>My first thought?
@@ -137,11 +137,11 @@ What does “good” look like?</p>
 
 <p>I know this poses real threats to traditional job structures, and the implications deserve serious thought.</p>
 
-<p>But like most people in my space, I’m here for the ride.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[New task. Figure out how to implement, run, and analyze Google AdWords campaigns.]]></summary></entry><entry><title type="html">New Domain</title><link href="http://localhost:4000/domain/" rel="alternate" type="text/html" title="New Domain" /><published>2026-02-01T00:00:00-08:00</published><updated>2026-02-01T00:00:00-08:00</updated><id>http://localhost:4000/domain</id><content type="html" xml:base="http://localhost:4000/domain/"><![CDATA[<p>I’ve changed my site’s domain name from ekr.blog to ericroberts.net</p>
+<p>But like most people in my space, I’m here for the ride.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[New task. Figure out how to implement, run, and analyze Google AdWords campaigns.]]></summary></entry><entry><title type="html">New Domain</title><link href="http://0.0.0.0:4000/domain/" rel="alternate" type="text/html" title="New Domain" /><published>2026-02-01T00:00:00-08:00</published><updated>2026-02-01T00:00:00-08:00</updated><id>http://0.0.0.0:4000/domain</id><content type="html" xml:base="http://0.0.0.0:4000/domain/"><![CDATA[<p>I’ve changed my site’s domain name from ekr.blog to ericroberts.net</p>
 
 <p>Namecheap wanted too much money so I decided to not renew my “premium” domain.</p>
 
-<p>I’ll hopefully have some new updates soon. Bye!</p>]]></content><author><name></name></author><summary type="html"><![CDATA[I’ve changed my site’s domain name from ekr.blog to ericroberts.net]]></summary></entry><entry><title type="html">Service</title><link href="http://localhost:4000/service/" rel="alternate" type="text/html" title="Service" /><published>2025-12-27T00:00:00-08:00</published><updated>2025-12-27T00:00:00-08:00</updated><id>http://localhost:4000/service</id><content type="html" xml:base="http://localhost:4000/service/"><![CDATA[<p>Japan’s customer service is often regarded as the best in the world.</p>
+<p>I’ll hopefully have some new updates soon. Bye!</p>]]></content><author><name></name></author><summary type="html"><![CDATA[I’ve changed my site’s domain name from ekr.blog to ericroberts.net]]></summary></entry><entry><title type="html">Service</title><link href="http://0.0.0.0:4000/service/" rel="alternate" type="text/html" title="Service" /><published>2025-12-27T00:00:00-08:00</published><updated>2025-12-27T00:00:00-08:00</updated><id>http://0.0.0.0:4000/service</id><content type="html" xml:base="http://0.0.0.0:4000/service/"><![CDATA[<p>Japan’s customer service is often regarded as the best in the world.</p>
 
 <p>At the heart of it lies omotenashi, a philosophy of selfless hospitality and proactive care.</p>
 
@@ -167,7 +167,7 @@ What does “good” look like?</p>
 
 <p>I know this isn’t new, but I feel more aware of it than on previous visits.</p>
 
-<p>I’m starting to think being present has become a skill we’re slowly losing.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Japan’s customer service is often regarded as the best in the world.]]></summary></entry><entry><title type="html">Japan Trip</title><link href="http://localhost:4000/trip/" rel="alternate" type="text/html" title="Japan Trip" /><published>2025-12-01T00:00:00-08:00</published><updated>2025-12-01T00:00:00-08:00</updated><id>http://localhost:4000/trip</id><content type="html" xml:base="http://localhost:4000/trip/"><![CDATA[<p>Hey.</p>
+<p>I’m starting to think being present has become a skill we’re slowly losing.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Japan’s customer service is often regarded as the best in the world.]]></summary></entry><entry><title type="html">Japan Trip</title><link href="http://0.0.0.0:4000/trip/" rel="alternate" type="text/html" title="Japan Trip" /><published>2025-12-01T00:00:00-08:00</published><updated>2025-12-01T00:00:00-08:00</updated><id>http://0.0.0.0:4000/trip</id><content type="html" xml:base="http://0.0.0.0:4000/trip/"><![CDATA[<p>Hey.</p>
 
 <p>It’s been a minute.</p>
 
@@ -201,7 +201,7 @@ What does “good” look like?</p>
 
 <p>On a related note, I read a great article from <a href="https://craigmod.com/ridgeline/218/">Craig Mod</a> about shops with rules and how we could use more of them.</p>
 
-<p>That’s it for now.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Hey.]]></summary></entry><entry><title type="html">Linux, Brave, and Mortgages</title><link href="http://localhost:4000/update/" rel="alternate" type="text/html" title="Linux, Brave, and Mortgages" /><published>2025-10-26T00:00:00-07:00</published><updated>2025-10-26T00:00:00-07:00</updated><id>http://localhost:4000/update</id><content type="html" xml:base="http://localhost:4000/update/"><![CDATA[<p>Just a quick update.</p>
+<p>That’s it for now.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Hey.]]></summary></entry><entry><title type="html">Linux, Brave, and Mortgages</title><link href="http://0.0.0.0:4000/update/" rel="alternate" type="text/html" title="Linux, Brave, and Mortgages" /><published>2025-10-26T00:00:00-07:00</published><updated>2025-10-26T00:00:00-07:00</updated><id>http://0.0.0.0:4000/update</id><content type="html" xml:base="http://0.0.0.0:4000/update/"><![CDATA[<p>Just a quick update.</p>
 
 <p>My open-source adventure continues.</p>
 
@@ -230,7 +230,7 @@ What does “good” look like?</p>
 <li>Increased savings rate</li> 
 </ul>
 
-<p>With that out of the way, I think some big changes are on the horizon. Stay tuned.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Just a quick update.]]></summary></entry><entry><title type="html">Financial Education for Kids</title><link href="http://localhost:4000/finance/" rel="alternate" type="text/html" title="Financial Education for Kids" /><published>2025-10-18T00:00:00-07:00</published><updated>2025-10-18T00:00:00-07:00</updated><id>http://localhost:4000/finance</id><content type="html" xml:base="http://localhost:4000/finance/"><![CDATA[<p>Parents used to say: “Buy a house in your 20s.”</p>
+<p>With that out of the way, I think some big changes are on the horizon. Stay tuned.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Just a quick update.]]></summary></entry><entry><title type="html">Financial Education for Kids</title><link href="http://0.0.0.0:4000/finance/" rel="alternate" type="text/html" title="Financial Education for Kids" /><published>2025-10-18T00:00:00-07:00</published><updated>2025-10-18T00:00:00-07:00</updated><id>http://0.0.0.0:4000/finance</id><content type="html" xml:base="http://0.0.0.0:4000/finance/"><![CDATA[<p>Parents used to say: “Buy a house in your 20s.”</p>
 
 <p>
   In Vancouver, 
@@ -257,7 +257,7 @@ What does “good” look like?</p>
 
 <p>And habits should be built at home too, so that by 18, investing feels as normal as paying a phone bill.</p>
 
-<p>Let’s not leave financial education up to algorithms and greedy corporations, otherwise the next generation risks becoming a class of degenerates.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Parents used to say: “Buy a house in your 20s.”]]></summary></entry><entry><title type="html">Reddit</title><link href="http://localhost:4000/reddit/" rel="alternate" type="text/html" title="Reddit" /><published>2025-09-27T00:00:00-07:00</published><updated>2025-09-27T00:00:00-07:00</updated><id>http://localhost:4000/reddit</id><content type="html" xml:base="http://localhost:4000/reddit/"><![CDATA[<p>I was browsing Reddit looking for an answer to a question I had.</p>
+<p>Let’s not leave financial education up to algorithms and greedy corporations, otherwise the next generation risks becoming a class of degenerates.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Parents used to say: “Buy a house in your 20s.”]]></summary></entry><entry><title type="html">Reddit</title><link href="http://0.0.0.0:4000/reddit/" rel="alternate" type="text/html" title="Reddit" /><published>2025-09-27T00:00:00-07:00</published><updated>2025-09-27T00:00:00-07:00</updated><id>http://0.0.0.0:4000/reddit</id><content type="html" xml:base="http://0.0.0.0:4000/reddit/"><![CDATA[<p>I was browsing Reddit looking for an answer to a question I had.</p>
 
 <p>One well-written and informative comment caught my eye. So much so that I graciously shared it across LinkedIn.</p>
 
@@ -283,7 +283,7 @@ What does “good” look like?</p>
 
 <p>Will AI-generated content come to dominate Reddit? If that happens, what unique value does Reddit offer compared to tools like ChatGPT?</p>
 
-<p>Is it a good idea to short Reddit’s stock. ;)</p>]]></content><author><name></name></author><summary type="html"><![CDATA[I was browsing Reddit looking for an answer to a question I had.]]></summary></entry><entry><title type="html">Texts</title><link href="http://localhost:4000/texts/" rel="alternate" type="text/html" title="Texts" /><published>2025-09-13T00:00:00-07:00</published><updated>2025-09-13T00:00:00-07:00</updated><id>http://localhost:4000/texts</id><content type="html" xml:base="http://localhost:4000/texts/"><![CDATA[<p>Iて’s prえてty impれsしve hおw oうr miんds cあn deさいファer tえxt.</p>
+<p>Is it a good idea to short Reddit’s stock. ;)</p>]]></content><author><name></name></author><summary type="html"><![CDATA[I was browsing Reddit looking for an answer to a question I had.]]></summary></entry><entry><title type="html">Texts</title><link href="http://0.0.0.0:4000/texts/" rel="alternate" type="text/html" title="Texts" /><published>2025-09-13T00:00:00-07:00</published><updated>2025-09-13T00:00:00-07:00</updated><id>http://0.0.0.0:4000/texts</id><content type="html" xml:base="http://0.0.0.0:4000/texts/"><![CDATA[<p>Iて’s prえてty impれsしve hおw oうr miんds cあn deさいファer tえxt.</p>
 
 <p>Hあve yおu hえard of typoglycemia?</p>
 
@@ -297,7 +297,7 @@ What does “good” look like?</p>
 
 <p>Acこrdいng to a reせarch stうdy at Cあmbrいdge on wおrd ordえr, the imポrタnt thいng is thあt the fいrst and lあst lえttえrs are in the rいght poしtいおn. Aんd thあt’s exあctりy whあt I’ve dおne fおr thいs pオst.</p>
 
-<p>So—did you get everything I just wrote?</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Iて’s prえてty impれsしve hおw oうr miんds cあn deさいファer tえxt.]]></summary></entry><entry><title type="html">Reliance</title><link href="http://localhost:4000/reliance/" rel="alternate" type="text/html" title="Reliance" /><published>2025-08-10T00:00:00-07:00</published><updated>2025-08-10T00:00:00-07:00</updated><id>http://localhost:4000/reliance</id><content type="html" xml:base="http://localhost:4000/reliance/"><![CDATA[<p>I’m noticing that I’m being (a bit) overly dependent on ChatGPT.</p>
+<p>So—did you get everything I just wrote?</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Iて’s prえてty impれsしve hおw oうr miんds cあn deさいファer tえxt.]]></summary></entry><entry><title type="html">Reliance</title><link href="http://0.0.0.0:4000/reliance/" rel="alternate" type="text/html" title="Reliance" /><published>2025-08-10T00:00:00-07:00</published><updated>2025-08-10T00:00:00-07:00</updated><id>http://0.0.0.0:4000/reliance</id><content type="html" xml:base="http://0.0.0.0:4000/reliance/"><![CDATA[<p>I’m noticing that I’m being (a bit) overly dependent on ChatGPT.</p>
 
 <p>For example, in Japanese—a language I’m actively trying to master—I’ve gotten into the habit of running my text messages through ChatGPT to check accuracy before sending them. It’s a bad habit, because it pucks up the learning process and keeps me from developing the fluency I’m aiming for.</p>
 
