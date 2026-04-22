@@ -334,7 +334,7 @@
     }
 
     /* Analyze button in VCR panel — override theme */
-    .tv-error { padding: 6px 0 0; font-size: 0.75rem; }
+    .tv-error { padding: 6px 0 0; font-size: 0.9rem; text-align: center; font-family: 'Dreamcast', 'Anton', sans-serif; letter-spacing: 0.05em; }
 
     /* ── Weights Panel (in-flow, no overlap) ── */
     .weights-panel {
@@ -1271,103 +1271,6 @@
       box-shadow: 6px 6px 0 #c4a882 !important;
     }
 
-    /* ── Mobile ── */
-    @media (max-width: 680px) {
-      /* Remove zoom */
-      body { zoom: 1 !important; }
-
-      /* Header */
-      .header { padding: 12px 16px; }
-
-      /* Onboarding */
-      .onboarding-inner { width: min(360px, calc(100vw - 32px)); }
-
-      /* ── Command hero: [Weights | API] bar + stacked controls ── */
-      .command-hero {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        padding: 12px 16px 0;
-        gap: 10px;
-      }
-      .weights-side { position: static; order: 1; }
-      .api-side     { position: static !important; order: 2; margin-left: auto; }
-      .tv-set       { order: 3; flex: 0 0 100%; max-width: 100%; }
-
-      /* ── Strip the TV casing ── */
-      .tv-body {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        border-radius: 0 !important;
-        padding: 12px 0 0;
-        gap: 10px;
-      }
-
-      /* Stack: input first, analyze button second */
-      .tv-top-row { flex-direction: column; gap: 10px; }
-
-      /* Screen — full width, prominent input */
-      .tv-screen-bezel {
-        border-radius: 12px !important;
-        border: 1px solid #c4a882 !important;
-      }
-      .tv-screen {
-        min-height: 52px;
-        border-radius: 10px !important;
-        background: #f7efe3 !important;
-      }
-      .tv-screen-inner { padding: 10px 14px; gap: 10px; }
-      .command-input { font-size: 0.9375rem; padding: 6px 0; }
-
-      /* Grille panel — strip decoration, become full-width Analyze bar */
-      .tv-grille-panel {
-        width: 100% !important;
-        flex-direction: row !important;
-        border-radius: 12px !important;
-        padding: 0 !important;
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        gap: 0;
-      }
-      .tv-grille-panel::before { display: none; }
-      .vcr-display { display: none; }
-
-      .btn-analyze {
-        width: 100% !important;
-        justify-content: center;
-        padding: 13px 22px !important;
-        font-size: 0.9rem !important;
-        border-radius: 12px !important;
-        box-shadow: 3px 3px 0 #8c3a00 !important;
-      }
-
-      /* Knobs strip — plain labeled row, no border */
-      .tv-controls-strip {
-        border-top: 1px solid #d9c5a8;
-        margin-top: 4px;
-        padding: 14px 8px 16px;
-        justify-content: space-around;
-      }
-      .tv-knob { width: 32px !important; height: 32px !important; }
-      .knob-label { font-size: 0.46rem; }
-
-      /* Weights panel */
-      .weights-panel { left: 16px; right: 16px; top: 56px; }
-      .weights-panel-inner { max-width: 100%; }
-
-      /* Container */
-      .container { padding: 0 12px 24px; }
-
-      /* Modals */
-      .modal, .modal-lg { width: calc(100vw - 32px); }
-
-      /* Two-col form → single col */
-      .form-2col { grid-template-columns: 1fr; }
-
-      /* Cards */
-      .card { padding: 12px 14px; gap: 10px; }
-    }
   </style>
 </head>
 <body>
@@ -1470,6 +1373,7 @@
   </div><!-- /.tv-set -->
 </div>
 
+
 <!-- ── Weights Panel (in document flow, no overlap) ── -->
 <div class="weights-panel" id="weights-panel">
   <div class="weights-panel-inner">
@@ -1540,7 +1444,7 @@
 // ─── CONFIG ─────────────────────────────────────────────────────────────────
 
 const DIMS = [
-  { key: 'reach',          label: 'Average Views',     weight: 50,
+  { key: 'reach',          label: 'Median Views',      weight: 50,
     tip: 'Average views per video.' },
   { key: 'uploadFreq',     label: 'Upload Frequency',  weight: 10,
     tip: 'How often they upload — more = more collab opportunities.' },
@@ -1798,19 +1702,24 @@ async function resolveShortUrl(urlStr) {
   } catch { clearTimeout(timer); return null; }
 }
 
+// Scan paragraph blocks (separated by blank lines) that contain an affiliate keyword,
+// and return all URLs in those blocks. This handles descriptions where the keyword
+// appears on a section header line and URLs follow on subsequent lines.
 function urlsOnAffiliateLines(desc) {
   const results = [];
   const urlRe = /https?:\/\/[^\s<>"{}|\\^`\[\]]+/g;
-  for (const line of desc.split('\n')) {
-    if (!AFFILIATE_PATTERNS.some(re => re.test(line))) continue;
+  const blocks = desc.split(/\n[ \t]*\n/);
+  for (const block of blocks) {
+    if (!AFFILIATE_PATTERNS.some(re => re.test(block))) continue;
     let m;
-    while ((m = urlRe.exec(line)) !== null) results.push(m[0]);
+    urlRe.lastIndex = 0;
+    while ((m = urlRe.exec(block)) !== null) results.push(m[0]);
   }
   return results;
 }
 
 // Detect tracking/referral URLs anywhere in description (sponsor links always have ref params)
-const TRACKING_PARAMS = new Set(['ref', 'utm_source', 'utm_campaign', 'aff', 'affid', 'n', 'code', 'partner', 'via', 'src']);
+const TRACKING_PARAMS = new Set(['ref', 'referral', 'utm_source', 'utm_campaign', 'aff', 'affid', 'n', 'code', 'partner', 'via', 'src']);
 function urlsWithTrackingParams(desc) {
   const results = [];
   const urlRe = /https?:\/\/[^\s<>"{}|\\^`\[\]]+/g;
@@ -2032,13 +1941,18 @@ function parseDuration(iso) {
   return (parseInt(m[1] || 0) * 3600) + (parseInt(m[2] || 0) * 60) + parseInt(m[3] || 0);
 }
 
-async function fetchChannelStats(channelId, apiKey, mode) {
+async function fetchChannelStats(channelId, apiKey, mode, sampleSize, preloadedItem) {
   // Channel info + uploads playlist
-  const chanData = await ytGet(
-    `channels?part=snippet,statistics,contentDetails&id=${channelId}`, apiKey
-  );
-  if (!chanData.items?.length) throw new Error('Channel not found.');
-  const ch = chanData.items[0];
+  let ch;
+  if (preloadedItem) {
+    ch = preloadedItem;
+  } else {
+    const chanData = await ytGet(
+      `channels?part=snippet,statistics,contentDetails&id=${channelId}`, apiKey
+    );
+    if (!chanData.items?.length) throw new Error('Channel not found.');
+    ch = chanData.items[0];
+  }
   const subs       = parseInt(ch.statistics.subscriberCount || 0);
   const videoCount = parseInt(ch.statistics.videoCount || 0);
   const uploadsId  = ch.contentDetails.relatedPlaylists.uploads;
@@ -2049,7 +1963,7 @@ async function fetchChannelStats(channelId, apiKey, mode) {
   const channelUrl = customUrl ? `https://www.youtube.com/${customUrl}` : `https://www.youtube.com/channel/${channelId}`;
 
   // Paginate uploads playlist, filtering by type, until we have 30 matching videos
-  const TARGET = parseInt(localStorage.getItem('video_sample') || '30');
+  const TARGET = sampleSize || parseInt(localStorage.getItem('video_sample') || '30');
   const filtered = [];
   let pageToken = null;
   let pagesFetched = 0;
@@ -2065,7 +1979,7 @@ async function fetchChannelStats(channelId, apiKey, mode) {
 
     const ids = items.map(i => i.snippet.resourceId.videoId).join(',');
     const videoData = await ytGet(
-      `videos?part=statistics,contentDetails,snippet&id=${ids}`, apiKey
+      `videos?part=statistics,contentDetails,snippet,liveStreamingDetails&id=${ids}`, apiKey
     );
     const videoMap = {};
     for (const v of (videoData.items || [])) videoMap[v.id] = v;
@@ -2074,9 +1988,12 @@ async function fetchChannelStats(channelId, apiKey, mode) {
       const vid = videoMap[item.snippet.resourceId.videoId];
       if (!vid) continue;
       const dur = parseDuration(vid.contentDetails?.duration || '');
-      const isShort = dur > 0 && dur <= 60;
+      // YouTube expanded Shorts to 3 min (180s) in late 2024; also catch #shorts tag
+      const isShort = (dur > 0 && dur <= 180) || /#shorts?\b/i.test(item.snippet.title);
       if (mode === 'shorts' && !isShort) continue;
       if (mode === 'long'   &&  isShort) continue;
+      // Skip all livestreams (completed, live, or scheduled) — raw stream recordings skew the median
+      if (vid.liveStreamingDetails) continue;
       filtered.push({
         date:        new Date(item.snippet.publishedAt),
         title:       item.snippet.title,
@@ -2141,6 +2058,10 @@ function addCollaboratorDirect(data) {
   collaborators.push({
     id: nextId++,
     name: data.name,
+    channelId:  data.channelId  || null,
+    channelUrl: data.channelUrl || null,
+    thumb:      data.thumb      || null,
+    country:    data.country    || null,
     language: data.language,
     avgViews: data.avgViews,
     subs: data.subs || null,
@@ -2173,7 +2094,7 @@ async function runAnalyze() {
   const errEl  = document.getElementById('analyze-error');
 
   errEl.className = 'analyze-error';
-  if (!url)    { showError('Please paste a YouTube URL.'); return; }
+  if (!url)    { return; }
   if (!apiKey) { showError('Please enter your YouTube Data API v3 key.'); return; }
 
   setAnalyzeLoading(true);
@@ -2192,7 +2113,7 @@ async function runAnalyze() {
 function setAnalyzeLoading(on) {
   document.getElementById('analyze-btn').disabled = on;
   document.getElementById('spinner').className = 'spinner' + (on ? ' active' : '');
-  document.getElementById('analyze-label').textContent = on ? 'Fetching…' : 'Analyze';
+  if (!on) document.getElementById('analyze-label').textContent = 'Analyze';
 }
 
 function showError(msg) {
