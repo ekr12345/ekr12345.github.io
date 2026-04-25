@@ -306,6 +306,13 @@
       font-size: 16px;
       z-index: -1;
     }
+    @media (max-width: 1024px) {
+      .topbar { padding: 12px 18px; font-size: 24px; gap: 12px; }
+      .topbar .actions { gap: 8px; }
+      .topbar button { font-size: 24px; padding: 4px 14px; }
+      .bottombar { padding: 10px 18px; font-size: 24px; }
+      .toolbar button { font-size: 22px; padding: 4px 10px; }
+    }
     @media (max-width: 640px) {
       .topbar { padding: 10px 14px; font-size: 20px; gap: 10px; }
       .topbar .actions { gap: 4px; }
@@ -540,9 +547,25 @@
         wrap.scrollTop -= (visTop + topMargin) - caretRect.top;
       }
     }
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', scrollCaretIntoView);
+    function updateBodyHeight() {
+      const vv = window.visualViewport;
+      const h = vv ? vv.height : window.innerHeight;
+      document.body.style.height = h + 'px';
     }
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', () => {
+        updateBodyHeight();
+        scrollCaretIntoView();
+        setTimeout(scrollCaretIntoView, 200);
+      });
+      window.visualViewport.addEventListener('scroll', scrollCaretIntoView);
+    }
+    window.addEventListener('resize', updateBodyHeight);
+    window.addEventListener('orientationchange', () => {
+      updateBodyHeight();
+      setTimeout(updateBodyHeight, 200);
+    });
+    updateBodyHeight();
 
     function updateWordCount() {
       const text = chars
@@ -931,9 +954,19 @@
       proxy.focus({ preventScroll: true });
     });
 
+    let revisePending = false;
+    let revisePendingTimer = null;
     document.getElementById('revise-btn').addEventListener('click', () => {
       if (chars.length === 0) { showToast('Nothing to revise'); return; }
-      if (confirm('Delete all text? This cannot be undone.')) revise();
+      if (revisePending) {
+        clearTimeout(revisePendingTimer);
+        revisePending = false;
+        revise();
+      } else {
+        revisePending = true;
+        showToast('Tap again to clear draft');
+        revisePendingTimer = setTimeout(() => { revisePending = false; }, 3000);
+      }
     });
     document.getElementById('clean-btn').addEventListener('click', () => {
       if (cleanProgress < WRITE_GOAL) { triggerShake(); return; }
