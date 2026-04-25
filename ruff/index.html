@@ -163,7 +163,7 @@
     .editor-wrap {
       flex: 1;
       overflow-y: auto;
-      padding: 48px 20px 80px;
+      padding: 48px 20px 40vh;
     }
     .editor {
       max-width: 640px;
@@ -330,7 +330,7 @@
       }
       .toolbar { gap: 4px; }
       .toolbar button { font-size: 18px; padding: 2px 10px; }
-      .editor-wrap { padding: 24px 16px 40px; }
+      .editor-wrap { padding: 24px 16px 50vh; }
       .toast { font-size: 18px; bottom: 70px; }
     }
   </style>
@@ -525,7 +525,23 @@
 
     function scrollCaretIntoView() {
       const c = editor.querySelector('.caret');
-      if (c) c.scrollIntoView({ block: 'nearest' });
+      if (!c) return;
+      const wrap = document.getElementById('editor-wrap');
+      const caretRect = c.getBoundingClientRect();
+      const vv = window.visualViewport;
+      const visTop = vv ? vv.offsetTop : 0;
+      const visHeight = vv ? vv.height : window.innerHeight;
+      const visBottom = visTop + visHeight;
+      const bottomMargin = Math.min(120, visHeight * 0.25);
+      const topMargin = Math.min(80, visHeight * 0.15);
+      if (caretRect.bottom > visBottom - bottomMargin) {
+        wrap.scrollTop += caretRect.bottom - (visBottom - bottomMargin);
+      } else if (caretRect.top < visTop + topMargin) {
+        wrap.scrollTop -= (visTop + topMargin) - caretRect.top;
+      }
+    }
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', scrollCaretIntoView);
     }
 
     function updateWordCount() {
