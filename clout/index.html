@@ -126,27 +126,6 @@
     .total-num { font-weight: 700; color: #22c55e !important; }
     .total-num.warn { color: #f59e0b !important; }
 
-    /* Market legend */
-    .market-list { display: flex; flex-direction: column; gap: 5px; }
-    .market-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.8rem;
-      color: #94a3b8;
-    }
-    .market-rank {
-      width: 18px; height: 18px;
-      border-radius: 4px;
-      background: #000000;
-      border: 1px solid #3d1a00;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.6875rem;
-      font-weight: 700;
-      color: #64748b;
-      flex-shrink: 0;
-    }
-
     /* ── Main ── */
     .main { display: flex; flex-direction: column; gap: 16px; }
 
@@ -536,6 +515,26 @@
       color: #f87171;
       min-height: 1em;
       text-align: center;
+    }
+    @media (max-width: 480px) {
+      .onboarding-inner {
+        width: 100%;
+        max-width: 360px;
+        padding: 0 24px;
+      }
+      .onboarding-title {
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+      }
+      .onboarding-sub {
+        font-size: 0.85rem;
+        margin-bottom: 28px;
+        line-height: 1.4;
+      }
+      .onboarding-input {
+        font-size: 16px;
+        padding: 11px 14px;
+      }
     }
 
     /* ── API Setup (shown until key verified) ── */
@@ -1454,32 +1453,8 @@ const DIMS = [
     tip: 'Average views divided by subscribers — measures audience loyalty.' },
 ];
 
-const MARKETS = [
-  'USA','Canada','UK','Germany','Japan',
-  'Brazil','Australia','France','Switzerland','Spain'
-];
-
 // Dims auto-populated from YouTube API (green badges)
 const AUTO_DIMS = new Set(['reach', 'uploadFreq', 'engagementRate', 'viewSubRatio']);
-
-// Languages that map to the top 10 LingQ markets
-const LINGQ_MARKET_LANGS = new Set([
-  'English', 'German', 'Japanese', 'Portuguese', 'French', 'Spanish'
-]);
-function marketAlignScore(lang) {
-  const scores = { 'English': 5, 'German': 4, 'Japanese': 4, 'French': 3, 'Spanish': 3, 'Portuguese': 2 };
-  return scores[lang] || 1;
-}
-function marketBadgeHtml(lang) {
-  const yes = LINGQ_MARKET_LANGS.has(lang);
-  return yes
-    ? `<span style="color:#4ade80">✓ Yes — matches a top LingQ market</span>`
-    : `<span style="color:#f87171">✗ No — outside top 10 LingQ markets</span>`;
-}
-function updateMarketBadge(val) {
-  const el = document.getElementById('market-badge');
-  if (el) el.innerHTML = marketBadgeHtml(val);
-}
 
 // ─── COLLABORATOR DATA ───────────────────────────────────────────────────────
 
@@ -1521,7 +1496,7 @@ function score(c) {
   DIMS.forEach(d => {
     s += (c.scores[d.key] / 5) * (weights[d.key] / total) * 100;
   });
-  return Math.round(s * 10) / 10;
+  return Math.round(s);
 }
 
 function scoreColor(s) {
@@ -1576,46 +1551,6 @@ function uploadFreqToScore(perWeek) {
   if (perWeek >= 0.45) return 3; // B:  bi-weekly
   if (perWeek >= 0.2)  return 2; // C:  monthly
   return 1;                      // C-: less than monthly
-}
-
-function detectLanguage(titles) {
-  const text = titles.join(' ');
-
-  // Non-Latin scripts — detected by character ranges
-  const scripts = [
-    { name: 'Japanese',    re: /[\u3040-\u30FF\u31F0-\u31FF]/g },  // hiragana + katakana
-    { name: 'Korean',      re: /[\uAC00-\uD7A3\u1100-\u11FF]/g },  // hangul
-    { name: 'Chinese',     re: /[\u4E00-\u9FFF\u3400-\u4DBF]/g },  // CJK (fallback after Japanese)
-    { name: 'Arabic',      re: /[\u0600-\u06FF]/g },
-    { name: 'Russian',     re: /[\u0400-\u04FF]/g },
-    { name: 'Hindi',       re: /[\u0900-\u097F]/g },
-    { name: 'Thai',        re: /[\u0E00-\u0E7F]/g },
-  ];
-
-  for (const { name, re } of scripts) {
-    const count = (text.match(re) || []).length;
-    if (count >= 5) return name;
-  }
-
-  // Latin-script languages — common function words
-  const lower = text.toLowerCase();
-  const latinLangs = [
-    { name: 'French',     re: /\b(les|des|une|pour|dans|avec|vous|est|sont|mais|tout|plus)\b/g },
-    { name: 'Spanish',    re: /\b(los|las|una|para|como|pero|este|muy|más|también|hablar)\b/g },
-    { name: 'German',     re: /\b(die|der|das|und|ist|für|mit|ich|nicht|auch|wird)\b/g },
-    { name: 'Portuguese', re: /\b(para|como|uma|não|por|com|você|isso|seus|suas|aprenda)\b/g },
-    { name: 'Italian',    re: /\b(della|degli|delle|per|una|non|con|che|sono|questo)\b/g },
-    { name: 'Turkish',    re: /\b(bir|ile|için|ama|bu|ve|ben|sen|nasıl|öğren)\b/g },
-  ];
-
-  let best = null;
-  for (const { name, re } of latinLangs) {
-    const count = (lower.match(re) || []).length;
-    if (!best || count > best.count) best = { name, count };
-  }
-
-  if (best && best.count >= 2) return best.name;
-  return 'English';
 }
 
 const SPONSORED_PATTERNS = [
@@ -1736,7 +1671,7 @@ function urlsWithTrackingParams(desc) {
   return results;
 }
 
-// Extract brand name from chapter markers like "01:46 Thank you LingQ!"
+// Extract brand name from chapter markers like "01:46 Thank you BrandName!"
 function brandsFromChapterMarkers(desc) {
   const brands = [];
   const chapterRe = /^\d+:\d+\s+thank(?:s|\s+you)\s+([A-Za-z0-9][A-Za-z0-9\s&.]{1,30}?)(?:[!.,\n]|$)/gim;
@@ -2025,8 +1960,8 @@ async function fetchChannelStats(channelId, apiKey, mode, sampleSize, preloadedI
   })();
   const totalViews    = views.reduce((a, b) => a + b, 0);
   const totalInteract = likes.reduce((a, b) => a + b, 0) + comments.reduce((a, b) => a + b, 0);
-  const engagementRate = totalViews > 0 ? Math.round((totalInteract / totalViews) * 1000) / 10 : 0;
-  const viewSubRatio   = subs > 0 ? Math.round((avgViews / subs) * 1000) / 10 : 0;
+  const engagementRate = totalViews > 0 ? Math.round((totalInteract / totalViews) * 100) : 0;
+  const viewSubRatio   = subs > 0 ? Math.round((avgViews / subs) * 100) : 0;
 
   // Upload frequency based on filtered videos
   const dates = filtered.map(v => v.date);
@@ -2035,15 +1970,14 @@ async function fetchChannelStats(channelId, apiKey, mode, sampleSize, preloadedI
     const newest = dates[0];
     const oldest = dates[dates.length - 1];
     const weeks  = (newest - oldest) / (1000 * 60 * 60 * 24 * 7);
-    videosPerWeek = weeks > 0 ? Math.round((filtered.length / weeks) * 10) / 10 : null;
+    videosPerWeek = weeks > 0 ? Math.round(filtered.length / weeks) : null;
   }
 
   const lastUploadDate  = dates.length ? dates[0] : null;
   const daysSinceUpload = lastUploadDate ? Math.floor((new Date() - lastUploadDate) / (1000 * 60 * 60 * 24)) : null;
-  const contentLanguage = detectLanguage(filtered.map(v => v.title));
   const { sponsoredRate, topSponsors, unidentifiedSponsored, affiliateRate, topAffiliates, unidentifiedAffiliated } = await detectMonetization(filtered);
 
-  return { channelId, name, channelUrl, subs, videoCount, avgViews, videosPerWeek, engagementRate, viewSubRatio, daysSinceUpload, thumb, language: contentLanguage, country, videoMode: mode, sponsoredRate, topSponsors, unidentifiedSponsored, affiliateRate, topAffiliates, unidentifiedAffiliated };
+  return { channelId, name, channelUrl, subs, videoCount, avgViews, videosPerWeek, engagementRate, viewSubRatio, daysSinceUpload, thumb, country, videoMode: mode, sponsoredRate, topSponsors, unidentifiedSponsored, affiliateRate, topAffiliates, unidentifiedAffiliated };
 }
 
 // ─── DIRECT ADD ──────────────────────────────────────────────────────────────
@@ -2062,7 +1996,6 @@ function addCollaboratorDirect(data) {
     channelUrl: data.channelUrl || null,
     thumb:      data.thumb      || null,
     country:    data.country    || null,
-    language: data.language,
     avgViews: data.avgViews,
     subs: data.subs || null,
     videosPerWeek: data.videosPerWeek || null,
@@ -2209,18 +2142,6 @@ function updateTotal() {
   el.className = 'weights-total-badge' + (t !== 100 ? ' warn' : '');
 }
 
-// ─── RENDER MARKETS ──────────────────────────────────────────────────────────
-
-function renderMarkets() {
-  const el = document.getElementById('market-list');
-  if (!el) return;
-  el.innerHTML = MARKETS.map((m, i) => `
-    <div class="market-item">
-      <div class="market-rank">${i + 1}</div>${m}
-    </div>
-  `).join('');
-}
-
 // ─── RENDER CARDS ────────────────────────────────────────────────────────────
 
 function renderCards() {
@@ -2258,10 +2179,6 @@ function renderCards() {
               <span class="sp-val">${c.videosPerWeek} / wk</span>
               <span class="sp-label">Upload Freq</span>
             </div>` : ''}
-            <div class="stat-pill">
-              <span class="sp-val">${c.language}</span>
-              <span class="sp-label">Language</span>
-            </div>
             ${c.engagementRate !== null ? `
             <div class="stat-pill">
               <span class="sp-val" style="color:${c.engagementRate >= 6 ? '#4ade80' : c.engagementRate >= 2 ? '#eab308' : '#f87171'}">${c.engagementRate}%</span>
@@ -2302,7 +2219,7 @@ function formatBrandName(name) {
   // Strip domain extension (.com, .io, .co, etc.) and any path
   const dotIdx = name.indexOf('.');
   const clean = dotIdx !== -1 ? name.substring(0, dotIdx) : name;
-  // Capitalize first letter, preserve internal casing (e.g. LingQ stays LingQ)
+  // Capitalize first letter, preserve internal casing
   return clean.charAt(0).toUpperCase() + clean.slice(1);
 }
 
@@ -2363,9 +2280,7 @@ function openAddModal(data) {
   const freqScore  = data.videosPerWeek ? uploadFreqToScore(data.videosPerWeek) : 3;
 
   const defaultScores = {
-    marketAlign:3,
     reach: reachScore, uploadFreq: freqScore,
-    relationship:1, contentAlign:3, steveEffect:1, noCompetitor:5
   };
 
   document.getElementById('modal-name').textContent = `Add: ${data.name}`;
@@ -2399,12 +2314,11 @@ function buildForm(scores, channelData, existingCollab) {
   const isNew = !!channelData;
 
   const nameVal    = existingCollab?.name     || channelData?.name     || '';
-  const langVal    = existingCollab?.language || channelData?.language || '';
   const viewsVal   = existingCollab?.avgViews || (channelData ? `${formatNum(channelData.avgViews)} avg` : '');
   const notesVal   = existingCollab?.notes    || '';
 
   // Dim inputs
-  const dimInputs = DIMS.filter(d => d.key !== 'marketAlign').map(d => {
+  const dimInputs = DIMS.map(d => {
     const v     = scores[d.key] || 3;
     const isAuto = AUTO_DIMS.has(d.key) && isNew;
     const btns  = [1,2,3,4,5].map(i => `
@@ -2424,38 +2338,18 @@ function buildForm(scores, channelData, existingCollab) {
   }).join('');
 
   const basicFields = isNew ? `
-    <div class="form-2col">
-      <div class="form-group">
-        <label class="form-label">Channel Name</label>
-        <input class="form-field" id="f-name" value="${nameVal}">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Content Language</label>
-        <input class="form-field" id="f-lang" value="${langVal}" placeholder="e.g. Japanese, English, French"
-          oninput="updateMarketBadge(this.value)">
-        <div id="market-badge" style="margin-top:6px;font-size:0.775rem;">
-          ${marketBadgeHtml(langVal)}
-        </div>
-      </div>
+    <div class="form-group">
+      <label class="form-label">Channel Name</label>
+      <input class="form-field" id="f-name" value="${nameVal}">
     </div>
     <div class="form-group">
       <label class="form-label">Avg Views <span class="form-hint">(edit if needed)</span></label>
       <input class="form-field" id="f-views" value="${viewsVal}">
     </div>
   ` : `
-    <div class="form-2col">
-      <div class="form-group">
-        <label class="form-label">Channel Name</label>
-        <input class="form-field" id="f-name" value="${nameVal}">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Content Language</label>
-        <input class="form-field" id="f-lang" value="${langVal}"
-          oninput="updateMarketBadge(this.value)">
-        <div id="market-badge" style="margin-top:6px;font-size:0.775rem;">
-          ${marketBadgeHtml(langVal)}
-        </div>
-      </div>
+    <div class="form-group">
+      <label class="form-label">Channel Name</label>
+      <input class="form-field" id="f-name" value="${nameVal}">
     </div>
     <div class="form-group">
       <label class="form-label">Avg Views</label>
@@ -2497,18 +2391,16 @@ function closeModal() {
 
 function saveModal() {
   const name   = document.getElementById('f-name').value.trim();
-  const lang   = document.getElementById('f-lang').value.trim();
   const views  = document.getElementById('f-views').value.trim();
   const notes  = document.getElementById('f-notes').value.trim();
   const scores = getModalScores();
-  scores.marketAlign = marketAlignScore(lang);
 
   if (!name) { alert('Please enter a channel name.'); return; }
 
   const d = pendingChannelData;
   collaborators.push({
     id: nextId++,
-    name, language: lang, avgViews: views,
+    name, avgViews: views,
     subs:                   d?.subs                   || null,
     videosPerWeek:          d?.videosPerWeek          || null,
     engagementRate:         d?.engagementRate         || null,
@@ -2633,8 +2525,8 @@ function exportToNotion() {
 
   const sorted = [...collaborators].sort((a, b) => score(b) - score(a));
 
-  const header = '| Rank | Channel | Subs | Avg Views | V/S Ratio | Upload Freq | Engagement | Language | Sponsored | Affiliate | Score | Notes |';
-  const divider = '|------|---------|------|-----------|-----------|-------------|------------|----------|-----------|-----------|-------|-------|';
+  const header = '| Rank | Channel | Subs | Avg Views | V/S Ratio | Upload Freq | Engagement | Sponsored | Affiliate | Score | Notes |';
+  const divider = '|------|---------|------|-----------|-----------|-------------|------------|-----------|-----------|-------|-------|';
 
   const rows = sorted.map((c, i) => {
     const s        = score(c);
@@ -2645,11 +2537,10 @@ function exportToNotion() {
     const vsr      = c.viewSubRatio  !== null ? `${c.viewSubRatio}%`  : '—';
     const freq     = c.videosPerWeek !== null ? `${c.videosPerWeek}/wk` : '—';
     const eng      = c.engagementRate !== null ? `${c.engagementRate}%` : '—';
-    const lang     = c.language || '—';
     const notes    = (c.notes || '').replace(/\|/g, '\\|').replace(/\n/g, ' ');
     const sponsored  = c.sponsoredRate !== null ? `${c.sponsoredRate}%` : '—';
     const affiliate  = c.affiliateRate  !== null ? `${c.affiliateRate}%`  : '—';
-    return `| ${rank} | ${name} | ${subs} | ${views} | ${vsr} | ${freq} | ${eng} | ${lang} | ${sponsored} | ${affiliate} | ${s} | ${notes} |`;
+    return `| ${rank} | ${name} | ${subs} | ${views} | ${vsr} | ${freq} | ${eng} | ${sponsored} | ${affiliate} | ${s} | ${notes} |`;
   });
 
   const today    = new Date().toISOString().slice(0, 10);
@@ -2713,7 +2604,6 @@ if (savedKey && localStorage.getItem('yt_api_key_verified') === '1') {
 
 loadData();
 renderWeights();
-renderMarkets();
 renderCards();
 updateChart();
 
