@@ -941,18 +941,18 @@
       localStorage.setItem('ruff-draft-size', editorSize);
     }
     applySize();
-    document.getElementById('size-plus-btn').addEventListener('click', () => {
-      if (editorSize >= MAX_SIZE) return;
-      editorSize = Math.min(MAX_SIZE, editorSize + SIZE_STEP);
-      applySize();
-      proxy.focus({ preventScroll: true });
-    });
-    document.getElementById('size-minus-btn').addEventListener('click', () => {
-      if (editorSize <= MIN_SIZE) return;
-      editorSize = Math.max(MIN_SIZE, editorSize - SIZE_STEP);
-      applySize();
-      proxy.focus({ preventScroll: true });
-    });
+    function bindSizeBtn(btn, delta) {
+      // Preserve current focus so tapping doesn't summon (or dismiss-then-resummon) the keyboard.
+      btn.addEventListener('mousedown', (e) => e.preventDefault());
+      btn.addEventListener('click', () => {
+        if (delta > 0 && editorSize >= MAX_SIZE) return;
+        if (delta < 0 && editorSize <= MIN_SIZE) return;
+        editorSize = Math.max(MIN_SIZE, Math.min(MAX_SIZE, editorSize + delta));
+        applySize();
+      });
+    }
+    bindSizeBtn(document.getElementById('size-plus-btn'), SIZE_STEP);
+    bindSizeBtn(document.getElementById('size-minus-btn'), -SIZE_STEP);
 
     let revisePending = false;
     let revisePendingTimer = null;
