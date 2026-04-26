@@ -993,7 +993,14 @@
       document.body.classList.add('focus-mode');
     }
 
-    proxy.focus({ preventScroll: true });
+    // Auto-focus the proxy only on devices with a fine pointer (mouse/trackpad) so desktop
+    // users can start typing immediately. On touch devices, an auto-focused hidden input
+    // gets a keyboard the moment the user taps anything (e.g. the +/- buttons), which is
+    // disruptive — the editor's mousedown handler will focus the proxy when the user
+    // actually taps into the editor area.
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      proxy.focus({ preventScroll: true });
+    }
     render();
   </script>
 </body>
