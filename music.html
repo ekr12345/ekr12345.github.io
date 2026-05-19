@@ -299,10 +299,11 @@ title: Music
     .bg-graffiti { display: none; }
     body { background: var(--accent); }
 
+    body { margin: 0; }
     #desktop {
       overflow: hidden;
       padding: 0;
-      min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -328,9 +329,14 @@ title: Music
 
     /* Thumb-friendly scrub on mobile */
     .lcd-overlay .scrub {
-      height: 1.4cqw;
-      min-height: 6px;
+      height: 1.8cqw;
+      min-height: 8px;
     }
+
+    /* 2x bigger LCD text on mobile */
+    .vmu-stage.vmu-mobile .lcd-overlay .track-title  { font-size: 8cqw; }
+    .vmu-stage.vmu-mobile .lcd-overlay .track-artist { font-size: 5.2cqw; }
+    .vmu-stage.vmu-mobile .lcd-overlay .times        { font-size: 4.4cqw; }
 
     /* Bigger VMU on mobile: crop empty padding inside SVG viewBox */
     .vmu-stage.vmu-mobile { aspect-ratio: 320 / 490; }
