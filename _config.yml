@@ -71,6 +71,13 @@ baseurl:
 
 permalink: /:title/
 
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      wide_layout: true
+
 
 # The release of Jekyll Now that you're using
 version: v1.2.0

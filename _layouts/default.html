@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
   {% include head.html %}
-  <body>
-    {% include nav.html %}
-
+  <body{% if page.wide_layout %} class="wide-layout"{% endif %}>
     <div id="main" role="main" class="container">
-      {{ content }}
+      {% if page.wide_layout %}
+        <div class="article-content">
+          {{ content }}
+        </div>
+      {% else %}
+        {{ content }}
+      {% endif %}
     </div>
 
     <div class="wrapper-footer">
@@ -17,6 +21,6 @@
     </div>
 
     {% include analytics.html %}
-    
+
   </body>
 </html>

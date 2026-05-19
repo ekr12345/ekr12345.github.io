@@ -561,17 +561,36 @@ nav {
 // Footer
 .wrapper-footer {
   margin-top: 50px;
-  border-top: 1px solid $footer-border-color;
-  border-bottom: 1px solid $footer-border-color;
-  background-color: $footer-background-color;
+  border: none;
+  background-color: #e8560a;
 }
 
 footer {
-  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  padding: 0;
   text-align: center;
+  color: #ffffff;
 
   p {
-    font-size: $small-font-size;
+    font-family: 'Dreamcast', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.03em;
+    margin: 0;
+    line-height: 1.2;
+    transform: translateY(4px);
+  }
+
+  p a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  p a:hover {
+    color: #000000;
   }
 
   .svg-icon {
@@ -579,6 +598,7 @@ footer {
     font-size: 0;
     list-style: none;
     margin: 0;
+    padding: 0;
     text-align: center;
 
     li {
@@ -624,7 +644,7 @@ body {
 footer {
   margin-top: auto;
   text-align: center;
-  padding: 1rem 0;
+  padding: 0;
 }
 /* === End universal sticky footer =================================== */
 
@@ -638,14 +658,92 @@ footer {
   content: none !important;
 }
 
+// === WIDE LAYOUT (posts index + article pages) ===
+// Left-anchored at the same x-position as the home page's Dreamcast disc
+// (SVG x≈221.8 of 1600 with xMidYMid slice ≈ 13.9vw on 16:9-ish viewports).
+
+body.wide-layout #main.container {
+  max-width: none;
+  margin: 0;
+  padding-top: 3rem;
+  padding-left: clamp(1rem, 14vw, 18rem);
+  padding-right: 1rem;
+
+  @include mobile {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+.article-content {
+  max-width: 720px;
+  font-size: 1.45rem;
+  line-height: 1.75;
+
+  // Align top of first visible element across all wide_layout pages
+  // (article H1s, /me & /now H1s, /posts list) to container padding-top.
+  h1:first-of-type {
+    margin-top: 0;
+  }
+
+  > ul:first-child,
+  > article > .entry > ul:first-child,
+  > article > .entry > h1:first-of-type {
+    margin-top: 0;
+  }
+}
+
 // === HOMEPAGE ===
 
+.home-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+
+.vertical-name {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: 'Dreamcast', sans-serif;
+  font-size: clamp(7.23rem, 19.76vh, 21.69rem);
+  letter-spacing: 0.2rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.85);
+  pointer-events: none;
+  z-index: 10;
+  display: flex;
+  align-items: flex-start;
+
+  @include mobile {
+    display: none;
+  }
+}
+
 .home {
-  background: #e8560a;
+  background: transparent;
   min-height: 100vh;
   padding: 2rem 10px;
   max-width: 740px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+
+  @include mobile {
+    pointer-events: auto;
+  }
 
   .site-title {
     font-family: 'Dreamcast', sans-serif;
@@ -671,15 +769,20 @@ footer {
   }
 
   nav {
+    display: none;
+    position: fixed;
+    left: 1.5rem;
+    bottom: 0;
     float: none !important;
     text-align: left !important;
+    z-index: 5;
     a {
       display: block;
       font-family: 'Dreamcast', sans-serif;
-      font-size: 3.2rem;
+      font-size: 2.75rem;
       color: #fff;
       letter-spacing: 1px;
-      line-height: 1.2;
+      line-height: 1.15;
       text-decoration: none;
       text-align: left !important;
       margin-left: 0 !important;
@@ -687,6 +790,16 @@ footer {
       &:hover {
         color: #1a1a1a;
       }
+
+      @include mobile {
+        font-size: 3.2rem;
+        line-height: 1.2;
+      }
+    }
+
+    @include mobile {
+      display: block;
+      position: static;
     }
   }
 

@@ -105,294 +105,192 @@ title: Music
     line-height: 1.5;
   }
 
-  /* ======= VMU player (cell-shaded) ======= */
+  /* ======= VMU player (white line-art on orange — matches home) ======= */
   #w-player {
-    width: 345px;
-    left: 60px; top: 80px; z-index: 10;
-    background: #f4f0e7;
-    border: 2.5px solid var(--ink);
-    border-radius: 22px 22px 30px 30px;
-    box-shadow: 8px 8px 0 0 var(--ink);
-    overflow: visible;
-    padding: 24px 22px;
+    width: 540px;
+    left: 60px; top: 60px; z-index: 10;
+    background: var(--accent);
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: hidden;
+    padding: 0;
   }
   #w-player .seam-l, #w-player .seam-r { display: none; }
 
-  /* titlebar holds the brand row + close — and is the drag handle */
   #w-player .titlebar {
     position: relative;
-    height: auto;
-    background: transparent;
-    border: none;
-    padding: 2px 0 14px;
+    height: 44px;
+    background: var(--accent);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 0 14px;
     margin: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
-    color: var(--ink);
+    gap: 10px;
+    color: #ffffff;
     font-family: var(--display);
-    font-size: 27px;
-    letter-spacing: .03em;
+    font-size: 22px;
+    letter-spacing: 0.03em;
+    cursor: grab;
   }
-  #w-player .titlebar .title { display: none; }
+  #w-player .titlebar:active { cursor: grabbing; }
   #w-player .titlebar .close {
-    position: absolute;
-    top: 2px; right: 2px;
-    background: var(--window-bg);
-    border: 2px solid var(--ink);
+    background: transparent;
+    border: 2px solid #ffffff;
     border-radius: 50%;
     width: 18px; height: 18px;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: background .15s ease;
   }
-  #w-player .titlebar .close:hover { background: var(--accent); }
-  #w-player .titlebar svg { width: 27px; height: 27px; flex-shrink: 0; }
-  #w-player .titlebar svg path { fill: var(--ink) !important; }
+  #w-player .titlebar .close:hover { background: #1d1410; border-color: #1d1410; }
 
-  /* LCD screen — flat cell-shaded */
-  #w-player .lcd {
-    background: #c4d3c1;
-    border: 2.5px solid var(--ink);
-    border-radius: 6px;
-    padding: 21px 18px;
-    color: var(--ink);
-    aspect-ratio: 1.05 / 1;
+  .vmu-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 620 / 700;
+    background: var(--accent);
+    container-type: inline-size;
+    cursor: grab;
+  }
+  .vmu-stage:active { cursor: grabbing; }
+
+  .vmu-art {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .vmu-art .vmu-line {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+  .vmu-art .vmu-letter text {
+    fill: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 21px;
+    text-anchor: middle;
+  }
+  .vmu-art .vmu-dim .dim {
+    fill: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 21px;
+    text-anchor: middle;
+  }
+  .vmu-art .vmu-dim .dim-small {
+    fill: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 19px;
+    text-anchor: middle;
+  }
+
+  /* LCD overlay aligned with SVG screen rect (216, 190, 188, 132) of 620x700 viewBox */
+  .lcd-overlay {
+    position: absolute;
+    left: 34.84%;
+    top: 27.14%;
+    width: 30.32%;
+    height: 18.86%;
+    padding: 2.5%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
-  #w-player .lcd .track-title {
-    font-family: var(--display);
-    font-size: 24px;
-    letter-spacing: .03em;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin-bottom: 6px;
-    color: var(--ink);
-  }
-  #w-player .lcd .track-artist {
-    font-size: 16px;
-    text-align: center;
-    color: var(--ink);
-    opacity: .7;
-    margin-bottom: 21px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  #w-player .lcd .track-artist:empty { display: none; }
-  #w-player .lcd .scrub {
-    height: 9px;
-    background: #f4f0e7;
-    border: 2px solid var(--ink);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  #w-player .lcd .scrub-fill {
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 0%;
-    background: var(--ink);
-  }
-  #w-player .lcd .times {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    font-variant-numeric: tabular-nums;
-    color: var(--ink);
-    opacity: .8;
-    margin-top: 9px;
-    letter-spacing: .05em;
-    font-weight: 700;
-  }
-
-  /* console area */
-  #w-player .console {
-    margin-top: 21px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    column-gap: 9px;
-  }
-
-  /* D-pad: cell-shaded round base + cross */
-  #w-player .dpad {
-    position: relative;
-    width: 96px;
-    height: 96px;
-    margin: 0 auto;
-    background: #b8bfc6;
-    border: 2px solid var(--ink);
-    border-radius: 50%;
-    box-shadow: 3px 3px 0 0 var(--ink);
-  }
-  #w-player .dpad .pad {
-    position: absolute;
-    background: #dee2e7;
-    border: 2px solid var(--ink);
-    z-index: 1;
-    transition: transform .08s ease;
-  }
-  #w-player .dpad:has(.left:active)  .pad.h { transform: translateX(-3px); }
-  #w-player .dpad:has(.right:active) .pad.h { transform: translateX(3px); }
-  #w-player .dpad:has(.up:active)    .pad.v { transform: translateY(-3px); }
-  #w-player .dpad:has(.down:active)  .pad.v { transform: translateY(3px); }
-  #w-player .dpad .h {
-    left: 6px; right: 6px;
-    top: 50%;
-    height: 27px;
-    margin-top: -13.5px;
-    border-radius: 6px;
-  }
-  #w-player .dpad .v {
-    top: 6px; bottom: 6px;
-    left: 50%;
-    width: 27px;
-    margin-left: -13.5px;
-    border-radius: 6px;
-  }
-  #w-player .dpad .center {
-    position: absolute;
-    left: 50%; top: 50%;
-    width: 6px; height: 6px;
-    background: var(--ink);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 2;
-  }
-  #w-player .dpad .zone {
-    position: absolute;
-    cursor: pointer;
-    z-index: 3;
-  }
-  #w-player .dpad .left  { left: 6px;  top: 50%; width: 33px; height: 24px; transform: translateY(-50%); }
-  #w-player .dpad .right { right: 6px; top: 50%; width: 33px; height: 24px; transform: translateY(-50%); }
-  #w-player .dpad .up    { top: 6px;   left: 50%; width: 24px; height: 33px; transform: translateX(-50%); }
-  #w-player .dpad .down  { bottom: 6px;left: 50%; width: 24px; height: 33px; transform: translateX(-50%); }
-
-  /* right-side controls */
-  #w-player .right-side {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 9px;
-  }
-  /* A / B big buttons */
-  #w-player .ab { display: flex; flex-direction: column; align-items: center; gap: 5px; }
-  #w-player .ab-btns { display: flex; gap: 15px; }
-  #w-player .btn-ab {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: #c8ced4;
-    border: 2px solid var(--ink);
-    box-shadow: 3px 3px 0 0 var(--ink);
-    cursor: pointer;
-    color: transparent;
-    padding: 0;
-    transition: background .12s ease;
-  }
-  #w-player .btn-ab:active {
-    transform: translate(3px, 3px);
-    box-shadow: 0 0 0 0 var(--ink);
-  }
-  #w-player .btn-ab.a-btn:hover,
-  #w-player .btn-ab.a-btn.playing {
-    background: var(--accent);
-  }
-  #w-player .ab-labels { display: flex; gap: 15px; }
-  #w-player .ab-labels span {
-    width: 42px;
-    text-align: center;
-    font-size: 12px;
-    letter-spacing: .25em;
-    font-weight: 700;
-    color: var(--ink);
-  }
-
-  #w-tracks { width: 420px; left: 470px; top: 80px; z-index: 9; }
-  #w-tracks .window-body { padding: 0; max-height: 480px; overflow-y: auto; }
-  #w-tracks ol { list-style: none; margin: 0; padding: 0; }
-  #w-tracks li {
-    padding: 15px 21px;
-    border-bottom: 1px solid rgba(0,0,0,.06);
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    font-size: 19px;
-  }
-  #w-tracks li:last-child { border-bottom: none; }
-  #w-tracks li:hover { background: var(--accent-soft); }
-  #w-tracks li.active { background: var(--accent); color: #fff; }
-  #w-tracks li.active .num { color: #fff; opacity: .85; }
-  #w-tracks li .num { color: var(--muted); min-width: 33px; font-variant-numeric: tabular-nums; }
-  #w-tracks li .t-title {
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  #w-tracks .empty {
-    padding: 42px 27px;
-    font-size: 19px;
-    text-align: center;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-  #w-tracks .empty code {
-    background: var(--accent-soft);
-    padding: 2px 7px;
-    border-radius: 5px;
-    font-size: 17px;
-  }
-
-  #w-about { width: 420px; left: 470px; top: 380px; z-index: 8; }
-  #w-about p { margin: 12px 0; font-size: 19px; }
-  #w-about a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-soft); }
-  #w-about a:hover { border-bottom-color: var(--accent); }
-  #w-about code {
-    background: var(--accent-soft);
-    padding: 2px 7px;
-    border-radius: 5px;
-    font-size: 17px;
-  }
-
-  #dock {
-    position: fixed;
-    bottom: 18px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 6px;
-    background: var(--window-bg);
-    border: 2.5px solid var(--ink);
-    border-radius: 999px;
-    box-shadow: 6px 6px 0 0 var(--ink);
-    padding: 6px 8px;
-    z-index: 100;
-    font-size: 13px;
-  }
-  #dock button {
+    color: #ffffff;
     font-family: var(--body);
-    font-weight: 700;
-    font-size: 13px;
-    background: transparent;
-    color: var(--ink);
-    border: 2px solid transparent;
-    border-radius: 999px;
-    padding: 5px 14px;
+    pointer-events: none;
+  }
+  .lcd-overlay > * { pointer-events: auto; }
+  .lcd-overlay .track-title {
+    font-family: var(--display);
+    font-size: 4cqw;
+    line-height: 1.05;
+    letter-spacing: 0.03em;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 2%;
+  }
+  .lcd-overlay .track-artist {
+    font-size: 2.6cqw;
+    line-height: 1.1;
+    text-align: center;
+    opacity: 0.85;
+    margin-bottom: 6%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .lcd-overlay .track-artist:empty { display: none; }
+  .lcd-overlay .scrub {
+    height: 0.9cqw;
+    min-height: 4px;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid #ffffff;
+    position: relative;
     cursor: pointer;
-    transition: background .12s ease, color .12s ease, border-color .12s ease;
+    overflow: hidden;
   }
-  #dock button:hover {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--ink);
+  .lcd-overlay .scrub-fill {
+    position: absolute;
+    inset: 0;
+    width: 0%;
+    background: #ffffff;
+    pointer-events: none;
   }
+  .lcd-overlay .times {
+    display: flex;
+    justify-content: space-between;
+    font-size: 2.2cqw;
+    line-height: 1.1;
+    margin-top: 4%;
+    letter-spacing: 0.05em;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+  }
+
+  /* Invisible interactive hot-spots over SVG buttons.
+     Hover matches home: white → dark ink (#1d1410) via SVG stroke swap. */
+  .hot {
+    position: absolute;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.2);
+    user-select: none;
+    transition: background 0.12s ease;
+  }
+  .hot:focus-visible {
+    outline: 2px dashed #ffffff;
+    outline-offset: -2px;
+  }
+  .hot.a-btn { left: 50.65%; top: 57.57%; width: 7.42%; height: 6.57%; border-radius: 50%; }
+  .hot.b-btn { left: 60.32%; top: 57.57%; width: 7.42%; height: 6.57%; border-radius: 50%; }
+  .hot.a-btn:hover,
+  .hot.a-btn.playing { background: rgba(255, 255, 255, 0.25); }
+  .hot.a-btn:active,
+  .hot.b-btn:active  { background: rgba(255, 255, 255, 0.4); }
+
+  /* D-pad cross actual coords (after translate -28,-35):
+     up: x[224..260], y[382..408]  | down: x[224..260], y[444..470]
+     left: x[198..226], y[408..444] | right: x[260..286], y[408..444] */
+  .hot.dpad-up    { left: 36.13%; top: 54.57%; width: 5.81%; height: 3.71%; }
+  .hot.dpad-down  { left: 36.13%; top: 63.43%; width: 5.81%; height: 3.71%; }
+  .hot.dpad-left  { left: 31.94%; top: 58.29%; width: 4.52%; height: 5.14%; }
+  .hot.dpad-right { left: 41.94%; top: 58.29%; width: 4.19%; height: 5.14%; }
+  .hot.dpad-up:active,
+  .hot.dpad-down:active,
+  .hot.dpad-left:active,
+  .hot.dpad-right:active { background: rgba(255, 255, 255, 0.25); }
 
   .hidden { display: none !important; }
 
@@ -412,10 +310,10 @@ title: Music
       left: auto !important;
       top: auto !important;
       width: calc(100% - 20px);
-      max-width: 440px;
+      max-width: 540px;
       margin: 16px auto 80px auto;
       z-index: 10;
-      padding: 18px 16px;
+      padding: 0;
     }
 
     /* Bigger close buttons */
@@ -424,107 +322,11 @@ title: Music
       height: 28px !important;
     }
 
-    /* LCD: shorter aspect on mobile */
-    #w-player .lcd {
-      aspect-ratio: 1.4 / 1;
-      padding: 16px 14px;
+    /* Thumb-friendly scrub on mobile */
+    .lcd-overlay .scrub {
+      height: 1.4cqw;
+      min-height: 6px;
     }
-
-    /* Taller, thumb-friendly scrub bar */
-    #w-player .lcd .scrub {
-      height: 20px;
-    }
-    #w-player .lcd .scrub-fill {
-      pointer-events: none;
-    }
-
-    /* Larger d-pad */
-    #w-player .dpad {
-      width: 120px;
-      height: 120px;
-    }
-    #w-player .dpad .h {
-      height: 34px;
-      margin-top: -17px;
-    }
-    #w-player .dpad .v {
-      width: 34px;
-      margin-left: -17px;
-    }
-    #w-player .dpad .left,
-    #w-player .dpad .right,
-    #w-player .dpad .up,
-    #w-player .dpad .down {
-      width: 44px;
-      height: 44px;
-    }
-
-    /* Larger A/B buttons */
-    #w-player .btn-ab {
-      width: 52px;
-      height: 52px;
-    }
-    #w-player .ab-labels span {
-      width: 52px;
-    }
-
-    /* Tracks + Readme become bottom sheets */
-    #w-tracks, #w-about {
-      position: fixed !important;
-      left: 0 !important;
-      right: 0 !important;
-      top: auto !important;
-      bottom: 0;
-      width: 100% !important;
-      max-height: 70vh;
-      margin: 0 !important;
-      border-radius: 14px 14px 0 0;
-      border-bottom: none;
-      box-shadow: 0 -6px 0 0 var(--ink);
-      transform: translateY(110%);
-      transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
-      z-index: 200;
-    }
-    #w-tracks.mobile-open,
-    #w-about.mobile-open {
-      transform: translateY(0);
-    }
-
-    /* Backdrop */
-    #mobile-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.45);
-      z-index: 150;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease;
-    }
-    #mobile-backdrop.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    /* Full-width dock with safe-area padding */
-    #dock {
-      bottom: 0;
-      left: 0;
-      right: 0;
-      transform: none;
-      width: 100%;
-      border-radius: 0;
-      border-left: none;
-      border-right: none;
-      border-bottom: none;
-      box-shadow: 0 -4px 0 0 var(--ink);
-      padding: 8px 12px;
-      padding-bottom: calc(8px + env(safe-area-inset-bottom));
-      justify-content: center;
-      z-index: 250;
-    }
-  }
-  @media (min-width: 701px) {
-    #mobile-backdrop { display: none; }
   }
 </style>
 
@@ -533,201 +335,67 @@ title: Music
   <svg class="bg-graffiti" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <!-- orange backdrop -->
     <rect width="1600" height="900" fill="#e8560a"/>
-
-    <!-- palm tree, left edge (cropped) -->
-    <!-- trunk -->
-    <path d="
-      M 30 900
-      L 180 900
-      C 195 720, 170 540, 165 360
-      C 162 320, 158 290, 152 270
-      L 108 250
-      C 100 285, 90 320, 80 360
-      C 65 540, 40 720, 30 900 Z"
-      fill="#1d1410"/>
-
-    <!-- trunk ring details -->
-    <g stroke="#e8560a" stroke-width="5" fill="none" stroke-linecap="round">
-      <path d="M 36 850 Q 110 838 178 852"/>
-      <path d="M 42 770 Q 110 758 174 770"/>
-      <path d="M 50 690 Q 110 680 172 690"/>
-      <path d="M 56 600 Q 110 592 170 600"/>
-      <path d="M 64 510 Q 110 502 168 510"/>
-      <path d="M 72 420 Q 110 414 166 420"/>
-      <path d="M 80 340 Q 110 336 162 340"/>
-    </g>
-
-    <!-- crown of fronds, anchored at top of trunk (130, 250) -->
-    <g fill="#1d1410">
-      <!-- back-left, off-screen -->
-      <g transform="rotate(-160 130 250)">
-        <path d="M 130 250 Q 220 222, 460 240 Q 220 278, 130 250 Z"/>
-      </g>
-      <!-- up-left -->
-      <g transform="rotate(-115 130 250)">
-        <path d="M 130 250 Q 200 218, 420 236 Q 200 282, 130 250 Z"/>
-      </g>
-      <!-- nearly vertical -->
-      <g transform="rotate(-82 130 250)">
-        <path d="M 130 250 Q 190 220, 380 232 Q 190 280, 130 250 Z"/>
-      </g>
-      <!-- up-right -->
-      <g transform="rotate(-45 130 250)">
-        <path d="M 130 250 Q 210 218, 440 234 Q 210 282, 130 250 Z"/>
-      </g>
-      <!-- right -->
-      <g transform="rotate(-12 130 250)">
-        <path d="M 130 250 Q 220 220, 480 240 Q 220 280, 130 250 Z"/>
-      </g>
-      <!-- droop right -->
-      <g transform="rotate(28 130 250)">
-        <path d="M 130 250 Q 200 222, 400 244 Q 200 278, 130 250 Z"/>
-      </g>
-      <!-- droop down-right -->
-      <g transform="rotate(62 130 250)">
-        <path d="M 130 250 Q 180 224, 340 246 Q 180 276, 130 250 Z"/>
-      </g>
-    </g>
-
-    <!-- coconuts -->
-    <g fill="#1d1410">
-      <circle cx="148" cy="262" r="11"/>
-      <circle cx="120" cy="266" r="9"/>
-      <circle cx="136" cy="278" r="10"/>
-    </g>
-
-    <!-- ============ RIGHT-EDGE SHORTER PALM ============ -->
-    <!-- trunk -->
-    <path d="
-      M 1420 900
-      L 1570 900
-      C 1582 800, 1568 680, 1565 540
-      C 1562 510, 1558 488, 1554 472
-      L 1510 458
-      C 1503 484, 1494 510, 1486 540
-      C 1474 680, 1432 800, 1420 900 Z"
-      fill="#1d1410"/>
-
-    <!-- trunk rings -->
-    <g stroke="#e8560a" stroke-width="5" fill="none" stroke-linecap="round">
-      <path d="M 1424 850 Q 1495 840 1568 854"/>
-      <path d="M 1430 770 Q 1495 760 1564 770"/>
-      <path d="M 1438 690 Q 1495 682 1562 690"/>
-      <path d="M 1448 610 Q 1495 602 1558 610"/>
-      <path d="M 1462 540 Q 1495 534 1554 540"/>
-    </g>
-
-    <!-- crown anchored at (1530, 460), fronds biased to the left -->
-    <g fill="#1d1410">
-      <!-- back-right, off-screen -->
-      <g transform="rotate(-20 1530 460)">
-        <path d="M 1530 460 Q 1604 432, 1820 450 Q 1604 488, 1530 460 Z"/>
-      </g>
-      <!-- up-right -->
-      <g transform="rotate(-65 1530 460)">
-        <path d="M 1530 460 Q 1598 430, 1780 446 Q 1598 488, 1530 460 Z"/>
-      </g>
-      <!-- nearly vertical -->
-      <g transform="rotate(-100 1530 460)">
-        <path d="M 1530 460 Q 1596 430, 1750 444 Q 1596 488, 1530 460 Z"/>
-      </g>
-      <!-- up-left -->
-      <g transform="rotate(-138 1530 460)">
-        <path d="M 1530 460 Q 1610 430, 1820 448 Q 1610 488, 1530 460 Z"/>
-      </g>
-      <!-- left -->
-      <g transform="rotate(-170 1530 460)">
-        <path d="M 1530 460 Q 1614 432, 1840 450 Q 1614 488, 1530 460 Z"/>
-      </g>
-      <!-- droop down-left -->
-      <g transform="rotate(155 1530 460)">
-        <path d="M 1530 460 Q 1598 432, 1760 452 Q 1598 488, 1530 460 Z"/>
-      </g>
-    </g>
-
-    <!-- coconuts -->
-    <g fill="#1d1410">
-      <circle cx="1518" cy="472" r="9"/>
-      <circle cx="1546" cy="476" r="10"/>
-      <circle cx="1532" cy="486" r="8"/>
-    </g>
   </svg>
 
   <section class="window" id="w-player">
     <span class="seam-l"></span>
     <span class="seam-r"></span>
-    <div class="titlebar">
-      <span class="close" data-close></span>
-      <span>Dreamblast.fm</span>
-    </div>
-    <div class="lcd">
-      <div class="track-title" id="track-title">No track loaded</div>
-      <div class="track-artist" id="track-artist">add MP3s to /music/</div>
-      <div class="scrub" id="scrub"><div class="scrub-fill" id="scrub-fill"></div></div>
-      <div class="times">
-        <span id="time-current">0:00</span>
-        <span id="time-total">0:00</span>
-      </div>
-    </div>
-    <div class="console">
-      <div class="dpad">
-        <div class="pad h"></div>
-        <div class="pad v"></div>
-        <div class="center"></div>
-        <div class="zone left"  id="btn-prev" title="Previous"></div>
-        <div class="zone right" id="btn-next" title="Next"></div>
-        <div class="zone up"    id="btn-vol-up"   title="Volume up"></div>
-        <div class="zone down"  id="btn-vol-down" title="Volume down"></div>
-      </div>
-      <div class="right-side">
-        <div class="ab">
-          <div class="ab-btns">
-            <button class="btn-ab a-btn" id="btn-play" title="Play/Pause"></button>
-            <button class="btn-ab b-btn" id="btn-stop" title="Stop"></button>
-          </div>
-          <div class="ab-labels"><span>A</span><span>B</span></div>
+
+    <div class="vmu-stage">
+      <svg class="vmu-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 700" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="vmuTitle vmuDesc">
+        <title id="vmuTitle">VMU front view</title>
+        <desc id="vmuDesc">Cyan line-art VMU with screen, D-pad, and A/B buttons.</desc>
+        <defs>
+          <clipPath id="vmu-screen-clip" clipPathUnits="userSpaceOnUse">
+            <rect x="244" y="225" width="188" height="132" rx="6" ry="6"/>
+          </clipPath>
+        </defs>
+
+        <g class="vmu-line" transform="translate(-28 -35)">
+          <path d="M 227 535 C 207 529 190 518 190 504 V 168 Q 190 158 198 158 V 122 Q 198 96 224 96 Q 238 96 244 106 C 296 84 380 84 432 106 Q 438 96 452 96 Q 478 96 478 122 V 158 Q 486 158 486 168 V 504 C 486 518 469 529 449 535 C 388 562 289 562 227 535 Z"/>
+          <path d="M 228 106 V 425.5"/>
+          <path d="M 228 496.5 V 532"/>
+          <path d="M 448 106 V 532"/>
+          <path d="M 198 158 H 228"/>
+          <path d="M 448 158 H 478"/>
+          <path d="M 228 141 C 292 119 384 119 448 141"/>
+          <path d="M 228 177 C 293 156 383 156 448 177"/>
+          <path d="M 228 517 C 296 550 380 550 448 517"/>
+          <circle cx="338" cy="145" r="37"/>
+          <rect x="244" y="225" width="188" height="132" rx="6" ry="6"/>
+          <circle cx="270" cy="461" r="55"/>
+          <path d="M 252 417 H 288 V 443 H 314 V 479 H 288 V 505 H 252 V 479 H 226 V 443 H 252 Z"/>
+          <circle cx="365" cy="461" r="23"/>
+          <circle cx="425" cy="461" r="23"/>
+        </g>
+
+        <g class="vmu-letter" transform="translate(-28 -35)">
+          <text x="365" y="510">A</text>
+          <text x="425" y="510">B</text>
+        </g>
+
+      </svg>
+
+      <div class="lcd-overlay">
+        <div class="track-title" id="track-title">No track loaded</div>
+        <div class="track-artist" id="track-artist">add MP3s to /music/</div>
+        <div class="scrub" id="scrub"><div class="scrub-fill" id="scrub-fill"></div></div>
+        <div class="times">
+          <span id="time-current">0:00</span>
+          <span id="time-total">0:00</span>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="window" id="w-tracks">
-    <div class="titlebar">
-      <span class="close" data-close></span>
-      <span class="title">Tracklist</span>
-    </div>
-    <div class="window-body">
-      <ol id="track-list"></ol>
-      <div class="empty hidden" id="track-empty">
-        no tracks yet.<br>
-        drop MP3s in <code>/music/</code><br>
-        and edit <code>tracks</code> in this page.
-      </div>
-    </div>
-  </section>
-
-  <section class="window" id="w-about">
-    <div class="titlebar">
-      <span class="close" data-close></span>
-      <span class="title">Readme</span>
-    </div>
-    <div class="window-body">
-      <p><strong>dreamblast.fm</strong></p>
-      <p>vibes by <a href="/">eric</a>. drag windows. close & re-open from the dock.</p>
-      <p>add tracks: drop MP3s in <code>~/blog/music/</code>, then edit the <code>tracks</code> array in <code>music.html</code>.</p>
+      <button class="hot a-btn" id="btn-play" aria-label="Play / Pause"></button>
+      <button class="hot b-btn" id="btn-stop" aria-label="Stop"></button>
+      <span class="hot dpad-left"  id="btn-prev"     role="button" tabindex="0" aria-label="Previous"></span>
+      <span class="hot dpad-right" id="btn-next"     role="button" tabindex="0" aria-label="Next"></span>
+      <span class="hot dpad-up"    id="btn-vol-up"   role="button" tabindex="0" aria-label="Volume up"></span>
+      <span class="hot dpad-down"  id="btn-vol-down" role="button" tabindex="0" aria-label="Volume down"></span>
     </div>
   </section>
 
 </div>
-
-<div id="mobile-backdrop"></div>
-
-<nav id="dock">
-  <button data-open="player">Player</button>
-  <button data-open="tracks">Tracks</button>
-  <button data-open="about">Readme</button>
-  <button onclick="location.href='/'">Home</button>
-</nav>
 
 <audio id="audio" preload="metadata"></audio>
 
@@ -759,8 +427,6 @@ title: Music
   const btnNext = $("#btn-next");
   const btnVolUp = $("#btn-vol-up");
   const btnVolDown = $("#btn-vol-down");
-  const trackListEl = $("#track-list");
-  const trackEmpty = $("#track-empty");
 
   let idx = -1;
 
@@ -771,28 +437,6 @@ title: Music
     return `${m}:${sec}`;
   };
 
-  function renderList() {
-    trackListEl.innerHTML = "";
-    if (!tracks.length) {
-      trackEmpty.classList.remove("hidden");
-      return;
-    }
-    trackEmpty.classList.add("hidden");
-    tracks.forEach((t, i) => {
-      const li = document.createElement("li");
-      li.dataset.i = i;
-      li.innerHTML = '<span class="num">' + (i+1).toString().padStart(2,"0") + '</span><span class="t-title">' + (t.title || t.src) + '</span>';
-      li.addEventListener("click", () => load(i, true));
-      trackListEl.appendChild(li);
-    });
-  }
-
-  function highlight() {
-    [...trackListEl.children].forEach((li) => {
-      li.classList.toggle("active", Number(li.dataset.i) === idx);
-    });
-  }
-
   function load(i, autoplay) {
     if (!tracks.length) return;
     idx = (i + tracks.length) % tracks.length;
@@ -800,7 +444,6 @@ title: Music
     audio.src = t.src;
     trackTitle.textContent = t.title || "untitled";
     trackArtist.textContent = t.artist || "";
-    highlight();
     if (autoplay) audio.play();
   }
 
@@ -850,79 +493,30 @@ title: Music
   scrub.addEventListener("pointerup", () => { scrubbing = false; });
   scrub.addEventListener("pointercancel", () => { scrubbing = false; });
 
+  // VMU drag
   const isMobile = () => window.matchMedia("(max-width: 700px)").matches;
-  const backdrop = document.getElementById("mobile-backdrop");
-  const sheets = ["w-tracks", "w-about"].map((id) => document.getElementById(id));
-
-  function closeSheet(w) {
-    w.classList.remove("mobile-open");
-    if (!sheets.some((s) => s.classList.contains("mobile-open"))) {
-      backdrop.classList.remove("visible");
-    }
-  }
-  function openSheet(w) {
-    sheets.forEach((s) => { if (s !== w) s.classList.remove("mobile-open"); });
-    w.classList.add("mobile-open");
-    backdrop.classList.add("visible");
-  }
-  backdrop.addEventListener("click", () => {
-    sheets.forEach((s) => s.classList.remove("mobile-open"));
-    backdrop.classList.remove("visible");
+  const player = document.getElementById("w-player");
+  const stage = player.querySelector(".vmu-stage");
+  let dx = 0, dy = 0, dragging = false;
+  stage.addEventListener("pointerdown", (e) => {
+    if (isMobile()) return;
+    if (e.target.closest(".hot, .scrub, button, [role=button]")) return;
+    dragging = true;
+    const r = player.getBoundingClientRect();
+    dx = e.clientX - r.left;
+    dy = e.clientY - r.top;
+    stage.setPointerCapture(e.pointerId);
   });
-
-  // draggable windows (desktop only)
-  let topZ = 20;
-  document.querySelectorAll(".window").forEach((w) => {
-    const bar = w.querySelector(".titlebar");
-    let dx = 0, dy = 0, dragging = false;
-
-    const bringFront = () => { if (!isMobile()) w.style.zIndex = ++topZ; };
-    w.addEventListener("pointerdown", bringFront);
-
-    bar.addEventListener("pointerdown", (e) => {
-      if (isMobile()) return;
-      if (e.target.dataset.close !== undefined) return;
-      dragging = true;
-      const r = w.getBoundingClientRect();
-      dx = e.clientX - r.left;
-      dy = e.clientY - r.top;
-      bar.setPointerCapture(e.pointerId);
-      bringFront();
-    });
-    bar.addEventListener("pointermove", (e) => {
-      if (!dragging) return;
-      const x = Math.max(0, Math.min(window.innerWidth  - 60, e.clientX - dx));
-      const y = Math.max(0, Math.min(window.innerHeight - 24, e.clientY - dy));
-      w.style.left = x + "px";
-      w.style.top  = y + "px";
-    });
-    bar.addEventListener("pointerup", () => dragging = false);
-
-    const cls = w.querySelector("[data-close]");
-    if (cls) cls.addEventListener("click", () => {
-      if (isMobile() && (w.id === "w-tracks" || w.id === "w-about")) {
-        closeSheet(w);
-      } else {
-        w.classList.add("hidden");
-      }
-    });
+  stage.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    const x = Math.max(0, Math.min(window.innerWidth  - 60, e.clientX - dx));
+    const y = Math.max(0, Math.min(window.innerHeight - 24, e.clientY - dy));
+    player.style.left = x + "px";
+    player.style.top  = y + "px";
   });
+  stage.addEventListener("pointerup",     () => dragging = false);
+  stage.addEventListener("pointercancel", () => dragging = false);
 
-  document.querySelectorAll("#dock [data-open]").forEach((b) => {
-    b.addEventListener("click", () => {
-      const id = "w-" + b.dataset.open;
-      const w = document.getElementById(id);
-      if (!w) return;
-      if (isMobile() && (id === "w-tracks" || id === "w-about")) {
-        openSheet(w);
-      } else {
-        w.classList.remove("hidden");
-        w.style.zIndex = ++topZ;
-      }
-    });
-  });
-
-  renderList();
   if (tracks.length) load(0, false);
 })();
 </script>

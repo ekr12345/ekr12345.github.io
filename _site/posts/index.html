@@ -44,131 +44,202 @@
     text-decoration: none;
     color: inherit;
   }
+
 </style>
+
+<style>
+  /* Page transition: vertical swipe panel sweeps bottom→top across the navigation,
+     painted with the destination page's bg color. */
+  .page-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    transform: translateY(100%);
+    background: #ffffff;
+    will-change: transform;
+  }
+  .page-overlay.with-transition {
+    transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .page-overlay.cover { transform: translateY(0); }
+  .page-overlay.exit  { transform: translateY(-100%); }
+  @media (prefers-reduced-motion: reduce) {
+    .page-overlay { display: none; }
+  }
+</style>
+
+<script>
+(() => {
+  const ORANGE_PATHS = new Set(['/', '/music/', '/music']);
+  const pageBg = (pathname) => ORANGE_PATHS.has(pathname) ? '#e8560a' : '#ffffff';
+
+  // Create the overlay immediately so it covers the page before content renders.
+  const ov = document.createElement('div');
+  ov.className = 'page-overlay cover';
+  ov.style.background = pageBg(location.pathname);
+  document.documentElement.appendChild(ov);
+
+  function reveal() {
+    requestAnimationFrame(() => {
+      ov.classList.add('with-transition');
+      requestAnimationFrame(() => {
+        ov.classList.remove('cover');
+        ov.classList.add('exit');
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', reveal);
+  } else {
+    reveal();
+  }
+
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) {
+      ov.classList.remove('with-transition', 'exit');
+      ov.classList.add('cover');
+      ov.style.background = pageBg(location.pathname);
+      reveal();
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a');
+    if (!a) return;
+    const hrefAttr = a.getAttribute('href') || a.getAttributeNS('http://www.w3.org/1999/xlink', 'href');
+    if (!hrefAttr) return;
+    if (a.getAttribute('target') === '_blank' || a.hasAttribute('download')) return;
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    if (/^(javascript|mailto|tel):/i.test(hrefAttr)) return;
+
+    let url;
+    try { url = new URL(hrefAttr, document.baseURI); } catch { return; }
+    if (url.origin !== location.origin) return;
+    if (url.pathname === location.pathname && url.hash) return;
+
+    e.preventDefault();
+    ov.classList.remove('with-transition', 'exit', 'cover');
+    ov.style.background = pageBg(url.pathname);
+    void ov.offsetWidth;
+    ov.classList.add('with-transition');
+    requestAnimationFrame(() => { ov.classList.add('cover'); });
+    const target = url.href;
+    setTimeout(() => { window.location.href = target; }, 420);
+  });
+})();
+</script>
 
 
 </head>
 
-  <body>
-    <div class="wrapper-masthead">
-  <div class="container">
-    <header class="masthead clearfix">
-      
-
-      <div class="site-info">
-        <h1 class="site-name"><a href="/">Eric Roberts</a></h1>
-      </div>
-
-      <nav>
-        
-      </nav>    
-      
-    </header>
-  </div>
-</div>
-
-
+  <body class="wide-layout">
     <div id="main" role="main" class="container">
-      <ul class="posts-list" style="list-style: none; padding: 0; margin: 0;">
+      
+        <div class="article-content">
+          <ul class="posts-list" style="list-style: none; padding: 0; margin: 0;">
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/ai/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Dependance on AI</a>
+      <a href="/ai/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Dependance on AI</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/claude/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Adwords and Claude</a>
+      <a href="/claude/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Adwords and Claude</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/domain/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">New Domain</a>
+      <a href="/domain/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">New Domain</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/service/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Service</a>
+      <a href="/service/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Service</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/trip/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Japan Trip</a>
+      <a href="/trip/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Japan Trip</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/update/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Linux, Brave, and Mortgages</a>
+      <a href="/update/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Linux, Brave, and Mortgages</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/finance/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Financial Education for Kids</a>
+      <a href="/finance/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Financial Education for Kids</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/reddit/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Reddit</a>
+      <a href="/reddit/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Reddit</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/texts/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Texts</a>
+      <a href="/texts/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Texts</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/reliance/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Reliance</a>
+      <a href="/reliance/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Reliance</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/llm/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">My New Financial Advisor</a>
+      <a href="/llm/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">My New Financial Advisor</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/comfort/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Comfort</a>
+      <a href="/comfort/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Comfort</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/moonshots/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Moonshots</a>
+      <a href="/moonshots/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Moonshots</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/act/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Second Act</a>
+      <a href="/act/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Second Act</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/github/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Figuring Out Github</a>
+      <a href="/github/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Figuring Out Github</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/code/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">I'm Coding</a>
+      <a href="/code/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">I'm Coding</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/value/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Value</a>
+      <a href="/value/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Value</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/background/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Background Music</a>
+      <a href="/background/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Background Music</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/language/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Learn a New Language</a>
+      <a href="/language/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Learn a New Language</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/nap/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Naps</a>
+      <a href="/nap/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Naps</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/less/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Less is More</a>
+      <a href="/less/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Less is More</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/remote/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Being Remote</a>
+      <a href="/remote/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Being Remote</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/unsocial/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">I Don't Use Social Media</a>
+      <a href="/unsocial/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">I Don't Use Social Media</a>
     </li>
   
     <li style="margin-bottom: 0.3rem;">
-      <a href="/consumption/" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">How I Consume Music</a>
+      <a href="/consumption/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">How I Consume Music</a>
     </li>
   
 </ul>
 
+        </div>
+      
     </div>
 
     <div class="wrapper-footer">
@@ -211,7 +282,7 @@
 
 
 
-<p>© 2026 Eric Roberts</p>
+<p><a href="/">© 2026 Eric Roberts</a></p>
 
         </footer>
       </div>
@@ -219,6 +290,6 @@
 
     
 
-    
+
   </body>
 </html>

@@ -44,40 +44,117 @@
     text-decoration: none;
     color: inherit;
   }
+
 </style>
+
+<style>
+  /* Page transition: vertical swipe panel sweeps bottom→top across the navigation,
+     painted with the destination page's bg color. */
+  .page-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    transform: translateY(100%);
+    background: #ffffff;
+    will-change: transform;
+  }
+  .page-overlay.with-transition {
+    transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .page-overlay.cover { transform: translateY(0); }
+  .page-overlay.exit  { transform: translateY(-100%); }
+  @media (prefers-reduced-motion: reduce) {
+    .page-overlay { display: none; }
+  }
+</style>
+
+<script>
+(() => {
+  const ORANGE_PATHS = new Set(['/', '/music/', '/music']);
+  const pageBg = (pathname) => ORANGE_PATHS.has(pathname) ? '#e8560a' : '#ffffff';
+
+  // Create the overlay immediately so it covers the page before content renders.
+  const ov = document.createElement('div');
+  ov.className = 'page-overlay cover';
+  ov.style.background = pageBg(location.pathname);
+  document.documentElement.appendChild(ov);
+
+  function reveal() {
+    requestAnimationFrame(() => {
+      ov.classList.add('with-transition');
+      requestAnimationFrame(() => {
+        ov.classList.remove('cover');
+        ov.classList.add('exit');
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', reveal);
+  } else {
+    reveal();
+  }
+
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) {
+      ov.classList.remove('with-transition', 'exit');
+      ov.classList.add('cover');
+      ov.style.background = pageBg(location.pathname);
+      reveal();
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a');
+    if (!a) return;
+    const hrefAttr = a.getAttribute('href') || a.getAttributeNS('http://www.w3.org/1999/xlink', 'href');
+    if (!hrefAttr) return;
+    if (a.getAttribute('target') === '_blank' || a.hasAttribute('download')) return;
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    if (/^(javascript|mailto|tel):/i.test(hrefAttr)) return;
+
+    let url;
+    try { url = new URL(hrefAttr, document.baseURI); } catch { return; }
+    if (url.origin !== location.origin) return;
+    if (url.pathname === location.pathname && url.hash) return;
+
+    e.preventDefault();
+    ov.classList.remove('with-transition', 'exit', 'cover');
+    ov.style.background = pageBg(url.pathname);
+    void ov.offsetWidth;
+    ov.classList.add('with-transition');
+    requestAnimationFrame(() => { ov.classList.add('cover'); });
+    const target = url.href;
+    setTimeout(() => { window.location.href = target; }, 420);
+  });
+})();
+</script>
 
 
 </head>
 
-  <body>
-    <div class="wrapper-masthead">
-  <div class="container">
-    <header class="masthead clearfix">
-      
-
-      <div class="site-info">
-        <h1 class="site-name"><a href="/">Eric Roberts</a></h1>
-      </div>
-
-      <nav>
-        
-      </nav>    
-      
-    </header>
-  </div>
-</div>
-
-
+  <body class="wide-layout">
     <div id="main" role="main" class="container">
-      <ul class="posts-list" style="list-style: none; padding: 0; margin: 0;">
-  <li style="margin-bottom: 0.3rem;">
-    <a href="/clout" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Clout</a>
+      
+        <div class="article-content">
+          <h1 style="font-family: 'Dreamcast', sans-serif; font-size: 2.5rem; font-weight: normal; margin-bottom: 1.5rem;">
+  Home-Cooked Apps
+</h1>
+
+<ul class="posts-list" style="list-style: none; padding: 0; margin: 0;">
+  <li style="margin-bottom: 1.2rem;">
+    <a href="https://ekr12345.github.io/clout/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Clout</a>
+    <p style="margin: 0.1rem 0 0 0;">Find YouTubers worth collaborating with.</p>
   </li>
-  <li style="margin-bottom: 0.3rem;">
-    <a href="/ruff" style="font-family: 'Dreamcast', sans-serif; font-size: 1.6rem; color: #e8560a; text-decoration: none;">Ruff Draft</a>
+  <li style="margin-bottom: 1.2rem;">
+    <a href="https://ekr12345.github.io/ruffdraft/" style="font-family: 'Dreamcast', sans-serif; font-size: 2.3rem; font-weight: normal; letter-spacing: 0.03em; color: #e8560a; text-decoration: none;">Ruff Draft</a>
+    <p style="margin: 0.1rem 0 0 0;">A distraction-free writing app for sh*tty first drafts.</p>
   </li>
 </ul>
 
+        </div>
+      
     </div>
 
     <div class="wrapper-footer">
@@ -120,7 +197,7 @@
 
 
 
-<p>© 2026 Eric Roberts</p>
+<p><a href="/">© 2026 Eric Roberts</a></p>
 
         </footer>
       </div>
@@ -128,6 +205,6 @@
 
     
 
-    
+
   </body>
 </html>
