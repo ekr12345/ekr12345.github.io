@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>PlayCast 98 — Record Walk</title>
-<meta name="description" content="A walking-tour planner for 736 record shops across Japan, dressed as a 1997 desktop.">
+<title>dig</title>
+<meta name="description" content="A walking-tour planner for 736 record shops across Japan.">
 <meta name="theme-color" content="#000000">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Eric Roberts">
-<meta property="og:title" content="PlayCast 98 — Record Walk">
-<meta property="og:description" content="A walking-tour planner for 736 record shops across Japan, dressed as a 1997 desktop.">
+<meta property="og:title" content="dig">
+<meta property="og:description" content="A walking-tour planner for 736 record shops across Japan.">
 <meta property="og:url" content="https://ericroberts.net/dig/">
 <meta name="twitter:card" content="summary">
 
@@ -20,12 +20,6 @@
 <body>
 
 <style>
-@font-face {
-  font-family:"Emotion Engine";
-  font-style:normal; font-weight:700; font-display:swap;
-  src:url(data:font/woff2;base64,d09GMgABAAAAAAPoAA0AAAAABpwAAAOWAAEZmgAAAAAAAAAAAAAAAAAAAAAAAAAAGxAcGgZgAGwRCAqFcIRyATYCJAMsCxgABCAFgXAHIBslBSA+DHCH+QouHlhWRBTc0ybvrEvfP80u0+UIKFt+5Hie/6vdN9O+2mpl0Mkx4/Go44GX9uGBH0e+fzSrtO0MhrI5wo1Il0bywHO5f2M2fHibYIqPBbI5DqR3YFGiUaCJpbIDH9Dxfj1f9HiLEzg8KEmLIcpsNx7pcAMcUF0XJhh/H6aU6vyvWw+Xd73Gy7AJ9I+3Sx1A6XGBhlG3XXpooOGlwytIOMUIkpAziKoRHA/1wwmjPCzlToxfbQRL5/+aetF2YBVEJ34i945yVbajVdCsnu/53gyqQT4uQSY4G023Ieqr/0VEas4D/KrAgBIVgDxGhx6xy6mvRA6AVnTMRdLkklURpKPurT8KJYCKtGWO297TEmMFMdMibf9G7nUe5QsCWu12LDiQhArIsCJJeI+UNLCgRpIEM/4iiSOHcupp+S8O/NxI3S+6spap1K5tGglsyF8hZii2MfQfZAIyLcyoif7HporJRUvLSMpsptg2ep/uw7p2BNGzCqccxeLRh1rN1nRjg1KFovLYnNesZa1In6Jdoe30nVQRBxGEtC7AU4DDD1oo3TelJytUzJSQZk/1oNpI3aYk2+5zj5JQPEIqrqokp9CmGsu0NTtUT1Y6nTT8rICkUK5Nu6Nib/tacB5WyX542lm9jav+4O2ikH6RIimjD4VsqkRkCZi+pil4qyKa0kd9uTmO+DR/RU6uI00X8+JzyNxhc6Sh/PGWOf3f3nmtVlYcRTlbT7Zu2+475v7LcuVOv8Kzuk/kvIVyponRN59FhiPNZh3355LliE9X2VD2GMt5xSMnRbWSB8vmKD+i9/R2SZWMeIfghSN5jieuGc/qhOWnqqLGX31CHyAr1+ma8rdf+1BbJ8Dweb1DM9z1iv21tYq92iZGxT1oZGXbd/OkQSvt8WcRKfpQwH+sD3g+ncuK/brQ9+SBtiA7y35YGDWi7VGcxQ1HfK5lLyFbmR8WVkf5IQYPl/BGdI49TYOJN9SXPcrrxc1Ee7b69zJsMlXr/Sn4dgsIpPWcuHJ1f6nqLx/KAV5NO9Xr/f/f/MP2nR9ChgAc6Hz/IyVyK4AqfvKPvX6Y1kL9Q/2+v8GJ8HnoJJtsk6psvqk+d4+AoVPImNfaIpAkYnkEI5AsQY6RLCkMK1mKjXxP5mDZKKKpoIp6ShS+EjPRbBElpQIixvzl5IclzNpwgBQKqKWuldy5bNNwSzEu45V0zkhaVkWLAAAAAA==) format("woff2");
-}
-
 :root {
   color-scheme: light;
 
@@ -66,7 +60,6 @@
   --bevel-field:inset -2px -2px 0 rgba(0,0,0,.55), inset 2px 2px 0 #FFFFFF;
   --edge:1.5px solid var(--ink);
   --max:1200px;
-  --spine-w:0px;
 
   --r-shell:18px;
   --r-panel:10px;
@@ -89,7 +82,7 @@ html, body { margin:0; padding:0; background:var(--desk); height:100%; overflow:
   background-size:8px 8px, 8px 8px, auto, auto, auto, auto;
   background-repeat:repeat, repeat, no-repeat, no-repeat, no-repeat, no-repeat;
   color:var(--ink); font-family:var(--text); font-size:12px; line-height:1.5;
-  padding:0 0 12px var(--spine-w); display:flex; flex-direction:column; align-items:center;
+  padding:0 0 12px; display:flex; flex-direction:column; align-items:center;
   -webkit-font-smoothing:antialiased;
 }
 .desk ::selection { background:var(--accent); color:#FFFFFF; }
@@ -137,25 +130,6 @@ html { scrollbar-color:var(--ink2) var(--panel2); }
 ::-webkit-scrollbar-button:vertical:start:increment,
 ::-webkit-scrollbar-button:vertical:end:decrement,
 ::-webkit-scrollbar-button:horizontal { display:none; }
-
-.spine {
-  position:fixed; left:0; top:0; bottom:0; width:var(--spine-w); z-index:6;
-  background:linear-gradient(180deg,
-    rgba(0,0,0,.94) 0%,
-    rgba(0,0,0,.89) 52%,
-    rgba(0,0,0,.60) 100%);
-  border-right:1.5px solid rgba(255,255,255,.16);
-  display:flex; align-items:center; justify-content:center;
-  pointer-events:none;
-}
-
-.spine span {
-  writing-mode:vertical-rl; transform:rotate(180deg);
-  font-family:"Emotion Engine","Century Gothic",Futura,"URW Gothic",var(--display);
-  font-weight:700; line-height:1;
-  font-size:clamp(26px, 4.3vh, 40px); letter-spacing:.06em;
-  color:var(--panel); white-space:nowrap;
-}
 
 .win {
   width:100%; max-width:var(--max);
@@ -393,10 +367,6 @@ html { scrollbar-color:var(--ink2) var(--panel2); }
 .pop-links { display:flex; flex-wrap:wrap; gap:6px; }
 
 @media (max-width:880px) {
-  :root { --spine-w:0px; }
-
-  .desk .spine,
-  .desk
 
   .headrow { position:relative; }
 
@@ -508,7 +478,6 @@ html { scrollbar-color:var(--ink2) var(--panel2); }
   background-color:var(--desk);
   padding:0;
 }
-.spine { display:none; }
 
 .win {
   max-width:none; width:100%; height:100dvh; max-height:none;
@@ -604,6 +573,8 @@ html { scrollbar-color:var(--ink) var(--panel2); }
   line-height:.78; letter-spacing:-.04em; text-transform:uppercase;
   white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%;
   pointer-events:none;
+
+  padding-top:.08em; margin-top:-.08em;
 }
 
 .wordwrap { position:absolute; }
@@ -1302,8 +1273,6 @@ html { scrollbar-color:#FFFFFF var(--panel2); }
 </div>
 
 <div class="desk">
-
-  <div class="spine"><span>PlayCast 98</span></div>
 
   <div class="win">
 
