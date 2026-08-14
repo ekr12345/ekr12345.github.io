@@ -1485,12 +1485,16 @@ html, body { background:#FFFFFF; }
 /* ---------------- 4. controls ----------------
    Quiet outlines in the site's grey ramp; orange only for the state
    that is actually on, and with the ink on top of it. */
+/* background-COLOR, not the background shorthand, on all four of these.
+   The phone rules below paint the ▾ as a background-image, and a
+   shorthand here would reset it — silently dropping the caret from
+   exactly the chips that are switched on. */
 .ctlbtn, .ctlicon {
-  border:1.5px solid var(--er-line-mid); background:transparent;
+  border:1.5px solid var(--er-line-mid); background-color:transparent;
   color:var(--er-ink);
 }
 .ctlbtn:hover, .ctlicon:hover {
-  background:var(--er-line-soft); border-color:var(--er-line-mid);
+  background-color:var(--er-line-soft); border-color:var(--er-line-mid);
   color:var(--er-ink-hi);
 }
 .ctlbtn:focus-visible, .ctlicon:focus-visible {
@@ -1498,7 +1502,7 @@ html, body { background:#FFFFFF; }
 }
 .ctlbtn.on, .ctlbtn[aria-expanded="true"], .segbtn.on,
 .segbtn[aria-pressed="true"] {
-  background:var(--er-orange); border-color:var(--er-orange);
+  background-color:var(--er-orange); border-color:var(--er-orange);
   color:var(--er-ink-hi);
 }
 .ctlicon.dead { color:#CED4DA; border-color:var(--er-line); }
@@ -1650,7 +1654,68 @@ html { scrollbar-color:var(--er-line-mid) var(--er-wash); }
   }
 }
 
-/* ---------------- 10. the arrival sweep ----------------
+/* ---------------- 10. the header row on a phone ----------------
+   The Maps button was dropping onto a second line of its own. .place is
+   flex-wrap:wrap, and on a 360px screen the four controls before it do
+   not fit: back(29) + place + genre + day + icon(27) + gaps. With the
+   genre set to "Club & Dance" that comes to roughly 390px, so the icon
+   wraps — and being last, it wraps alone.
+
+   Shrinking the chips does not fix it, it only moves the threshold. The
+   longest genre in the set is "Electronica & Ambient", and at any legible
+   size that row cannot fit on a phone. So the row stops wrapping and the
+   genre chip absorbs the difference instead: it is the only control here
+   whose label has no bound, and the only one that can lose its tail and
+   still be identifiable. Everything else stays flex:none at full width.
+
+   Which means the ▾ has to come off ::after and become a background
+   mark, or text-overflow would eat the caret before the label. Drawn
+   with the same two-gradient triangle pair the scrollbar end-caps use,
+   in currentColor so it follows the chip through its active state, and
+   applied to all three chips so one caret shape is used throughout —
+   not a different one on the chip that happens to truncate. */
+@media (max-width:880px) {
+  .headrow { padding:10px 12px 9px; }
+  .place { flex-wrap:nowrap; min-width:0; gap:6px; }
+
+  .ctlbtn {
+    display:block; min-width:0; min-height:29px; line-height:17px;
+    padding:6px 22px 6px 9px; font-size:9px; letter-spacing:.1em;
+    text-align:left;
+  }
+  .ctlbtn::after { content:none; }
+
+  /* The states have to be named here, not just .ctlbtn. Two rules above
+     this sheet — .ctlbtn:hover and .ctlbtn.on — set the background
+     SHORTHAND, which expands to background-image:none at 0,2,0. A plain
+     .ctlbtn caret at 0,1,0 loses to that on specificity no matter how
+     late it is declared, so the mark would disappear from precisely the
+     chips that are switched on. Matching their specificity and coming
+     later wins both. */
+  .ctlbtn,
+  .ctlbtn:hover,
+  .ctlbtn.on,
+  .ctlbtn[aria-expanded="true"] {
+    background-image:
+      linear-gradient(45deg,  transparent 50%, currentColor 50%),
+      linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-repeat:no-repeat, no-repeat;
+    background-size:4px 4px, 4px 4px;
+    background-position:right 10px center, right 6px center;
+  }
+
+  /* the one control allowed to give ground, and the floor it stops at */
+  #ctlGenre { flex:0 1 auto; min-width:56px; }
+  #ctlGenreBtn {
+    max-width:100%;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+
+  /* so it can never be the thing that gets pushed off the row */
+  #mapsLink { flex:none; }
+}
+
+/* ---------------- 11. the arrival sweep ----------------
    Every page on the site is entered through a panel that sweeps
    bottom to top, painted the destination's ground. dig was the one
    page you arrived at with a hard cut. Same geometry, same easing,
