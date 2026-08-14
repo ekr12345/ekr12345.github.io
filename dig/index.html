@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>dig</title>
 <meta name="description" content="The cleanest way to discover over 700 record shops across Japan.">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#E8560A">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Eric Roberts">
 <meta property="og:title" content="dig">
@@ -13,9 +13,9 @@
 <meta property="og:url" content="https://ericroberts.net/dig/">
 <meta name="twitter:card" content="summary">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23fff' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='2.5' fill='%23E8560A'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23E8560A'/%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23fff' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='2.5' fill='%231D1410'/%3E%3C/svg%3E">
 
-<style>:root{color-scheme:light}html,body{margin:0;padding:0;background:#000}img{max-width:100%}</style>
+<style>:root{color-scheme:light}html,body{margin:0;padding:0;background:#E8560A}img{max-width:100%}</style>
 </head>
 <body>
 
@@ -1251,6 +1251,420 @@ html { scrollbar-color:#FFFFFF var(--panel2); }
 .ctlmenu button[aria-selected="true"] { background:#E8560A; color:#000000; }
 .ctlmenu button[aria-selected="true"]:hover { background:#C4460A; color:#000000; }
 </style>
+<style>
+/* ============================================================
+   PAPER MODE — dig, re-skinned to ericroberts.net
+   ------------------------------------------------------------
+   Appended last, so equal-specificity rules win on source order.
+   Nothing above this block is edited.
+
+   The site runs exactly two modes and never a third:
+
+     cover   #E8560A ground, #FFFFFF ink   — /, /music, the footer band
+     paper   #FFFFFF ground, #343A40 ink   — /posts, /apps, /me, /now
+
+   dig had invented a third — black ground, white ink, orange as a
+   small accent — which is why it read as a separate property. This
+   block maps dig's two screens onto the site's two modes instead:
+   the magazine cover becomes the site's cover, the tool becomes the
+   site's paper. Black survives only where the site keeps it: as a
+   hover ink (#1D1410, which is `.dc a:hover` on the home page).
+
+   Contrast, measured rather than eyeballed, because the orange is
+   the whole constraint:
+
+     #E8560A on #FFFFFF   3.64:1   large type and >=3px marks only
+     #FFFFFF on #E8560A   3.64:1   same — display sizes only
+     #1D1410 on #E8560A   4.98:1   the accessible pairing on orange
+     #C4460A on #FFFFFF   4.97:1   the accessible orange on paper
+     #343A40 on #FFFFFF  10.30:1   body ink
+
+   So orange never carries small text. Below ~16px it becomes
+   #C4460A on paper or #1D1410 on orange. That is the same discipline
+   the site already keeps — it only ever sets orange as a ground or
+   as the 7rem+ Dreamcast wordmark, never as running text.
+   ============================================================ */
+
+:root {
+  /* the site's own values, lifted from /style.css */
+  --er-orange:#E8560A;      /* body.home-page, .wrapper-footer */
+  --er-orange-ink:#C4460A;  /* orange, darkened until it passes on paper */
+  --er-ink:#343A40;         /* body colour */
+  --er-ink-hi:#1D1410;      /* .dc a:hover */
+  --er-muted:#868E96;       /* h4, h6, .date, blockquote p */
+  --er-line:#E9ECEF;        /* table borders, .tag ground */
+  --er-line-soft:#F1F3F5;   /* hr, ::selection, footnote borders */
+  --er-line-mid:#DEE2E6;    /* blockquote rule, .count ground */
+  --er-wash:#F8F9FA;        /* .highlight ground */
+  --er-blue:#1B6EC2;        /* a — the only link colour on the site */
+
+  /* Shape. The site has no square corner anywhere — its whole radius
+     vocabulary is three values, and they are small:
+       2px  a.footnote
+       3px  .post .tag a, code.highlighter-rouge, pre.highlight, and the
+            seven rx="3" vent slats in the home page's Dreamcast drawing
+       5px  img, .site-avatar img
+     dig had gone the other way twice: full 999px pills in the original
+     retro sheet, then border-radius:0 on everything when that sheet was
+     flattened. Neither is a shape the site makes. Controls take the 3px
+     it puts on a tag or a code span; surfaces take the 5px it puts on an
+     image. Nothing becomes a pill, because nothing on the site is one. */
+  --er-r-fine:2px;
+  --er-r-ctl:3px;
+  --er-r-surf:5px;
+
+  /* remap dig's existing tokens onto them, so every rule that was
+     already written against a token comes along for free */
+  --ink:var(--er-ink);
+  --ink2:var(--er-muted);
+  --paper:#FFFFFF;
+  --panel:#FFFFFF;
+  --panel2:transparent;
+  --field:#FFFFFF;
+  --soft:var(--er-line-soft);
+  --hair:var(--er-line-soft);
+  --paper-line:var(--er-line-soft);
+  --accent:var(--er-orange);
+  --pool-violet:var(--er-orange);
+  --pool-pink:var(--er-orange);
+  --pool-pale:#FFFFFF;
+  --on-dark:var(--er-muted);
+  --warn:var(--er-orange-ink);
+  --warn-ink:var(--er-orange-ink);
+  --edge:1.5px solid var(--er-line);
+}
+
+html, body { background:#FFFFFF; }
+
+/* ---------------- 1. the cover: the site's home page ----------------
+   Orange field, white line art, Dreamcast wordmark. The word was
+   filled orange, which on an orange ground is nothing at all; it goes
+   back to the white outline it had — and that outline is now the same
+   gesture as the home page's 2.35px white Dreamcast drawing rather
+   than a coincidence. */
+.digwrap {
+  background-color:var(--er-orange);
+  background-image:none;   /* see "flat grounds" below */
+  color:#FFFFFF;
+}
+
+.wordwrap.city .word {
+  color:transparent;
+  -webkit-text-stroke:2.35px #FFFFFF;  /* the home page's stroke-width */
+  letter-spacing:-.03em;
+}
+.wordwrap.city:hover .word,
+.wordwrap.city:focus-within .word,
+.wordwrap:hover .word,
+.wordwrap select:focus-visible ~ .word,
+.wordwrap .cycle:focus-visible ~ .word {
+  color:#FFFFFF; -webkit-text-stroke-color:#FFFFFF;
+}
+
+/* 13px bold on orange is exactly where white stops being readable
+   (3.64:1), so the subtitle takes the ink instead — 4.98:1, and the
+   same colour the home page's hover state uses.
+
+   Set in sentence case, so the tracking comes almost all the way out.
+   .18em was buying legibility back from all-caps, which loses the
+   word-shapes that let you read at a glance; with ascenders and
+   descenders doing that job, the same tracking just pulls the line
+   apart. The site sets no tracking on running text at all. */
+.valueline {
+  color:var(--er-ink-hi); letter-spacing:.01em; text-align:center;
+}
+/* Centred under the count rather than ranged left with it. The number is
+   drawn as fixed-width .dgt cells so its block has a definite width, and
+   this column shrink-wraps to whichever of the two is wider — so the
+   caption sits on the number's centre line instead of its left edge.
+   The block itself stays at left:22px; only the pair is centred. */
+.wordwrap.city { align-items:center; }
+
+/* START: outlined white, pulsing to solid. Same two-state button the
+   home page's nav has, just with a border because it is a button. */
+.mag-search {
+  background:transparent; color:#FFFFFF;
+  border:2.35px solid #FFFFFF; border-radius:0;
+}
+.mag-search:hover, .mag-search:focus-visible {
+  background:#FFFFFF; color:var(--er-ink-hi); animation:none;
+}
+.mag-search:active { background:var(--er-ink-hi); color:#FFFFFF; border-color:var(--er-ink-hi); }
+.mag-search:focus-visible { outline:2px solid #FFFFFF; outline-offset:4px; }
+/* "Start", not "START" — so .22em of tracking comes out with the caps.
+   A word in sentence case is read by its silhouette; spacing the
+   letters apart is what you do when there is no silhouette left. */
+.mag-search .go { letter-spacing:.02em; }
+@keyframes searchfill {
+  0%,  20%  { background-color:rgba(255,255,255,0); }
+  22%, 40%  { background-color:rgba(255,255,255,1); }
+  42%, 100% { background-color:rgba(255,255,255,0); }
+}
+@keyframes searchink {
+  0%,  20%  { color:#FFFFFF; }
+  22%, 40%  { color:#1D1410; }
+  42%, 100% { color:#FFFFFF; }
+}
+.digwrap :focus-visible { outline:2px solid #FFFFFF; outline-offset:3px; }
+.digwrap ::selection { background:#FFFFFF; color:var(--er-ink-hi); }
+
+/* There was a Dreamcast "Eric Roberts" down here linking back to the
+   site. Removed: the cover already says what it is in 116px, and a
+   second wordmark on the same screen makes the reader choose between
+   two titles. The sweep below still runs on arrival — the continuity it
+   was there to provide does not depend on a visible link. */
+
+/* ---------------- 2. the tool: the site's content pages ----------------
+   White paper, #343A40 ink, hairlines out of the site's grey ramp.
+
+   FLAT GROUNDS. Every ground here was carrying a 34px ruled grid, and
+   two of them a stack of radial glows underneath it as well. The site
+   has neither: body.home-page is one flat #e8560a, the content pages are
+   one flat #ffffff, and the only marks on either are the drawing and the
+   type. A ruled ground is a texture the site does not own, and on paper
+   it also competes with the thing the grid is supposed to suggest — the
+   map already has its own graticule. So all of it comes off: no grid on
+   the cover, none on the desk, none in the map card. */
+.desk, .digwrap.gone {
+  background-color:#FFFFFF;
+  background-image:none;
+  color:var(--er-ink);
+}
+.desk ::selection { background:var(--er-line-soft); color:#000000; }
+.desk :focus-visible { outline:2px solid var(--er-orange-ink); outline-offset:2px; }
+.desk a { color:var(--er-ink); }
+.desk a:hover { color:var(--er-orange-ink); }
+
+.headrow { border-bottom:1.5px solid var(--er-line); }
+.listhead { background:transparent; border-bottom:1.5px solid var(--er-line); }
+.listhead .sec { color:var(--er-muted); }
+.mapcell { border-right:0; }
+
+/* ---------------- 3. the map, drawn with the home page's pen ----------------
+   The home page is a technical line drawing: 2.35px, no fills, round
+   caps and joins, dimension arrows with labels. The map is the same
+   idiom, so it gets the same pen instead of its own. */
+.mapcard {
+  background-color:#FFFFFF; background-image:none;
+  box-shadow:none; border:0;
+}
+.route {
+  stroke:var(--er-orange); stroke-width:2.35;
+  stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:none;
+}
+.route-done { stroke:rgba(52,58,64,.28); stroke-width:1.6; }
+.route-case { stroke:#FFFFFF; stroke-width:6; }
+
+/* The moving mark used to be a chevron flying along the route on an
+   animateMotion — a second object on a map that otherwise has only
+   dots and one line, and it had to be rotated to face the right way at
+   every corner. It is now the route itself: the same path, the same
+   2.35px, dashed so that exactly one short segment exists at a time,
+   and travelling by stroke-dashoffset. Nothing is added to the drawing;
+   a stretch of the line just goes dark and moves. Round caps so the
+   segment reads as a speck rather than a cut piece of pipe. */
+.runner {
+  stroke:var(--er-ink-hi); stroke-width:2.35;
+  stroke-linecap:round; stroke-linejoin:round;
+}
+
+.pin .dot { fill:#FFFFFF; stroke:var(--er-ink); stroke-width:1.4; }
+.pin .halo { stroke:var(--er-orange); stroke-width:1.6; }
+.pin .term { stroke:var(--er-ink); }
+.pin.on .dot, .pin.first .dot { fill:var(--er-orange); stroke:var(--er-orange); }
+.pin.first .halo { stroke:var(--er-orange); }
+.pin.hot .dot, .pin:hover .dot { fill:var(--er-orange-ink); stroke:var(--er-orange-ink); }
+.pin.hot .halo, .pin:hover .halo { stroke:var(--er-orange-ink); }
+.hoverlab { fill:var(--er-ink); stroke:#FFFFFF; }
+.citylab  { fill:var(--er-ink); stroke:#FFFFFF; }
+.placepin .cdisc { fill:var(--er-orange); stroke:var(--er-orange); stroke-width:1.5; }
+.placepin.hot .cdisc, .placepin:hover .cdisc { fill:var(--er-ink-hi); stroke:var(--er-ink-hi); }
+.placepin.hot .citylab, .placepin:hover .citylab { fill:var(--er-ink-hi); }
+.leader { stroke:var(--er-muted); opacity:.6; }
+
+/* ---------------- 4. controls ----------------
+   Quiet outlines in the site's grey ramp; orange only for the state
+   that is actually on, and with the ink on top of it. */
+.ctlbtn, .ctlicon {
+  border:1.5px solid var(--er-line-mid); background:transparent;
+  color:var(--er-ink);
+}
+.ctlbtn:hover, .ctlicon:hover {
+  background:var(--er-line-soft); border-color:var(--er-line-mid);
+  color:var(--er-ink-hi);
+}
+.ctlbtn:focus-visible, .ctlicon:focus-visible {
+  outline:2px solid var(--er-orange-ink); outline-offset:2px;
+}
+.ctlbtn.on, .ctlbtn[aria-expanded="true"], .segbtn.on,
+.segbtn[aria-pressed="true"] {
+  background:var(--er-orange); border-color:var(--er-orange);
+  color:var(--er-ink-hi);
+}
+.ctlicon.dead { color:#CED4DA; border-color:var(--er-line); }
+
+.ctlmenu {
+  background:#FFFFFF; border:1.5px solid var(--er-line);
+  box-shadow:0 14px 30px -16px rgba(52,58,64,.5);
+}
+.ctlmenu button { color:var(--er-ink); }
+.ctlmenu button:hover { background:var(--er-line-soft); color:var(--er-ink-hi); }
+.ctlmenu button[aria-selected="true"] { background:var(--er-orange); color:var(--er-ink-hi); }
+.ctlmenu button[aria-selected="true"]:hover { background:var(--er-orange-ink); color:#FFFFFF; }
+.ctlmenu button[disabled],
+.ctlmenu button[disabled]:hover { background:transparent; color:#CED4DA; }
+
+.backbtn {
+  border:1.5px solid var(--er-line-mid); background:transparent;
+  color:var(--er-ink);
+}
+.backbtn:hover {
+  background:var(--er-orange); border-color:var(--er-orange);
+  color:var(--er-ink-hi);
+}
+.backbtn:focus-visible { outline:2px solid var(--er-orange-ink); outline-offset:2px; }
+
+.btn, .row .startbtn, .row .cut, .dropnote .undo {
+  border:1.5px solid var(--er-line-mid); background:transparent;
+  color:var(--er-ink); border-radius:0; box-shadow:none;
+}
+.btn:hover, .row .startbtn:hover, .dropnote .undo:hover {
+  background:var(--er-orange); border-color:var(--er-orange);
+  color:var(--er-ink-hi);
+}
+.row .cut:hover {
+  background:var(--er-orange-ink); border-color:var(--er-orange-ink);
+  color:#FFFFFF;
+}
+
+/* ---------------- 5. the list ----------------
+   The hover row was a solid inversion. On paper that is a black bar
+   through a white page; the site's own ::selection is #F1F3F5, so the
+   row takes that and a 3px orange rule instead. The colour still
+   marks the row, at a weight where 3.64:1 is allowed. */
+.row, .crow { border-bottom:1px solid var(--er-line-soft); }
+.row { box-shadow:inset 3px 0 0 transparent; }
+.row .n { color:var(--er-orange-ink); }
+.row.first .n { color:var(--er-ink-hi); }
+.row .mins { color:var(--er-muted); }
+.row.hot, .row:hover {
+  background:var(--er-line-soft); color:var(--er-ink-hi);
+  box-shadow:inset 3px 0 0 var(--er-orange);
+}
+.row.hot .nm, .row:hover .nm { color:var(--er-ink-hi); }
+.row.hot .n, .row:hover .n,
+.row.hot.first .n, .row:hover.first .n { color:var(--er-orange-ink); }
+.row.hot .mins, .row:hover .mins { color:var(--er-muted); }
+.row.hot .startbtn, .row:hover .startbtn,
+.row.hot .cut, .row:hover .cut {
+  border-color:var(--er-line-mid); color:var(--er-ink); background:transparent;
+}
+.row.hot .startbtn:hover, .row:hover .startbtn:hover {
+  background:var(--er-orange); border-color:var(--er-orange); color:var(--er-ink-hi);
+}
+.row.hot .cut:hover, .row:hover .cut:hover {
+  background:var(--er-orange-ink); border-color:var(--er-orange-ink); color:#FFFFFF;
+}
+
+.crow.hot, .crow:hover {
+  background:var(--er-line-soft); color:var(--er-ink-hi);
+  box-shadow:inset 3px 0 0 var(--er-orange);
+}
+.crow.hot .cc, .crow:hover .cc { color:var(--er-orange-ink); }
+.crow:focus-visible { outline:2px solid var(--er-orange-ink); outline-offset:-4px; }
+.empty, .leadnote { color:var(--er-muted); }
+.dropnote { color:var(--er-orange-ink); border-bottom-color:var(--er-line-soft); }
+
+/* ---------------- 6. shop windows ---------------- */
+.pop {
+  background:#FFFFFF; border:1.5px solid var(--er-line); border-radius:0;
+  box-shadow:0 2px 0 rgba(52,58,64,.05), 0 26px 46px -20px rgba(52,58,64,.45);
+}
+.pop-bar { border-bottom:1.5px solid var(--er-line); }
+.pop-title { color:var(--er-ink-hi); }
+.pop-close { color:var(--er-muted); }
+.pop-close:hover { color:var(--er-orange-ink); }
+.pop-body { background:#FFFFFF; box-shadow:none; color:var(--er-ink); }
+.spec dt { color:var(--er-muted); }
+.spec dd { color:var(--er-ink); }
+.spec dd.shut { color:var(--er-orange-ink); }
+
+/* ---------------- 7. scrollbars ---------------- */
+html { scrollbar-color:var(--er-line-mid) var(--er-wash); }
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track:vertical { background:var(--er-wash); border-left:0; }
+::-webkit-scrollbar-corner { background:var(--er-wash); }
+::-webkit-scrollbar-thumb {
+  background:var(--er-line-mid); border:0; border-radius:0; box-shadow:none;
+}
+::-webkit-scrollbar-thumb:hover { background:var(--er-orange-ink); }
+::-webkit-scrollbar-button { display:none; }
+
+/* ---------------- 8. type scale ----------------
+   The site sets an 18px root and reads its articles at 1.45rem/1.75.
+   dig was running 10-12px, which is a different publication. Opened up
+   on desktop only — the mobile rules above already sized up, and this
+   sheet is later, so an unscoped rule would shrink them back. */
+@media (min-width:881px) {
+  .row .nm { font-size:14px; letter-spacing:.005em; }
+  .row .n { font-size:12px; }
+  .row .mins { font-size:11px; }
+  .crow .cn { font-size:15px; }
+  .crow .cc { font-size:11px; }
+  .spec { font-size:11.5px; }
+  .spec dt { font-size:9.5px; }
+  .listhead .sec { font-size:11px; }
+  .row { padding:10px 16px; }
+}
+
+/* ---------------- 9. shape ----------------
+   The site's three radii, put back on. Controls at 3px, surfaces at 5px,
+   and the window itself left square because it is the edge of the page
+   rather than an object sitting on it. */
+.btn, .row .startbtn, .row .cut, .dropnote .undo,
+.ctlbtn, .ctlicon, .backbtn, .mag-search {
+  border-radius:var(--er-r-ctl);
+}
+.ctlmenu, .pop, .mapcard { border-radius:var(--er-r-surf); }
+.ctlmenu { overflow:hidden; overflow-y:auto; }
+::-webkit-scrollbar-thumb { border-radius:var(--er-r-ctl); }
+
+/* The pane switcher is mobile-only and was missed entirely by the passes
+   above: a white 1.5px border and white labels, which on paper is an
+   invisible control floating over the map. Same treatment as the filter
+   chips it is a sibling of, plus a shadow, because unlike them it is
+   fixed over the map rather than sitting in the header. */
+@media (max-width:880px) {
+  .seg {
+    border:1.5px solid var(--er-line-mid); border-radius:var(--er-r-ctl);
+    background:#FFFFFF; overflow:hidden;
+    box-shadow:0 6px 20px -8px rgba(52,58,64,.45);
+  }
+  .segbtn { color:var(--er-ink); }
+  .segbtn + .segbtn { border-left:1.5px solid var(--er-line-mid); }
+  .segbtn[aria-pressed="true"] {
+    background:var(--er-orange); color:var(--er-ink-hi);
+  }
+  .segbtn:focus-visible {
+    outline:2px solid var(--er-orange-ink); outline-offset:2px;
+  }
+}
+
+/* ---------------- 10. the arrival sweep ----------------
+   Every page on the site is entered through a panel that sweeps
+   bottom to top, painted the destination's ground. dig was the one
+   page you arrived at with a hard cut. Same geometry, same easing,
+   same 0.45s as .page-overlay in /style.css. */
+.er-sweep {
+  position:fixed; inset:0; z-index:9999; pointer-events:none;
+  transform:translateY(100%); background:var(--er-orange);
+  will-change:transform;
+}
+.er-sweep.armed { transform:translateY(0); }
+.er-sweep.moving { transition:transform .45s cubic-bezier(.65,0,.35,1); }
+.er-sweep.out { transform:translateY(-100%); }
+@media (prefers-reduced-motion: reduce) { .er-sweep { display:none; } }
+</style>
 
 <div class="digwrap" id="digWrap">
 
@@ -1259,7 +1673,7 @@ html { scrollbar-color:#FFFFFF var(--panel2); }
 
       <span class="wordwrap city">
         <span class="word" id="wCity">&mdash;</span>
-        <span class="valueline">RECORD STORES IN JAPAN</span>
+        <span class="valueline">Record stores in Japan</span>
       </span>
     </div>
   </div>
@@ -1267,7 +1681,7 @@ html { scrollbar-color:#FFFFFF var(--panel2); }
   <div class="mag-foot">
 
     <button class="mag-search" id="digGo" type="button">
-      <span class="go">START</span>
+      <span class="go">Start</span>
     </button>
   </div>
 </div>
@@ -2613,12 +3027,15 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
 
     var secs = Math.min(14, Math.max(3.5, len / RUN_PX_PER_SEC));
 
-    var mark = el("path", { "class": "runner", d: "M-10 -10 L0 0 L-10 10" });
-    var mo = document.createElementNS(SVGNS, "animateMotion");
+    var SPECK = 16;
+    var mark = el("path", { "class": "runner", d: d });
+    mark.setAttribute("stroke-dasharray", SPECK + " " + Math.max(1, len - SPECK).toFixed(1));
+    var mo = document.createElementNS(SVGNS, "animate");
+    mo.setAttribute("attributeName", "stroke-dashoffset");
+    mo.setAttribute("from", "0");
+    mo.setAttribute("to", (-len).toFixed(1));
     mo.setAttribute("dur", secs.toFixed(2) + "s");
     mo.setAttribute("repeatCount", "indefinite");
-    mo.setAttribute("rotate", "auto");
-    mo.setAttribute("path", d);
     mark.appendChild(mo);
     g.appendChild(mark);
   }
@@ -3677,5 +4094,29 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
 })();
 </script>
 
+<script>
+/* PAPER MODE — the one bit of the site that is DOM rather than CSS:
+   the panel you arrive through. Purely additive; it appends a single
+   element and touches nothing the app already owns. */
+(function () {
+  "use strict";
+
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  /* Same panel, easing and duration as .page-overlay in /style.css,
+     painted the cover's orange because that is the ground it uncovers. */
+  var sweep = document.createElement("div");
+  sweep.className = "er-sweep armed";
+  document.body.appendChild(sweep);
+
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      sweep.classList.add("moving");
+      sweep.classList.remove("armed");
+      sweep.classList.add("out");
+    });
+  });
+})();
+</script>
 </body>
 </html>
