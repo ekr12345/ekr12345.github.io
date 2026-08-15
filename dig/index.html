@@ -1380,8 +1380,8 @@ html, body { background:#FFFFFF; }
    The block itself stays at left:22px; only the pair is centred. */
 .wordwrap.city { align-items:center; }
 
-/* START: outlined white, pulsing to solid. Same two-state button the
-   home page's nav has, just with a border because it is a button. */
+/* The destination action is solid and the location shortcut is outlined,
+   so the planning path remains primary for visitors outside Japan. */
 .mag-search {
   background:transparent; color:#FFFFFF;
   border:2.35px solid #FFFFFF; border-radius:0;
@@ -1395,6 +1395,37 @@ html, body { background:#FFFFFF; }
    A word in sentence case is read by its silhouette; spacing the
    letters apart is what you do when there is no silhouette left. */
 .mag-search .go { letter-spacing:.02em; }
+.mag-actions {
+  display:flex; align-items:stretch; justify-content:flex-end; gap:12px;
+}
+.mag-primary {
+  background:#FFFFFF; color:var(--er-ink-hi); animation:none;
+  font-size:clamp(14px,2.1vh,19px);
+}
+.mag-primary:hover, .mag-primary:focus-visible {
+  background:var(--er-ink-hi); border-color:var(--er-ink-hi); color:#FFFFFF;
+}
+.mag-secondary {
+  border-color:#FFFFFF; color:#FFFFFF; animation:none;
+  font-size:clamp(14px,2.1vh,19px);
+}
+.mag-secondary:hover, .mag-secondary:focus-visible {
+  background:#FFFFFF; border-color:#FFFFFF; color:var(--er-ink-hi);
+}
+.mag-secondary:active {
+  background:var(--er-ink-hi); border-color:var(--er-ink-hi); color:#FFFFFF;
+}
+.mag-search:disabled { cursor:wait; opacity:.62; animation:none; }
+.geo-status {
+  max-width:620px; margin:0 0 10px; color:var(--er-ink-hi);
+  font-size:13px; font-weight:700; line-height:1.45; text-align:right;
+}
+@media (max-width:720px) {
+  .mag-foot { align-items:stretch; }
+  .mag-actions { flex-direction:column; align-items:stretch; }
+  .mag-search { width:100%; text-align:center; }
+  .geo-status { text-align:left; }
+}
 @keyframes searchfill {
   0%,  20%  { background-color:rgba(255,255,255,0); }
   22%, 40%  { background-color:rgba(255,255,255,1); }
@@ -1439,6 +1470,53 @@ html, body { background:#FFFFFF; }
 .listhead { background:transparent; border-bottom:1.5px solid var(--er-line); }
 .listhead .sec { color:var(--er-muted); }
 .mapcell { border-right:0; }
+
+.shop-search {
+  flex:1 1 320px; max-width:470px; min-width:240px; margin-left:auto;
+  display:grid; grid-template-columns:minmax(0,1fr) auto auto; align-items:stretch;
+  min-height:34px; border:1.5px solid var(--er-line-mid);
+  border-radius:var(--er-r-ctl); background:#FFFFFF; overflow:hidden;
+}
+.shop-search:focus-within {
+  border-color:var(--er-orange-ink);
+  box-shadow:0 0 0 1px var(--er-orange-ink);
+}
+.shop-search input {
+  min-width:0; width:100%; border:0; outline:0; background:transparent;
+  padding:7px 10px; color:var(--er-ink-hi); font:inherit; font-size:12px;
+}
+.shop-search input::placeholder { color:var(--er-muted); opacity:1; }
+.shop-search input::-webkit-search-cancel-button { display:none; }
+.search-clear {
+  width:32px; border:0; background:transparent; color:var(--er-muted);
+  cursor:pointer; font:inherit; font-size:18px; line-height:1;
+}
+.search-clear:hover { background:var(--er-line-soft); color:var(--er-orange-ink); }
+.search-clear:focus-visible { outline:2px solid var(--er-orange-ink); outline-offset:-3px; }
+.search-count {
+  display:flex; align-items:center; padding:0 10px;
+  border-left:1px solid var(--er-line); color:var(--er-muted);
+  font-size:10px; font-weight:700; white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+}
+.row .nm.search-match {
+  display:flex; flex-direction:column; align-items:flex-start; gap:2px;
+  white-space:normal;
+}
+.shopname { max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.shoparea {
+  max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  color:var(--er-muted); font-size:10px; font-weight:500;
+}
+.row.hot .shoparea, .row:hover .shoparea { color:var(--er-muted); }
+
+@media (max-width:880px) {
+  .shop-search {
+    order:2; flex:1 0 100%; width:100%; max-width:none; min-width:0; margin-left:0;
+  }
+  .shop-search input { font-size:16px; }
+  .search-count { padding:0 8px; }
+}
 
 /* ---------------- 3. the map, drawn with the home page's pen ----------------
    The home page is a technical line drawing: 2.35px, no fills, round
@@ -1744,10 +1822,15 @@ html { scrollbar-color:var(--er-line-mid) var(--er-wash); }
   </div>
 
   <div class="mag-foot">
-
-    <button class="mag-search" id="digGo" type="button">
-      <span class="go">Start</span>
-    </button>
+    <p class="geo-status" id="geoStatus" role="status" aria-live="polite" hidden></p>
+    <div class="mag-actions">
+      <button class="mag-search mag-primary" id="digChoose" type="button">
+        <span class="go">Choose a destination</span>
+      </button>
+      <button class="mag-search mag-secondary" id="nearMe" type="button">
+        <span class="go">Use my location</span>
+      </button>
+    </div>
   </div>
 </div>
 
@@ -1790,6 +1873,17 @@ html { scrollbar-color:var(--er-line-mid) var(--er-wash); }
           <button class="segbtn" type="button" data-pane="list"
                   aria-pressed="false">List</button>
         </div>
+      </div>
+
+      <div class="shop-search" role="search">
+        <input id="shopSearch" type="search"
+               placeholder="Search shop or neighborhood"
+               aria-label="Search shops, neighborhoods, prefectures, or addresses"
+               aria-describedby="searchCount" autocomplete="off" spellcheck="false">
+        <button class="search-clear" id="clearSearch" type="button"
+                aria-label="Clear search" hidden>&times;</button>
+        <span class="search-count" id="searchCount" role="status"
+              aria-live="polite" aria-atomic="true"></span>
       </div>
 
     </div>
@@ -2781,7 +2875,32 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
 
   var GENS = {};
 
+  var SEARCH = "";
+  var SEARCH_RAW = "";
+
+  function normalizeSearch(v) {
+    v = String(v || "").trim().toLocaleLowerCase();
+    return v.normalize ? v.normalize("NFKC") : v;
+  }
+
+  function searchText(s) {
+    if (s._searchText) return s._searchText;
+    s._searchText = normalizeSearch([
+      s.n, s.nja, s.a, s.c, s.adr, (s.g || []).join(" ")
+    ].join(" "));
+    return s._searchText;
+  }
+
+  function inSearch(s) {
+    if (!SEARCH) return true;
+    var text = searchText(s);
+    return SEARCH.split(/\s+/).every(function (word) {
+      return text.indexOf(word) > -1;
+    });
+  }
+
   var CUT = {};
+  var EDIT_SCOPE = null;
   var PIN = null;
 
   var hot = null;
@@ -2816,7 +2935,9 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
 
   var PLACE = null;
   function inPlace(s) { return !PLACE || s.c === PLACE; }
-  function keep(s) { return inPlace(s) && inDay(s) && inGenre(s) && !CUT[s.ix]; }
+  function keep(s) {
+    return (SEARCH || inPlace(s)) && inSearch(s) && inDay(s) && inGenre(s) && !CUT[s.ix];
+  }
 
   function inGenre(s) {
     if (!genCount()) return true;
@@ -3307,12 +3428,14 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
 
     var here = inView();
 
-    var source = locked || here.map(function (v) { return v.s; });
+    var source = SEARCH ? PLACED : (locked || EDIT_SCOPE || here.map(function (v) { return v.s; }));
     var pool = source.filter(keep);
+
+    paintSearch(pool.length);
 
     if (areaMode(pool.length)) { renderAreaView(); return; }
 
-    var routable = pool.length >= 2;
+    var routable = pool.length >= 2 && (!SEARCH || pool.length <= ROUTE_MAX);
     var R = routable ? solveRoute(pool) : null;
 
     var inPool = {};
@@ -3356,7 +3479,9 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
       }).map(function (s) { return row(s, "·", "", false, false); });
 
       html = '<p class="leadnote">' +
-        (pool.length ? "A WALK NEEDS TWO STOPS." : "NOTHING TO WALK HERE.") +
+        (SEARCH && pool.length > ROUTE_MAX
+          ? "NARROW YOUR SEARCH TO BUILD A WALK."
+          : pool.length ? "A WALK NEEDS TWO STOPS." : "NOTHING TO WALK HERE.") +
         "</p>" + rows.join("");
     }
 
@@ -3380,7 +3505,10 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
   function row(s, n, mins, first, canStart) {
     return '<div class="row' + (first ? " first" : "") + '" data-ix="' + s.ix + '">' +
       '<span class="n">' + n + "</span>" +
-      '<button class="nm" type="button">' + esc(s.n) + "</button>" +
+      '<button class="nm' + (SEARCH ? " search-match" : "") + '" type="button">' +
+        '<span class="shopname">' + esc(s.n) + "</span>" +
+        (SEARCH ? '<span class="shoparea">' + esc([s.a, s.c].filter(Boolean).join(" \u00B7 ")) + "</span>" : "") +
+      "</button>" +
       '<div class="act">' +
         (canStart
           ? '<button class="startbtn" type="button" data-start="' + s.ix + '">START</button>'
@@ -3732,7 +3860,9 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
   var openMenu = null;
 
   function inPrefecture() {
-    return PLACED.filter(function (s) { return s.c === PLACE; });
+    if (SEARCH) return PLACED.filter(inSearch);
+    if (PLACE) return PLACED.filter(function (s) { return s.c === PLACE; });
+    return locked || PLACED;
   }
 
   function genreRows() {
@@ -3774,7 +3904,7 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
     if (!gb || !db) return;
 
     if (pb) {
-      pb.textContent = PLACE ? PLACE : "\u2014";
+      pb.textContent = SEARCH ? "All Japan" : (PLACE ? PLACE : (lockedName || "\u2014"));
       pb.setAttribute("aria-label", "Prefecture: " + pb.textContent);
     }
 
@@ -3823,9 +3953,9 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
 
       paintFilters();
 
-      PIN = null; CUT = {}; hot = null;
+      PIN = null; CUT = {}; EDIT_SCOPE = null; hot = null;
       rebuild();
-      var t = PLACE ? cityFit(PLACE, 40) : null;
+      var t = searchTarget();
       if (t) { animateTo(t, 260); } else { render(); }
     };
   }
@@ -3848,7 +3978,11 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
       toggle("ctlPlaceBtn", "ctlPlaceMenu", function build() {
         fillMenu("ctlPlaceMenu", placeRows(),
           function (v) { return v === PLACE; },
-          function (v) { if (v && v !== PLACE) jump("city:" + v); },
+          function (v) {
+            if (!v) return;
+            clearShopSearch(false);
+            jump("city:" + v);
+          },
           build, true);
       }));
 
@@ -3934,6 +4068,99 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
   window.addEventListener("resize", fitWords);
   window.addEventListener("orientationchange", fitWords);
 
+  function enterDig(after) {
+    var wrap = $("digWrap"), win = document.querySelector(".win");
+
+    if (REDUCE || !win) {
+      wrap.hidden = true;
+      if (after) requestAnimationFrame(after);
+      return;
+    }
+
+    win.classList.add("arriving");
+    wrap.classList.add("leaving");
+    setTimeout(function () {
+      wrap.hidden = true;
+      wrap.classList.remove("leaving");
+      win.classList.remove("arriving");
+      if (after) after();
+    }, 700);
+  }
+
+  function paintSearch(count) {
+    var input = $("shopSearch"), clear = $("clearSearch"), out = $("searchCount");
+    if (!input || !clear || !out) return;
+    clear.hidden = !SEARCH_RAW;
+    if (SEARCH_RAW && !SEARCH) {
+      out.textContent = "Type 1 more";
+    } else {
+      out.textContent = count + (count === 1 ? " shop" : " shops");
+    }
+  }
+
+  function searchTarget() {
+    if (SEARCH) return fitTarget(PLACED.filter(keep), 60);
+    if (locked) return fitTarget(locked.filter(keep), 60);
+    return PLACE ? cityFit(PLACE, 40) : null;
+  }
+
+  function editSource() {
+    if (SEARCH) return PLACED;
+    if (locked) return locked;
+    if (!EDIT_SCOPE) {
+      EDIT_SCOPE = inView().map(function (v) { return v.s; });
+    }
+    return EDIT_SCOPE;
+  }
+
+  function refitAfterEdit() {
+    var remaining = editSource().filter(keep);
+    var t = fitTarget(remaining, narrow() ? 40 : 60);
+    if (!t) { render(); return; }
+
+    var mapHidden = document.querySelector(".body").classList.contains("listview");
+    animateTo(t, mapHidden ? 0 : 260);
+  }
+
+  function applyShopSearch(value, move) {
+    SEARCH_RAW = normalizeSearch(value);
+    SEARCH = SEARCH_RAW.length >= 2 ? SEARCH_RAW : "";
+    PIN = null;
+    CUT = {};
+    EDIT_SCOPE = null;
+    hot = null;
+    shutCtl();
+
+    var t = searchTarget();
+    if (move && t) animateTo(t, 220);
+    else render();
+  }
+
+  function clearShopSearch(move) {
+    var input = $("shopSearch");
+    if (input) input.value = "";
+    applyShopSearch("", move !== false);
+  }
+
+  (function wireSearch() {
+    var input = $("shopSearch"), clear = $("clearSearch"), timer = 0;
+    input.addEventListener("input", function () {
+      clearTimeout(timer);
+      var value = input.value;
+      timer = setTimeout(function () { applyShopSearch(value, true); }, 120);
+    });
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && input.value) {
+        e.preventDefault();
+        clearShopSearch(true);
+      }
+    });
+    clear.addEventListener("click", function () {
+      clearShopSearch(true);
+      input.focus();
+    });
+  })();
+
   (function digPanel() {
 
     $("wCity").innerHTML = String(PLACED.length).replace(
@@ -3976,25 +4203,98 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
 
     var LANDING = CITY_BY_NAME["Tokyo"] ? "Tokyo" : (CITIES[0] && CITIES[0].c);
 
-    $("digGo").setAttribute("aria-label",
-      "Start: " + PLACED.length + " record stores in Japan. Opens in " + LANDING + ".");
+    $("digChoose").setAttribute("aria-label",
+      "Choose a destination from " + PLACED.length + " record stores in Japan");
 
-    $("digGo").addEventListener("click", function () {
-
+    $("digChoose").addEventListener("click", function () {
       GENS = {};
       DAYSET = {};
+      clearShopSearch(false);
       if (LANDING) jump("city:" + LANDING, 0);
+      enterDig(function () {
+        $("ctlPlaceBtn").focus();
+        $("ctlPlaceBtn").click();
+      });
+    });
 
-      var wrap = $("digWrap"), win = document.querySelector(".win");
-      if (REDUCE || !win) { wrap.hidden = true; return; }
+    $("nearMe").addEventListener("click", function () {
+      var button = $("nearMe"), status = $("geoStatus");
 
-      win.classList.add("arriving");
-      wrap.classList.add("leaving");
-      setTimeout(function () {
-        wrap.hidden = true;
-        wrap.classList.remove("leaving");
-        win.classList.remove("arriving");
-      }, 700);
+      function ready() {
+        button.disabled = false;
+        button.removeAttribute("aria-busy");
+        button.querySelector(".go").textContent = "Use my location";
+      }
+
+      function say(message) {
+        status.textContent = message;
+        status.hidden = false;
+      }
+
+      if (!navigator.geolocation) {
+        say("Location is not available in this browser. Choose a destination instead.");
+        $("digChoose").focus();
+        return;
+      }
+
+      status.hidden = true;
+      button.disabled = true;
+      button.setAttribute("aria-busy", "true");
+      button.querySelector(".go").textContent = "Finding you\u2026";
+
+      navigator.geolocation.getCurrentPosition(function (position) {
+        var here = [position.coords.latitude, position.coords.longitude];
+        var nearest = PLACED.slice().sort(function (a, b) {
+          return kmBetween(here, [a.lat, a.lng]) - kmBetween(here, [b.lat, b.lng]);
+        }).slice(0, 12);
+
+        if (!nearest.length) {
+          ready();
+          say("No located shops are available right now. Choose a destination instead.");
+          $("digChoose").focus();
+          return;
+        }
+
+        var nearestKm = kmBetween(here, [nearest[0].lat, nearest[0].lng]);
+        if (nearestKm > 150) {
+          ready();
+          say("You appear to be outside Japan. Choose a destination to plan your trip.");
+          $("digChoose").focus();
+          return;
+        }
+
+        GENS = {};
+        DAYSET = {};
+        clearShopSearch(false);
+        CUT = {};
+        EDIT_SCOPE = null;
+        PLACE = null;
+        wantAreas = false;
+        hot = null;
+        locked = nearest;
+        lockedName = "Near you";
+        placeName = "NEAR YOU";
+        PIN = nearest[0].ix;
+
+        measure();
+        animateTo(fitTarget(nearest, 60), 0);
+        ready();
+        enterDig();
+      }, function (error) {
+        ready();
+        if (error.code === error.PERMISSION_DENIED) {
+          say("Location access was blocked. Choose a destination instead.");
+        } else if (error.code === error.TIMEOUT) {
+          say("Finding your location took too long. Try again or choose a destination.");
+        } else {
+          say("We could not find your location. Choose a destination instead.");
+        }
+        $("digChoose").focus();
+      }, {
+        enableHighAccuracy:false,
+        timeout:8000,
+        maximumAge:300000
+      });
     });
 
     if ($("digBack")) $("digBack").addEventListener("click", function () {
@@ -4025,6 +4325,7 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
     PIN = null;
     hot = null;
     CUT = {};
+    EDIT_SCOPE = null;
 
     locked = null;
     lockedName = "";
@@ -4042,6 +4343,7 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
     hot = null;
     hotArea = null;
     CUT = {};
+    EDIT_SCOPE = null;
     animateTo(fitTarget(a.shops, 60), 300);
   }
 
@@ -4058,14 +4360,19 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
 
     var cb = e.target.closest("button[data-cut]");
     if (cb) {
+      editSource();
       var cix = +cb.dataset.cut;
       CUT[cix] = 1;
       if (PIN === cix) PIN = null;
 
-      render();
+      refitAfterEdit();
       return;
     }
-    if (e.target.closest("#undoCut")) { CUT = {}; render(); return; }
+    if (e.target.closest("#undoCut")) {
+      CUT = {};
+      refitAfterEdit();
+      return;
+    }
 
     var sb = e.target.closest("button[data-start]");
     if (sb) {
@@ -4131,8 +4438,8 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
     reflowT = setTimeout(function () {
       if (measure()) {
 
-        if (PLACE) {
-          var t = cityFit(PLACE, 40);
+        if (SEARCH || PLACE || locked) {
+          var t = searchTarget();
           if (t) { view.lat = t.lat; view.lng = t.lng; view.z = clampZ(t.z); }
         }
         render();
