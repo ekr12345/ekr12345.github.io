@@ -1793,7 +1793,178 @@ html { scrollbar-color:var(--er-line-mid) var(--er-wash); }
   #mapsLink { flex:none; }
 }
 
-/* ---------------- 11. the arrival sweep ----------------
+/* ---------------- 11. list-first directory ----------------
+   The map remains in the document as dormant route-planning machinery, but
+   discovery now starts with the information people can actually scan: every
+   shop in the selected prefecture, grouped by neighborhood. */
+.results-intro {
+  position:relative; z-index:30;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  width:100%; max-width:1120px; margin:0 auto; box-sizing:border-box;
+  padding:12px 16px; border-bottom:1px solid var(--er-line-soft);
+  border-left:1px solid var(--er-line-soft);
+  border-right:1px solid var(--er-line-soft);
+}
+.desk .results-title {
+  margin:0; color:var(--er-orange); font-family:"Dreamcast", sans-serif;
+  font-size:41.4px; font-weight:400; line-height:1.2; letter-spacing:.03em;
+}
+.results-place { display:inline-block; }
+.results-intro .place { padding-right:0; flex-wrap:wrap; gap:18px; }
+.results-place-btn {
+  position:relative; display:block; min-height:0; padding:0 0 3px;
+  border:0; background:transparent; color:var(--er-orange); cursor:pointer;
+  text-align:left;
+}
+.results-place-btn::after {
+  content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
+  background:currentColor; opacity:.3; transform:scaleX(.32);
+  transform-origin:left center; transition:transform .18s ease, opacity .18s ease;
+}
+.results-place-btn:hover,
+.results-place-btn[aria-expanded="true"] { color:var(--er-orange-ink); }
+.results-place-btn:hover::after,
+.results-place-btn[aria-expanded="true"]::after {
+  opacity:1; transform:scaleX(1);
+}
+@keyframes prefecture-cue {
+  0%, 100% { opacity:.3; transform:scaleX(.32); }
+  38%, 68% { opacity:1; transform:scaleX(1); }
+}
+.results-place-btn.prefecture-cue::after {
+  animation:prefecture-cue 1.5s cubic-bezier(.65,0,.35,1) .75s both;
+}
+.results-place-btn:focus-visible {
+  outline:2px solid var(--er-orange-ink); outline-offset:5px;
+}
+.results-intro #ctlGenreBtn,
+.results-intro #ctlDayBtn {
+  position:relative; display:block; min-width:0; min-height:0;
+  padding:0 0 3px; border:0; background:transparent;
+  background-image:none; color:var(--er-orange);
+  font-family:"Dreamcast", sans-serif; font-size:21px; font-weight:400;
+  line-height:1.2; letter-spacing:.03em; text-align:left;
+}
+.results-intro #ctlGenreBtn::after,
+.results-intro #ctlDayBtn::after {
+  content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
+  background:currentColor; opacity:.3; transform:scaleX(.32);
+  transform-origin:left center; transition:transform .18s ease, opacity .18s ease;
+}
+.results-intro #ctlGenreBtn:hover,
+.results-intro #ctlDayBtn:hover,
+.results-intro #ctlGenreBtn[aria-expanded="true"],
+.results-intro #ctlDayBtn[aria-expanded="true"] {
+  border:0; background:transparent; background-image:none;
+  color:var(--er-orange-ink);
+}
+.results-intro #ctlGenreBtn:hover::after,
+.results-intro #ctlDayBtn:hover::after,
+.results-intro #ctlGenreBtn[aria-expanded="true"]::after,
+.results-intro #ctlDayBtn[aria-expanded="true"]::after {
+  opacity:1; transform:scaleX(1);
+}
+.results-place #ctlPlaceMenu { top:calc(100% + 10px); min-width:240px; }
+.results-intro .shop-search {
+  flex:1 1 260px; max-width:360px; min-width:200px; min-height:34px;
+  margin-left:auto; border:0; border-bottom:1px solid var(--er-line-mid);
+  border-radius:0; background:transparent; overflow:visible;
+}
+.results-intro .shop-search:focus-within {
+  border-color:var(--er-orange); box-shadow:none;
+}
+.results-intro .shop-search input {
+  padding:6px 2px; font-family:var(--text); font-size:16px; line-height:1.35;
+}
+.results-intro .shop-search input::placeholder {
+  color:var(--er-muted); opacity:1;
+}
+.directory-view {
+  display:block; overflow:hidden;
+}
+.directory-view .mapcell,
+#paneSeg,
+#mapsLink { display:none !important; }
+.directory-view .listcell {
+  display:flex !important; width:100%; max-width:1120px; height:100%;
+  margin:0 auto; border-left:1px solid var(--er-line-soft);
+  border-right:1px solid var(--er-line-soft);
+}
+.headrow {
+  width:100%; max-width:1120px; margin:0 auto; box-sizing:border-box;
+  border-left:1px solid var(--er-line-soft);
+  border-right:1px solid var(--er-line-soft);
+}
+.directory-view #rows {
+  flex:1; max-height:none; overflow-y:auto; scrollbar-width:thin;
+  -webkit-mask-image:none; mask-image:none;
+}
+.directory-view #rows::-webkit-scrollbar { width:8px; }
+.directory-view #rows::-webkit-scrollbar-thumb { background:var(--er-line-mid); }
+.directory-view .listhead { display:none; }
+.directory-view .listhead .sec {
+  color:var(--er-muted); font-size:9px; letter-spacing:.16em;
+}
+.area-heading {
+  position:sticky; top:0; z-index:2;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:20px 18px 9px; border-bottom:1px solid var(--er-line);
+  background:#FFFFFF; color:var(--er-ink-hi);
+}
+.area-heading > span:first-child {
+  font-family:"Dreamcast", sans-serif; font-size:26px; font-weight:400;
+  line-height:1.2; letter-spacing:.03em;
+}
+.area-count {
+  color:var(--er-muted); font-family:var(--text); font-size:10px;
+  font-weight:700; letter-spacing:.03em; white-space:nowrap;
+}
+.directory-row {
+  display:block; min-height:54px; height:auto; padding:0;
+}
+.directory-row .nm {
+  display:block; width:100%; padding:11px 18px;
+  white-space:normal; text-align:left;
+}
+.directory-row .shopname {
+  font-family:"Nunito", "Spoqa Han Sans", "Apple SD Gothic Neo", sans-serif;
+  font-size:18px; font-weight:400; line-height:1.4;
+}
+.directory-row:focus-within { box-shadow:inset 3px 0 0 var(--er-orange); }
+.shop-search #searchCount {
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+}
+
+@media (max-width:880px) {
+  .results-intro { padding:17px 12px 12px; }
+  .results-intro .place { gap:12px; }
+  .results-intro .shop-search {
+    flex:1 0 100%; width:100%; max-width:none; min-width:0; margin-left:0;
+  }
+  .directory-row .shopname {
+    display:block; overflow:visible; text-overflow:clip; white-space:normal;
+    overflow-wrap:anywhere; line-height:1.35;
+  }
+  .pop.sheet .pop-bar { align-items:flex-start; }
+  .pop.sheet .pop-title {
+    flex:1; min-width:0; overflow:visible; text-overflow:clip;
+    white-space:normal; overflow-wrap:anywhere; line-height:1.35;
+  }
+  .directory-view .listcell { border:0; padding-bottom:0; }
+  .directory-view #rows { max-height:none; }
+  .directory-row {
+    display:block; min-height:52px; padding:0;
+  }
+  .directory-row .nm { padding:11px 12px; }
+  .area-heading { padding:18px 12px 9px; }
+}
+
+@media (max-width:520px) {
+  .results-intro { align-items:flex-start; flex-direction:column; gap:7px; }
+}
+
+/* ---------------- 12. the arrival sweep ----------------
    Every page on the site is entered through a panel that sweeps
    bottom to top, painted the destination's ground. dig was the one
    page you arrived at with a hard cut. Same geometry, same easing,
@@ -1839,19 +2010,20 @@ html { scrollbar-color:var(--er-line-mid) var(--er-wash); }
   <div class="win">
 
     <div class="wintop">
-    <div class="headrow">
+    <div class="headrow results-intro">
       <div class="place">
 
         <button class="backbtn" id="digBack" type="button"
                 aria-label="Back to the search"><svg viewBox="0 0 16 16"
                 aria-hidden="true" focusable="false"><path d="M10 2.5 4.5 8 10 13.5"/></svg></button>
 
-        <div class="ctl" id="ctlPlace">
-          <button class="ctlbtn on" id="ctlPlaceBtn" type="button"
+        <div class="ctl results-place" id="ctlPlace">
+          <button class="results-title results-place-btn prefecture-cue" id="ctlPlaceBtn" type="button"
                   aria-haspopup="listbox" aria-expanded="false">Tokyo</button>
           <div class="ctlmenu" id="ctlPlaceMenu" role="listbox"
                aria-label="Prefecture" hidden></div>
         </div>
+
         <div class="ctl" id="ctlGenre">
           <button class="ctlbtn" id="ctlGenreBtn" type="button"
                   aria-haspopup="listbox" aria-expanded="false">Anything</button>
@@ -1865,9 +2037,9 @@ html { scrollbar-color:var(--er-line-mid) var(--er-wash); }
                aria-label="Day" hidden></div>
         </div>
 
-        <a id="mapsLink" class="ctlicon" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M1 3.6 5.5 1.8 10.5 3.8 15 2v10.4l-4.5 1.8-5-2L1 14z"/><path d="M5.5 1.8v10.4"/><path d="M10.5 3.8v10.4"/></svg></a>
+        <a id="mapsLink" class="ctlicon" target="_blank" rel="noopener" hidden><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M1 3.6 5.5 1.8 10.5 3.8 15 2v10.4l-4.5 1.8-5-2L1 14z"/><path d="M5.5 1.8v10.4"/><path d="M10.5 3.8v10.4"/></svg></a>
 
-        <div class="seg" id="paneSeg" role="group" aria-label="Which pane to show">
+        <div class="seg" id="paneSeg" role="group" aria-label="Which pane to show" hidden>
           <button class="segbtn" type="button" data-pane="map"
                   aria-pressed="true">Map</button>
           <button class="segbtn" type="button" data-pane="list"
@@ -1877,7 +2049,7 @@ html { scrollbar-color:var(--er-line-mid) var(--er-wash); }
 
       <div class="shop-search" role="search">
         <input id="shopSearch" type="search"
-               placeholder="Search shop or neighborhood"
+               placeholder="Search"
                aria-label="Search shops, neighborhoods, prefectures, or addresses"
                aria-describedby="searchCount" autocomplete="off" spellcheck="false">
         <button class="search-clear" id="clearSearch" type="button"
@@ -1890,8 +2062,8 @@ html { scrollbar-color:var(--er-line-mid) var(--er-wash); }
 
     </div>
 
-    <div class="body">
-      <div class="mapcell">
+    <div class="body directory-view">
+      <div class="mapcell" aria-hidden="true">
         <div class="mapcard">
           <svg id="map" role="img" aria-label="Map of every record shop in the set">
             <g id="pan">
@@ -1908,8 +2080,8 @@ html { scrollbar-color:var(--er-line-mid) var(--er-wash); }
       </div>
 
       <div class="listcell">
-        <div class="listhead">
-          <span class="sec" id="listSec">THE WALK, IN ORDER</span>
+        <div class="listhead" hidden>
+          <span class="sec" id="listSec">SHOPS BY AREA</span>
           <div class="acts">
 
             <button class="btn tight" id="resetStart" type="button" hidden>⟲ SHORTEST ORDER</button>
@@ -1994,7 +2166,6 @@ var SHOPS = [{"s": "Atsushi Wakaizumi's Asagaya shop, built on the idea of sound
 {"n": "THE STAND", "nja": "", "slug": "the-stand", "a": "Chiyoda", "c": "Tokyo", "lat": 35.674772, "lng": 139.762812, "adr": "Under the JR East Yurakucho Station overpass, Ecute Edition Yurakucho, 2-9-1 Yurakucho, Chiyoda-ku, Tokyo", "h": "", "cl": "", "g": [], "inv": null, "tel": "", "ig": "https://www.instagram.com/stand.tokyo", "w": "https://classic-inc.jp/stand", "tw": "", "new": null, "used": null, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
 {"n": "USED Records Orient", "nja": "オリエント", "slug": "used-record-orient", "a": "Chiyoda", "c": "Tokyo", "lat": 35.6941364, "lng": 139.7649722, "adr": "Nichibei-shokai Building 3F, 2-1 Kanda Ogawamachi, Chiyoda-ku, Tokyo", "h": "14:00 - 20:00", "cl": "", "g": [], "inv": null, "tel": "", "ig": "", "w": "", "tw": "", "new": null, "used": null, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
 {"n": "RECORD CONVENI", "nja": "レコードコンビニ", "slug": "record-conveni", "a": "Chuo", "c": "Tokyo", "lat": 35.686919, "lng": 139.790386, "adr": "2-55-5-104 Nihonbashi Hamacho, Chuo-ku, Tokyo", "h": "Closed on Sundays and Holidays", "cl": "", "g": ["Rock & Oldies", "Rock & Indie", "Hard Rock & Metal", "Punk", "Soul", "Latin & Brazilian", "Club & Dance", "Japanese Indie"], "inv": null, "tel": "", "ig": "https://www.instagram.com/record_conveni", "w": "https://www.youtube.com/channel/UCNIonAYkfLzLIqk5-YL-IYQ", "tw": "https://twitter.com/RECORD.CONVENI", "new": null, "used": true, "v": "", "s": "A convenience store that sells used records.There is a record inside the convenience store, and it is a different space.Holidays", "src": "recoya", "osm": "", "dOK": true, "lOK": true},
-{"n": "Shermann Artworks", "nja": "シェルマンアートワークス", "slug": "shellman", "a": "Chuo", "c": "Tokyo", "lat": 35.6706199, "lng": 139.769828, "adr": "3-14-16 Ginza, Chuo-ku, Tokyo", "h": "", "cl": "", "g": ["Classical", "Jazz"], "inv": null, "tel": "", "ig": "https://www.instagram.com/shellman_aw78rpm", "w": "https://www.shellman-aw.co.jp", "tw": "https://twitter.com/shellman_aw78?s=20", "new": null, "used": true, "v": "", "s": "Specialty store for phonographs and SP records", "src": "recoya", "osm": "", "dOK": true, "lOK": true},
 {"n": "Ame to Kyujitsu", "nja": "", "slug": "ametokyujitsu", "a": "Hachioji", "c": "Tokyo", "lat": 35.63717145140338, "lng": 139.3554616490729, "adr": "777 Uchikoshi-machi, Hachioji City, Tokyo 192-0911, Japan.", "h": "Closed on irregular days – please check their Instagram for updates.", "cl": "", "g": ["Jazz", "Folk"], "inv": null, "tel": "", "ig": "https://www.instagram.com/ametokyujitsu", "w": "https://shop.ameto.biz", "tw": "https://twitter.com/ametokyujitsu", "new": true, "used": null, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
 {"n": "SHeLTeR", "nja": "", "slug": "shelter", "a": "Hachioji", "c": "Tokyo", "lat": 35.659261, "lng": 139.333212, "adr": "1-1 Yokamachi, Hachioji City, Tokyo, Japan.", "h": "", "cl": "", "g": [], "inv": null, "tel": "", "ig": "https://www.instagram.com/shelter_japan", "w": "https://www.at-shelter.com", "tw": "", "new": null, "used": null, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
 {"n": "COCONUTSDISK IKEBUKURO", "nja": "", "slug": "coconutsdisk-ikebukuro", "a": "Toshima", "c": "Tokyo", "lat": 35.7350717, "lng": 139.7038086, "adr": "Ikeda Building 1F, 3-22-7 Ikebukuro, Toshima-ku, Tokyo", "h": "12:00 - 21:00", "cl": "", "g": [], "inv": null, "tel": "", "ig": "https://www.instagram.com/https://www.instagram.com/c_c_n_d_ikb/?hl=ja", "w": "http://coconutsdisk.com/ikebukuro", "tw": "https://twitter.com/ https://x.com/C_C_N_D_IKB?s=20", "new": null, "used": true, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
@@ -2022,7 +2193,6 @@ var SHOPS = [{"s": "Atsushi Wakaizumi's Asagaya shop, built on the idea of sound
 {"n": "Kokubunji Tyouyamadadou", "nja": "国分寺超山田堂", "slug": "cho-yamada-do", "a": "Kokubunji", "c": "Tokyo", "lat": 35.70392712, "lng": 139.4815528, "adr": "Takara Building 201, 1-5-4 honda, Kokubunji, Tokyo", "h": "15:00 - 23:00", "cl": "", "g": ["Rock & Oldies", "Punk"], "inv": null, "tel": "", "ig": "", "w": "https://ultrasuperya.thebase.in", "tw": "", "new": null, "used": true, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
 {"n": "MEZURASHIYA Kokubunji Kitaguchi Store", "nja": "珍屋 国分寺北口店", "slug": "mezurashiya-kokubun-north", "a": "Kokubunji", "c": "Tokyo", "lat": 35.7015112, "lng": 139.4790573, "adr": "6th Arata Building 103, 4-13-13 Honmachi, Kokubunji-shi, Tokyo", "h": "12:00 - 21:00", "cl": "", "g": [], "inv": null, "tel": "", "ig": "", "w": "http://blog.livedoor.jp/mezurashiya/archives/51820915.html", "tw": "https://twitter.com/mezurashiya?s=20", "new": null, "used": true, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
 {"n": "MEZURASHIYA Kokubunji South Exit Store", "nja": "珍屋 国分寺南口店", "slug": "mezurashiya-kokubun-south", "a": "Kokubunji", "c": "Tokyo", "lat": 35.699906, "lng": 139.4834126, "adr": "2-17-10 Minami-cho, Kokubunji-shi, Tokyo", "h": "Open 11:00 AM to 8:00 PM, open daily.", "cl": "", "g": [], "inv": null, "tel": "", "ig": "", "w": "http://blog.livedoor.jp/mezurashiya/archives/51820909.html", "tw": "https://twitter.com/mezurashiya?s=20", "new": null, "used": true, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
-{"n": "RÁDIO CULTURA coffee & gallery", "nja": "", "slug": "radio-cultura-coffee-gallery", "a": "Koto", "c": "Tokyo", "lat": 35.685640614280096, "lng": 139.8054032153442, "adr": "1st Floor, 4-9-14 Morishita, Koto City, Tokyo 135-0004, Japan.", "h": "Check out their Instagram for the latest updates.", "cl": "", "g": [], "inv": null, "tel": "", "ig": "https://www.instagram.com/disco_e_cultura_01", "w": "https://radioculturatokyo.com", "tw": "", "new": null, "used": null, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
 {"n": "45rpm.tokyo", "nja": "", "slug": "45rpm-tokyo", "a": "Koto", "c": "Tokyo", "lat": 35.67908849, "lng": 139.7989186, "adr": "San-IWAI Building 2F, 1-8-1 Hirano, Koto-ku, Tokyo", "h": "10:00 - 21:00", "cl": "", "g": ["Kayōkyoku / J-Pop", "Jazz", "Rock & Oldies"], "inv": null, "tel": "", "ig": "", "w": "http://www.45rpm.tokyo", "tw": "", "new": null, "used": true, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
 {"n": "Downtown record", "nja": "ダウンタウンレコード", "slug": "downtown-records", "a": "Koto", "c": "Tokyo", "lat": 35.67003132, "lng": 139.8150453, "adr": "3-27-3 Toyo, Koto-ku, Tokyo", "h": "13:00 - 20:00", "cl": "", "g": [], "inv": null, "tel": "", "ig": "", "w": "http://www.downtownrecords.jp", "tw": "", "new": null, "used": true, "v": "", "s": "A record shop that is easy to enter downtown", "src": "recoya", "osm": "", "dOK": true, "lOK": true},
 {"n": "DARE RECORDS Machida", "nja": "デア・レコーズ町田", "slug": "dear-records-machida", "a": "Machida", "c": "Tokyo", "lat": 35.548436, "lng": 139.447722, "adr": "Nakamachi Iwanami Building 2nd floor, 1-30-2 Nakamachi, Machida-shi", "h": "Open from 1 PM to 8 PM. Closed on Fridays.", "cl": "", "g": ["Jazz", "Rock & Oldies"], "inv": null, "tel": "", "ig": "https://www.instagram.com/machida_dare", "w": "", "tw": "", "new": null, "used": true, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
@@ -2078,7 +2248,6 @@ var SHOPS = [{"s": "Atsushi Wakaizumi's Asagaya shop, built on the idea of sound
 {"n": "ELLA RECORDS", "nja": "", "slug": "ella-records", "a": "Shibuya", "c": "Tokyo", "lat": 35.674825, "lng": 139.679438, "adr": "1-14-10 Nishihara, Shibuya-ku, Tokyo", "h": "12:00 - 20:00", "cl": "", "g": [], "inv": null, "tel": "", "ig": "", "w": "http://www.ella-records.com", "tw": "https://twitter.com/Ella-records-327611483980346", "new": null, "used": true, "v": "", "s": "Between Hatagaya Station and Yoyogi Uehara Station.A new all -genre used record store that is rumored to be good from various places.", "src": "recoya", "osm": "", "dOK": true, "lOK": true},
 {"n": "The Record Rack", "nja": "", "slug": "the-record-rack", "a": "Shibuya", "c": "Tokyo", "lat": 35.686762, "lng": 139.680288, "adr": "4-29-1 Honmachi, Shibuya-ku, Tokyo", "h": "Every Saturday 13:00 - 18:00", "cl": "", "g": [], "inv": null, "tel": "", "ig": "https://www.instagram.com/the_record_rack", "w": "", "tw": "", "new": null, "used": null, "v": "", "s": "2022/5/14 Open!!Record Shop & Cozy Space Every Saturday 1 pm-6pm (from Instagram)", "src": "recoya", "osm": "", "dOK": true, "lOK": true},
 {"n": "Chillphy Records", "nja": "", "slug": "chillphy-records", "a": "Setagaya", "c": "Tokyo", "lat": 35.661751, "lng": 139.669364, "adr": "Nakase Building 4-C, 2-7-2 Kitazawa, Setagaya-ku, Tokyo", "h": "12:00-20:00 (closed Mon-Wed)", "cl": "", "g": [], "inv": null, "tel": "", "ig": "", "w": "", "tw": "https://twitter.com/newwave_record", "new": null, "used": null, "v": "", "s": "2 minute walk from Shimokitazawa station, New Wave main used record store.", "src": "recoya", "osm": "", "dOK": true, "lOK": true},
-{"n": "Disk Union Shimokitazawa", "nja": "ディスクユニオン下北沢店", "slug": "diskunion-shimokitazawa", "a": "Setagaya", "c": "Tokyo", "lat": 35.66196962, "lng": 139.6700083, "adr": "Kashiwa sado building 1F, 1-40-7 Kitazawa, Setagaya-ku, Tokyo", "h": "12:00 - 22:00", "cl": "", "g": [], "inv": null, "tel": "", "ig": "", "w": "http://diskunion.net", "tw": "", "new": null, "used": true, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
 {"n": "Disk Union Shimokitazawa Club Music Shop", "nja": "ディスクユニオン下北沢クラブミュージックショップ", "slug": "diskunion-shimokitazawa-club", "a": "Setagaya", "c": "Tokyo", "lat": 35.66194456, "lng": 139.670007, "adr": "Kashiwa sado building 1F, 1-40-7 Kitazawa, Setagaya-ku, Tokyo", "h": "11:30 - 21:00", "cl": "", "g": ["Hip-Hop & R&B", "Club & Dance"], "inv": null, "tel": "", "ig": "", "w": "http://diskunion.net", "tw": "https://twitter.com/diskunion_do9", "new": null, "used": null, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
 {"n": "ELLA WAREHOUSE", "nja": "", "slug": "ella-warehouse", "a": "Setagaya", "c": "Tokyo", "lat": 35.662381, "lng": 139.667037, "adr": "2-25-8 Kitazawa, Setagaya-ku, Tokyo Toyo Kogyo Building 3rd floor 3A-3", "h": "13:00 - 20:00 (Closed: Monday & Tuesday)", "cl": "", "g": ["Funk & Disco", "Hip-Hop & R&B", "Club & Dance"], "inv": null, "tel": "", "ig": "https://www.instagram.com/ella_warehouse", "w": "https://ellawarehouse.com", "tw": "", "new": null, "used": true, "v": "", "s": "2022.11.05 (Sat) reopen!12inch only record store.", "src": "recoya", "osm": "", "dOK": true, "lOK": true},
 {"n": "Jet Set Shimokitazawa store", "nja": "JET SET 下北沢店", "slug": "jetset-shimokizawa", "a": "Setagaya", "c": "Tokyo", "lat": 35.66312832, "lng": 139.6692444, "adr": "Yanagawa Building 201, 2-33-12 Kitazawa, Setagaya-ku, Tokyo", "h": "14:00 - 22:00", "cl": "", "g": [], "inv": null, "tel": "", "ig": "", "w": "http://www.jetsetrecords.net", "tw": "", "new": true, "used": true, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
@@ -2094,7 +2263,6 @@ var SHOPS = [{"s": "Atsushi Wakaizumi's Asagaya shop, built on the idea of sound
 {"n": "Disk Union Cinema and Book Union Shinjuku", "nja": "ディスクユニオン シネマ館・ブックユニオン新宿", "slug": "diskunion-shinjuku-book", "a": "Shinjuku", "c": "Tokyo", "lat": 35.690266, "lng": 139.70304, "adr": "Juraku Twin B Building 2F, 3-34-1 Shinjuku, Shinjuku-ku, Tokyo", "h": "11:00 - 20:00", "cl": "", "g": ["Soundtracks"], "inv": null, "tel": "", "ig": "", "w": "https://diskunion.net/shop/ct/shinjuku_chukokan_bookunion", "tw": "https://twitter.com/bookunionshinju", "new": null, "used": true, "v": "", "s": "Combining \"Cinema\" and \"Book Union Shinjuku\" on one floor, a new specialty store for \"movies\", \"video software\", and \"music books\" has been born in Shinjuku.", "src": "recoya", "osm": "", "dOK": true, "lOK": true},
 {"n": "Disk Union Shinjuku Accessory Museum", "nja": "ディスクユニオン新宿アクセサリー館", "slug": "diskunion-shinjuku-acc", "a": "Shinjuku", "c": "Tokyo", "lat": 35.690637, "lng": 139.70381, "adr": "Yamada Building 2F, 3-31-4 Shinjuku, Shinjuku-ku, Tokyo", "h": "11:00 - 20:00", "cl": "", "g": [], "inv": null, "tel": "", "ig": "", "w": "http://blog-shinjuku-acc.diskunion.net", "tw": "", "new": null, "used": null, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
 {"n": "Disk Union Shinjuku BF Japanese Rock Indies Museum", "nja": "ディスクユニオン新宿 BF 日本のロックインディーズ館", "slug": "diskunion-shinjuku-japrock", "a": "Shinjuku", "c": "Tokyo", "lat": 35.690628, "lng": 139.703838, "adr": "Yamada Building, 3-31-4 Shinjuku, Shinjuku-ku, Tokyo", "h": "11:00 - 20:00", "cl": "", "g": ["Kayōkyoku / J-Pop"], "inv": null, "tel": "", "ig": "", "w": "http://blog-shinjuku-jp.diskunion.net", "tw": "https://twitter.com/diskunionshinjyukubf", "new": null, "used": null, "v": "", "s": "Lock / pops specialty museum by Japanese people", "src": "recoya", "osm": "", "dOK": true, "lOK": true},
-{"n": "Disk Union Shinjuku Best Album Store", "nja": "ディスクユニオン新宿ベストアルバムストア", "slug": "diskunion-shinjuku-bestalbum", "a": "Shinjuku", "c": "Tokyo", "lat": 35.691999, "lng": 139.70309, "adr": "T & TⅢ Building 3F, 3-17-5 Shinjuku, Shinjuku-ku, Tokyo", "h": "12:00-20:00", "cl": "", "g": [], "inv": null, "tel": "", "ig": "", "w": "", "tw": "", "new": null, "used": true, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
 {"n": "Disk Union Shinjuku Choi Rock CD Hall", "nja": "ディスクユニオン新宿中古ロックCD館", "slug": "diskunion-shinjuku-rock-cd", "a": "Shinjuku", "c": "Tokyo", "lat": 35.690681, "lng": 139.703835, "adr": "Yamada Building 5F, 3-31-4 Shinjuku, Shinjuku-ku, Tokyo", "h": "11:00 - 20:00", "cl": "", "g": ["Rock & Oldies"], "inv": null, "tel": "", "ig": "", "w": "http://blog-shinjuku-usedrockcd.diskunion.net", "tw": "https://twitter.com/shinjukuusedrockcd", "new": null, "used": true, "v": "", "s": "Western -style CD specialty floor from 60s to '70s", "src": "recoya", "osm": "", "dOK": true, "lOK": true},
 {"n": "Disk Union Shinjuku Classic Building", "nja": "ディスクユニオン新宿クラシック館", "slug": "diskunion-shinjuku-classic", "a": "Shinjuku", "c": "Tokyo", "lat": 35.691969, "lng": 139.703078, "adr": "T & TIII Building 3F, 3-17 Shinjuku, Shinjuku-ku, Tokyo", "h": "12:00 - 20:00", "cl": "", "g": ["Classical"], "inv": null, "tel": "", "ig": "https://www.instagram.com/diskunion_shinjuku_classic", "w": "https://diskunion.net/shop/ct/shinjuku_classic", "tw": "", "new": null, "used": true, "v": "", "s": "Total exhibitions 70,000 points such as classical CD/DVD/records", "src": "recoya", "osm": "", "dOK": true, "lOK": true},
 {"n": "Disk Union Shinjuku Heavy Metal Museum", "nja": "ディスクユニオン新宿ヘヴィメタル館", "slug": "diskunion-shinjuku-hm", "a": "Shinjuku", "c": "Tokyo", "lat": 35.690774, "lng": 139.702706, "adr": "Mimine Building 5F, 3-28-4 Shinjuku, Shinjuku-ku, Tokyo", "h": "11:00 - 20:00", "cl": "", "g": ["Hard Rock & Metal"], "inv": null, "tel": "", "ig": "https://www.instagram.com/diskunion_shinjuku_metal", "w": "https://diskunion.net/shop/ct/shinjuku_metal", "tw": "https://twitter.com/diskunion_ds8", "new": null, "used": null, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
@@ -2133,7 +2301,6 @@ var SHOPS = [{"s": "Atsushi Wakaizumi's Asagaya shop, built on the idea of sound
 {"n": "MEZURASHIYA Tachikawa 1st store", "nja": "珍屋 立川1号店", "slug": "mezurashiya-tachikawa1", "a": "Tachikawa", "c": "Tokyo", "lat": 35.69676402, "lng": 139.4174794, "adr": "Ogiwara Building 1F, 1-5-23 Nishiki-cho, Tachikawa-shi, Tokyo", "h": "11:00 - 20:00", "cl": "", "g": [], "inv": null, "tel": "", "ig": "", "w": "http://blog.livedoor.jp/mezurashiya/archives/51820095.html", "tw": "https://twitter.com/mezurashiya?s=20", "new": null, "used": true, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
 {"n": "MEZURASHIYA Tachikawa 2nd store", "nja": "珍屋 立川2号店", "slug": "mezurashiya-tachikawa2", "a": "Tachikawa", "c": "Tokyo", "lat": 35.6963802, "lng": 139.4161318, "adr": "Ogawa Building 2F, 1-3-13 Nishiki-cho, Tachikawa-shi, Tokyo", "h": "11:00 - 20:00", "cl": "", "g": ["Club & Dance"], "inv": null, "tel": "", "ig": "", "w": "http://blog.livedoor.jp/mezurashiya/archives/51820099.html", "tw": "https://twitter.com/mezurashiya", "new": null, "used": true, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
 {"n": "Music Mates", "nja": "", "slug": "music-mates", "a": "Taito", "c": "Tokyo", "lat": 35.71204858939823, "lng": 139.79664634755426, "adr": "1-32-5 Asakusa, Taito City, Tokyo 111-0032, Japan.", "h": "Open Saturdays, Sundays, and Mondays from 1 PM to 6 PM.", "cl": "", "g": [], "inv": null, "tel": "", "ig": "https://www.instagram.com/musicmates_asakusa", "w": "", "tw": "https://twitter.com/MusicMates2026", "new": null, "used": null, "v": "", "s": "Just a 1-minute walk from Asakusa's Kaminarimon Gate, this record shop offers vinyl records, CDs, and music-related merchandise.", "src": "recoya", "osm": "", "dOK": true, "lOK": true},
-{"n": "CHIKUKODO", "nja": "", "slug": "chikuko-do", "a": "Taito", "c": "Tokyo", "lat": 35.7105306, "lng": 139.7749289, "adr": "6-12-16 Ueno, Taito-ku, Tokyo", "h": "11:00 - 22:30", "cl": "", "g": ["Kayōkyoku / J-Pop"], "inv": null, "tel": "", "ig": "", "w": "", "tw": "", "new": null, "used": true, "v": "", "s": "Old -fashioned record shop near Ame Yoko", "src": "recoya", "osm": "", "dOK": true, "lOK": true},
 {"n": "GINZA RECORDS & AUDIO KURAMAE", "nja": "", "slug": "ginzarecords_kuramae", "a": "Taito", "c": "Tokyo", "lat": 35.70211239711744, "lng": 139.79038059614274, "adr": "2-1-23 Kuramae 2nd Building 3F, 2-1-23 Kuramae, Taito-ku, Tokyo 111-0051", "h": "11:00 - 20:00 (Irregular holidays)", "cl": "", "g": [], "inv": null, "tel": "", "ig": "https://www.instagram.com/ginzarecords_kuramae", "w": "", "tw": "", "new": null, "used": null, "v": "", "s": "It is a select shop of records and audio that sound viewfinder works.January 27, 2023 Open!", "src": "recoya", "osm": "", "dOK": true, "lOK": true},
 {"n": "Fandango! Records", "nja": "", "slug": "fandango-records", "a": "Adachi", "c": "Tokyo", "lat": 35.74863946380474, "lng": 139.8091687720125, "adr": "Sanwa Building No. 2 202, 4-17 Senjuasahicho, adachi-ku, Tokyo", "h": "Open 12 PM – 7 PM. Closed Wednesdays.", "cl": "", "g": [], "inv": null, "tel": "", "ig": "https://www.instagram.com/fandangorecordstokyo", "w": "https://ameblo.jp/fandangorecords", "tw": "https://twitter.com/fandangorecords", "new": null, "used": true, "v": "", "s": "Kitasenju Station East Exit 4 minutes All Genre Used Records", "src": "recoya", "osm": "", "dOK": true, "lOK": true},
 {"n": "ARTS C SOUNDTRACK", "nja": "", "slug": "arts-c-soundtrack", "a": "Toshima", "c": "Tokyo", "lat": 35.7224068, "lng": 139.7123777, "adr": "Wakodo Mejiro 1F, 3-10-2 Zoshigaya, Toshima-ku, Tokyo", "h": "15:00 - 18:00", "cl": "", "g": ["Soundtracks"], "inv": null, "tel": "", "ig": "", "w": "http://www.sound-track.net", "tw": "https://twitter.com/MiyakoshiAtsus2", "new": null, "used": true, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
@@ -2235,7 +2402,6 @@ var SHOPS = [{"s": "Atsushi Wakaizumi's Asagaya shop, built on the idea of sound
 {"n": "OLD HAT GEAR", "nja": "", "slug": "old-hat-gear", "a": "Chuo", "c": "Osaka", "lat": 34.6733316, "lng": 135.4987382, "adr": "Leestructure Nishishinbashi East 211, 1-9-28 Nishishinsaibashi, Chuo-ku, Osaka-shi, Osaka", "h": "12:00 - 19:00 Please check the HP for business hours.", "cl": "", "g": ["Soul", "Rock & Oldies"], "inv": null, "tel": "", "ig": "", "w": "http://oldhatgear.com", "tw": "", "new": null, "used": true, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
 {"n": "PANPOT RECORDS", "nja": "", "slug": "panpot-records", "a": "Chuo", "c": "Osaka", "lat": 34.6766118, "lng": 135.4996047, "adr": "Morimura Mido Building 301, 4-3-21 Minami Senba, Chuo-ku, Osaka-shi, Osaka", "h": "Open from 1 PM to 7 PM, closed on Tuesdays and Wednesdays.", "cl": "", "g": ["Jazz", "Soul", "Rock & Oldies", "Reggae & Ska"], "inv": null, "tel": "", "ig": "", "w": "https://panpotrecords.com", "tw": "", "new": null, "used": true, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
 {"n": "PLANTATION", "nja": "", "slug": "plantation", "a": "Chuo", "c": "Osaka", "lat": 34.6732, "lng": 135.4987382, "adr": "Leastructure Nishishinsaibashi 302, 1-9-28 Nishishinsaibashi, Chuo-ku, Osaka-shi, Osaka", "h": "11:00 - 20:00", "cl": "", "g": ["Reggae & Ska", "Latin & Brazilian", "World", "Cassettes"], "inv": null, "tel": "", "ig": "", "w": "http://plantationwebshop.com", "tw": "", "new": null, "used": true, "v": "", "s": "Asia, Africa, World Music specialty store", "src": "recoya", "osm": "", "dOK": true, "lOK": true},
-{"n": "PUNK AND DESTROY", "nja": "", "slug": "punk-and-destroy", "a": "Chuo", "c": "Osaka", "lat": 34.670572, "lng": 135.499294, "adr": "B1F, 2-9-5 Nishishinsaibashi, Chuo-ku, Osaka-shi, Osaka 542-0086", "h": "12:00 - 20:00", "cl": "", "g": ["Punk"], "inv": null, "tel": "", "ig": "", "w": "http://www.punkanddestroy.com", "tw": "", "new": null, "used": null, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
 {"n": "Perfect Pitch Records", "nja": "パーフェクト ピッチ レコード", "slug": "perfect-pitch-records", "a": "Chuo", "c": "Osaka", "lat": 34.672992, "lng": 135.499475, "adr": "Shigetani Building 2F, 1-4-17 Nishishinsaibashi, Chuo-ku, Osaka-shi, Osaka", "h": "12:00 - 20:00", "cl": "", "g": ["Jazz", "Soul", "Funk & Disco", "Hip-Hop & R&B"], "inv": null, "tel": "", "ig": "", "w": "http://www.perfectpitchrecords.com", "tw": "", "new": null, "used": true, "v": "", "s": "Used record [Disco, Hip Hop, Jazz, Rare Groove, Soul]", "src": "recoya", "osm": "", "dOK": true, "lOK": true},
 {"n": "RECORD SHOP rare groove", "nja": "", "slug": "record-shop-rare-groove", "a": "Chuo", "c": "Osaka", "lat": 34.6734, "lng": 135.4987382, "adr": "Leastructure Nishishinsaibashi 409, 1-9-28 Nishishinsaibashi, Chuo-ku, Osaka-shi, Osaka", "h": "12:00 - 19:00", "cl": "", "g": ["Latin & Brazilian", "Jazz", "Club & Dance", "Rock & Indie", "House"], "inv": null, "tel": "", "ig": "https://www.instagram.com/recordshopraregroove", "w": "http://www.raregroove.jp", "tw": "https://twitter.com/RECORDSHOPraregroove", "new": null, "used": null, "v": "", "s": "", "src": "recoya", "osm": "", "dOK": false, "lOK": true},
 {"n": "REDBONE RECORDS", "nja": "レッドボーンレコード", "slug": "redbone-records", "a": "Chuo", "c": "Osaka", "lat": 34.6765757, "lng": 135.5029211, "adr": "Osaka Jewelry Building 101B, 3-3-26 Minami Senba, Chuo-ku, Osaka-shi, Osaka", "h": "12:30 - 20:00", "cl": "", "g": ["Blues", "Rock & Oldies", "Progressive Rock", "Hard Rock & Metal", "Folk"], "inv": null, "tel": "", "ig": "https://www.instagram.com/redbonerecords_osaka_japan", "w": "http://redbonerecords.o.oo7.jp", "tw": "", "new": null, "used": true, "v": "", "s": "Focusing on old rock, swamp, SSW, used recordmaine", "src": "recoya+osm", "osm": "node/10720541295", "dOK": true, "lOK": true},
@@ -2787,7 +2953,7 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
     return out;
   }
 
-  var DAY_ABBR = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
+  var DAY_ABBR = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
   var IDX = { sun:0, mon:1, tue:2, wed:3, thu:4, fri:5, sat:6 };
 
   var SHUT_RX = [
@@ -3421,37 +3587,91 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
   function render() {
     $("map").setAttribute("viewBox", "0 0 " + size.w + " " + size.h);
 
-    showMap(true);
+    showMap(false);
 
-    $("listSec").textContent = "";
+    $("listSec").textContent = "SHOPS BY AREA";
     hotArea = null;
 
-    var here = inView();
-
-    var source = SEARCH ? PLACED : (locked || EDIT_SCOPE || here.map(function (v) { return v.s; }));
+    var source = SEARCH ? PLACED : (locked || PLACED);
     var pool = source.filter(keep);
 
     paintSearch(pool.length);
 
-    if (areaMode(pool.length)) { renderAreaView(); return; }
-
-    var routable = pool.length >= 2 && (!SEARCH || pool.length <= ROUTE_MAX);
-    var R = routable ? solveRoute(pool) : null;
-
-    var inPool = {};
-    pool.forEach(function (s) { inPool[s.ix] = 1; });
-
-    var draw = here.filter(function (v) { return keep(v.s); });
-    var dimmed = function (s) { return !inPool[s.ix]; };
-    lastRoute = R;
-    lastDim = dimmed;
-
-    drawMarks(draw, R, dimmed);
-
-    renderList(here, source, pool, R);
-    renderControls(R, routable);
+    lastRoute = null;
+    lastDim = function () { return false; };
+    renderDirectoryList(pool);
+    renderControls(null, false);
     setHot(hot);
 
+  }
+
+  function displayTitleCase(name) {
+    var abbreviations = {
+      HMV: true, CD: true, CDS: true, DVD: true, DJ: true,
+      LP: true, EP: true, UK: true, USA: true, NYC: true, JPN: true,
+      JR: true, SNS: true, URL: true
+    };
+
+    return String(name || "").replace(/[A-Za-z][A-Za-z'\u2019.-]*/g, function (word) {
+      var key = word.replace(/[^A-Za-z]/g, "").toUpperCase();
+      if (abbreviations[key]) return word.toUpperCase();
+      if (word !== word.toUpperCase()) return word;
+
+      return word.toLowerCase().replace(/(^|-)([a-z])/g, function (_, boundary, letter) {
+        return boundary + letter.toUpperCase();
+      });
+    });
+  }
+
+  function directoryShopName(s) {
+    var name = String(s.n || "").replace(
+      /\s*[\uFF08(][^\uFF09)]*[\u3040-\u30ff\u3400-\u9fff][^\uFF09)]*[\uFF09)]\s*$/,
+      ""
+    ).trim();
+    return displayTitleCase(name);
+  }
+
+  function directoryRow(s) {
+    return '<div class="row directory-row" data-ix="' + s.ix + '">' +
+      '<button class="nm" type="button">' +
+        '<span class="shopname">' + esc(directoryShopName(s)) + "</span>" +
+      "</button>" +
+      "</div>";
+  }
+
+  function renderDirectoryList(pool) {
+    if (!pool.length) {
+      $("rows").innerHTML = '<p class="empty">NO SHOPS MATCH THESE FILTERS.</p>';
+      return;
+    }
+
+    var groups = {};
+    pool.forEach(function (s) {
+      var area = s.a || s.c || "Other";
+      var key = (SEARCH ? (s.c || "Japan") + "\u0000" : "") + area;
+      if (!groups[key]) {
+        groups[key] = {
+          label: SEARCH && s.c && s.c !== area ? area + " \u00B7 " + s.c : area,
+          shops: []
+        };
+      }
+      groups[key].shops.push(s);
+    });
+
+    var html = Object.keys(groups).sort(function (a, b) {
+      return groups[a].label.localeCompare(groups[b].label);
+    }).map(function (key) {
+      var group = groups[key];
+      group.shops.sort(function (a, b) { return a.n.localeCompare(b.n); });
+      var count = group.shops.length;
+      return '<section class="area-group">' +
+        '<div class="area-heading"><span>' + esc(group.label) + "</span>" +
+          '<span class="area-count">' + count + (count === 1 ? " shop" : " shops") + "</span></div>" +
+        group.shops.map(function (s) { return directoryRow(s); }).join("") +
+        "</section>";
+    }).join("");
+
+    $("rows").innerHTML = html;
   }
 
   function renderList(here, source, pool, R) {
@@ -3600,26 +3820,26 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
     var shut = closedDays(s);
 
     var shutTxt = shut ? shut.map(function (d) { return DAY_ABBR[d]; }).join(" · ")
-      : (s.cl ? esc(String(s.cl).toUpperCase()) : "");
+      : (s.cl ? esc(displayTitleCase(s.cl)) : "");
     var fams = famsOf(s);
 
     var out = "";
 
     out += '<dl class="spec">' +
-      spec("AREA", esc(s.a) + (s.c !== s.a ? " · " + esc(s.c) : "")) +
-      spec("ADDRESS", s.adr ? esc(s.adr) : "—") +
-      spec("HOURS", s.h ? esc(s.h) : "NOT LISTED") +
-      spec("CLOSED", shutTxt, "shut") +
-      spec("GENRE", fams.join(" · ")) +
-      spec("STOCK", s.inv ? s.inv.toLocaleString("en-US") + " RECORDS" : "") +
-      spec("TEL", s.tel ? esc(s.tel) : "") +
+      spec("Area", esc(displayTitleCase(s.a)) + (s.c !== s.a ? " · " + esc(displayTitleCase(s.c)) : "")) +
+      spec("Address", s.adr ? esc(displayTitleCase(s.adr)) : "—") +
+      spec("Hours", s.h ? esc(displayTitleCase(s.h)) : "Not listed") +
+      spec("Closed", shutTxt, "shut") +
+      spec("Genre", fams.map(genreLabel).join(" · ")) +
+      spec("Stock", s.inv ? s.inv.toLocaleString("en-US") + " records" : "") +
+      spec("Tel", s.tel ? esc(s.tel) : "") +
       "</dl>";
 
-    var links = [linkBtn(shopMapUrl(s), "MAPS")];
-    if (s.w) links.push(linkBtn(s.w, "WEBSITE"));
-    if (s.ig) links.push(linkBtn(s.ig, "INSTAGRAM"));
+    var links = [linkBtn(shopMapUrl(s), "Maps")];
+    if (s.w) links.push(linkBtn(s.w, "Website"));
+    if (s.ig) links.push(linkBtn(s.ig, "Instagram"));
     if (s.tw) links.push(linkBtn(s.tw, "X"));
-    if (s.v) links.push(linkBtn("https://www.youtube.com/watch?v=" + s.v, "▶ EPISODE"));
+    if (s.v) links.push(linkBtn("https://www.youtube.com/watch?v=" + s.v, "▶ Episode"));
     out += '<div class="pop-links">' + links.join("") + "</div>";
     return out;
   }
@@ -3691,8 +3911,8 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
     win.setAttribute("data-shop", ix);
     win.innerHTML =
       '<div class="pop-bar">' +
-        '<button class="pop-close" type="button" aria-label="Close ' + esc(s.n) + '">✕</button>' +
-        '<span class="pop-title">' + esc(s.n) + "</span>" +
+        '<button class="pop-close" type="button" aria-label="Close ' + esc(directoryShopName(s)) + '">✕</button>' +
+        '<span class="pop-title">' + esc(directoryShopName(s)) + "</span>" +
       "</div>" +
       '<div class="pop-body">' + shopBody(s) + "</div>";
 
@@ -3858,6 +4078,21 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
   var DAY_ROWS = [["1", "Mon"], ["2", "Tue"], ["3", "Wed"], ["4", "Thu"],
                   ["5", "Fri"], ["6", "Sat"], ["0", "Sun"]];
   var openMenu = null;
+
+  function resetFilterMenus() {
+    ["ctlPlaceMenu", "ctlGenreMenu", "ctlDayMenu"].forEach(function (id) {
+      var menu = $(id);
+      if (menu) menu.hidden = true;
+    });
+    ["ctlPlaceBtn", "ctlGenreBtn", "ctlDayBtn"].forEach(function (id) {
+      var button = $(id);
+      if (button) button.setAttribute("aria-expanded", "false");
+    });
+    openMenu = null;
+  }
+
+  resetFilterMenus();
+  window.addEventListener("pageshow", resetFilterMenus);
 
   function inPrefecture() {
     if (SEARCH) return PLACED.filter(inSearch);
@@ -4096,6 +4331,9 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
     } else {
       out.textContent = count + (count === 1 ? " shop" : " shops");
     }
+
+    var title = SEARCH ? "Search results" : (lockedName || PLACE || "All Japan");
+    if ($("resultPlace")) $("resultPlace").textContent = title;
   }
 
   function searchTarget() {
@@ -4213,7 +4451,6 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
       if (LANDING) jump("city:" + LANDING, 0);
       enterDig(function () {
         $("ctlPlaceBtn").focus();
-        $("ctlPlaceBtn").click();
       });
     });
 
