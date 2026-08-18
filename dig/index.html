@@ -1939,17 +1939,18 @@ html { scrollbar-color:var(--er-line-mid) var(--er-wash); }
 @media (max-width:880px) {
   .results-intro { padding:17px 12px 12px; }
   .results-intro .place {
-    width:100%; min-width:0; flex-wrap:nowrap; align-items:center; gap:18px;
+    width:100%; min-width:0; flex-wrap:nowrap; align-items:center;
+    gap:clamp(10px, 3.2vw, 18px);
   }
   .results-intro .results-place { flex:0 1 auto; min-width:0; }
   .desk .results-intro .results-title {
-    font-size:clamp(34px, 11.5vw, 41.4px); white-space:nowrap;
+    font-size:clamp(32px, 9.5vw, 37px); white-space:nowrap;
   }
   .results-intro #ctlGenre,
   .results-intro #ctlDay { min-width:0; }
   .results-intro #ctlGenreBtn,
   .results-intro #ctlDayBtn {
-    font-size:clamp(17px, 5.6vw, 21px); white-space:nowrap;
+    font-size:clamp(17px, 4.8vw, 19px); white-space:nowrap;
   }
   .results-intro .shop-search {
     flex:1 0 100%; width:100%; max-width:none; min-width:0; margin-left:0;
@@ -2014,6 +2015,10 @@ html { scrollbar-color:var(--er-line-mid) var(--er-wash); }
 
 @media (max-width:880px) {
   .ctlmenu button { min-height:48px; padding:12px 14px; font-size:16px; }
+  .ctlmenu { max-width:calc(100vw - 24px); }
+  #ctlGenreMenu, #ctlDayMenu { left:auto; right:0; }
+  .ctlmenu button { white-space:normal; }
+  .ctlmenu .lb { min-width:0; }
   .ctlmenu .ct { font-size:13px; }
   .pop.sheet .pop-title { font-size:20px; }
   .pop.sheet .pop-body { padding:16px 16px 22px; gap:16px; }
