@@ -687,14 +687,6 @@ html { scrollbar-color:#FFFFFF var(--panel2); }
 }
 .place { align-items:center; gap:12px; }
 
-.backbtn {
-  flex:none; border:0; background:#FFFFFF; color:#000000; cursor:pointer;
-  font-family:var(--display); font-weight:700; font-size:10px;
-  letter-spacing:.16em; padding:6px 12px;
-}
-.backbtn:hover { background:#9A938E; }
-.backbtn:focus-visible { outline:2px solid #FFFFFF; outline-offset:2px; }
-
 .headrow,
 .listhead,
 .mapcell,
@@ -780,15 +772,9 @@ html { scrollbar-color:#FFFFFF var(--panel2); }
   background:#FFFFFF; color:#000000;
 }
 
-.backbtn {
-  border:1.5px solid #FFFFFF; background:#FFFFFF; color:#000000; font-weight:700;
-}
-.backbtn:hover { background:#9A938E; border-color:#9A938E; color:#000000; }
-
 .btn[disabled], .btn.dead,
 
 .btn:focus-visible,
-.backbtn:focus-visible,
 .row .startbtn:focus-visible,
 .row .cut:focus-visible { outline:2px solid #FFFFFF; outline-offset:3px; }
 
@@ -956,15 +942,6 @@ html { scrollbar-color:#FFFFFF var(--panel2); }
   .ctlicon { width:27px; height:27px; }
 }
 
-.backbtn {
-  width:29px; height:29px; padding:0;
-  display:grid; place-items:center;
-  border:1.5px solid #FFFFFF; background:#FFFFFF; color:#000000;
-}
-.backbtn svg {
-  width:15px; height:15px; fill:none; stroke:currentColor;
-  stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;
-}
 .ctlbtn { display:inline-flex; align-items:center; min-height:29px; }
 
 .ctlmenu button { gap:10px; }
@@ -1596,16 +1573,6 @@ html, body { background:#FFFFFF; }
 .ctlmenu button[disabled],
 .ctlmenu button[disabled]:hover { background:transparent; color:#CED4DA; }
 
-.backbtn {
-  border:1.5px solid var(--er-line-mid); background:transparent;
-  color:var(--er-ink);
-}
-.backbtn:hover {
-  background:var(--er-orange); border-color:var(--er-orange);
-  color:var(--er-ink-hi);
-}
-.backbtn:focus-visible { outline:2px solid var(--er-orange-ink); outline-offset:2px; }
-
 .btn, .row .startbtn, .row .cut, .dropnote .undo {
   border:1.5px solid var(--er-line-mid); background:transparent;
   color:var(--er-ink); border-radius:0; box-shadow:none;
@@ -1704,7 +1671,7 @@ html { scrollbar-color:var(--er-line-mid) var(--er-wash); }
    and the window itself left square because it is the edge of the page
    rather than an object sitting on it. */
 .btn, .row .startbtn, .row .cut, .dropnote .undo,
-.ctlbtn, .ctlicon, .backbtn, .mag-search {
+.ctlbtn, .ctlicon, .mag-search {
   border-radius:var(--er-r-ctl);
 }
 .ctlmenu, .pop, .mapcard { border-radius:var(--er-r-surf); }
@@ -2078,11 +2045,6 @@ html { scrollbar-color:var(--er-line-mid) var(--er-wash); }
     <div class="wintop">
     <div class="headrow results-intro">
       <div class="place">
-
-        <button class="backbtn" id="digBack" type="button"
-                aria-label="Back to the search"><svg viewBox="0 0 16 16"
-                aria-hidden="true" focusable="false"><path d="M10 2.5 4.5 8 10 13.5"/></svg></button>
-
         <div class="ctl results-place" id="ctlPlace">
           <button class="results-title results-place-btn prefecture-cue" id="ctlPlaceBtn" type="button"
                   aria-haspopup="listbox" aria-expanded="false">Tokyo</button>
@@ -4597,11 +4559,6 @@ var AREAS = [{"a": "Shinsaibashi", "c": "Osaka", "n": 36, "lat": 34.674158204330
         timeout:8000,
         maximumAge:300000
       });
-    });
-
-    if ($("digBack")) $("digBack").addEventListener("click", function () {
-      $("digWrap").hidden = false;
-      $("digWrap").classList.remove("leaving");
     });
 
   })();
