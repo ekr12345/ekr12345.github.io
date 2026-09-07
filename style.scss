@@ -812,3 +812,56 @@ body.wide-layout #main.container {
   }
 }
 
+
+// === SCALED EMBEDS (interactive mocks in posts) ===
+// The mocks are fixed-width desktop artboards — below roughly 1000px their
+// table columns collide — so the frame is rendered at its native width and
+// the whole thing is scaled down to fit whatever width is available. The
+// `--embed-w` / `--embed-h` custom properties (unitless px, set inline by
+// _includes/embed.html) carry the native size.
+//
+// The scale fallback assumes the .article-content width below; embed.js
+// overrides --embed-scale with the measured width, which also lets the
+// figure break out wider than the text column on large screens.
+
+.embed {
+  margin: 2.5rem 0 3rem;
+  max-width: calc(var(--embed-w) * 1px);
+}
+
+.embed-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--embed-w) / var(--embed-h);
+  overflow: hidden;
+  border: 1px solid rgba(16, 20, 19, 0.14);
+  border-radius: 12px;
+  background: #f5f4f0;
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(var(--embed-w) * 1px);
+    height: calc(var(--embed-h) * 1px);
+    border: 0;
+    // 720 == .article-content max-width; keep the two in sync.
+    transform: scale(var(--embed-scale, calc(720 / var(--embed-w))));
+    transform-origin: top left;
+  }
+}
+
+.embed figcaption {
+  margin-top: 0.9rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: $base-lighten-color;
+}
+
+// Under ~0.35 scale the mock is a thumbnail, not something you can tap —
+// let it read as a figure and send taps to the full-size link instead.
+@include mobile {
+  .embed-viewport iframe {
+    pointer-events: none;
+  }
+}

@@ -1,0 +1,62 @@
+{% comment %}
+  Scaled iframe embed for fixed-width interactive mocks.
+
+  The mocks are desktop artboards that only hold their layout above ~1000px,
+  so instead of letting them reflow (columns collide) we render them at their
+  native width and scale the whole frame down to fit the column. Params:
+
+    src     — page to frame
+    w / h   — native pixel size of the mock
+    title   — iframe title (a11y)
+    caption — optional figcaption text, shown before the full-size link
+{% endcomment %}
+
+<figure class="embed" style="--embed-w: {{ include.w }}; --embed-h: {{ include.h }};">
+  <div class="embed-viewport">
+    <iframe
+      src="{{ include.src }}"
+      title="{{ include.title }}"
+      loading="lazy"
+      scrolling="no"
+      referrerpolicy="no-referrer"></iframe>
+  </div>
+  <figcaption>
+    {{ include.caption }}
+    <a href="{{ include.src }}" target="_blank" rel="noopener">Open full size &#8599;</a>
+  </figcaption>
+</figure>
+
+<script>
+// Scales .embed figures to the width actually available inside #main, so the
+// fixed-width mock keeps its desktop layout at every screen size (and can run
+// wider than the 720px text column when there's room). Guarded so several
+// embeds on one page still only install one set of listeners.
+(function () {
+  if (window.__embedFitInstalled) return;
+  window.__embedFitInstalled = true;
+
+  function fit(figure) {
+    var native = parseFloat(getComputedStyle(figure).getPropertyValue('--embed-w'));
+    if (!native) return;
+
+    var box = figure.closest('#main') || figure.parentElement;
+    var style = getComputedStyle(box);
+    var available = box.clientWidth -
+      parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+
+    var width = Math.min(native, available);
+    figure.style.width = width + 'px';
+    figure.style.setProperty('--embed-scale', width / native);
+  }
+
+  function fitAll() {
+    var figures = document.querySelectorAll('.embed');
+    for (var i = 0; i < figures.length; i++) fit(figures[i]);
+  }
+
+  fitAll();
+  window.addEventListener('resize', fitAll);
+  // Web fonts can shift the container width after first paint.
+  window.addEventListener('load', fitAll);
+})();
+</script>
